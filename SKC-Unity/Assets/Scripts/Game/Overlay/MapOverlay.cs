@@ -13,7 +13,8 @@ namespace Game.Overlay
 
         public void AddStatusText(Entity entity, string text, Color color, int lifetime, int offsetTime = 0)
         {
-            var statusText = Instantiate(_characterStatusTextPrefab, transform);;
+            var statusText = Instantiate(_characterStatusTextPrefab, transform);
+            ;
             statusText.Init(entity, text, color, lifetime, offsetTime);
             statusText.gameObject.SetActive(true);
         }

@@ -6,7 +6,7 @@ namespace Networking.Packets.Outgoing
     {
         public override PacketId Id => PacketId.Move;
 
-        private readonly int _time;
+        private readonly int     _time;
         private readonly Vector3 _position;
 
         public Move(int time, Vector3 position)

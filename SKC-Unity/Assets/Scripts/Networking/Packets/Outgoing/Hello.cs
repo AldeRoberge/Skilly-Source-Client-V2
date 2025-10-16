@@ -3,8 +3,8 @@ namespace Networking.Packets.Outgoing
     public class Hello : OutgoingPacket
     {
         public override PacketId Id => PacketId.Hello;
-        
-        private readonly int _worldId;
+
+        private readonly int    _worldId;
         private readonly string _username;
         private readonly string _password;
 

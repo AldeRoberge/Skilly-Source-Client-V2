@@ -9,12 +9,10 @@ namespace Networking.Packets.Incoming
 
         public override void Read(PacketReader rdr)
         {
-            
         }
 
         public override void Handle(PacketHandler handler, Map map)
         {
-            
         }
     }
 }

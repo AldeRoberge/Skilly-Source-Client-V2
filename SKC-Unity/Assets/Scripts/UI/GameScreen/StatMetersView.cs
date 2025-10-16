@@ -20,7 +20,7 @@ namespace UI.GameScreen
         private StatusBar _mpBar;
 
         private Player _player;
-        
+
         private void Awake()
         {
             Networking.Packets.Incoming.Update.OnMyPlayerJoined += OnMyPlayerJoined;
@@ -38,7 +38,7 @@ namespace UI.GameScreen
         {
             if (_player == null)
                 return;
-            
+
             var levelText = "Lvl " + _player.Level;
             if (levelText != _expBar.LabelText)
             {
@@ -52,6 +52,7 @@ namespace UI.GameScreen
                     _expBar.gameObject.SetActive(true);
                     _fameBar.gameObject.SetActive(false);
                 }
+
                 _expBar.Draw(_player.Exp, _player.NextLevelExp, 0);
             }
             else
@@ -61,9 +62,10 @@ namespace UI.GameScreen
                     _fameBar.gameObject.SetActive(true);
                     _expBar.gameObject.SetActive(false);
                 }
+
                 _fameBar.Draw(_player.Fame, _player.NextClassQuestFame, 0);
             }
-            
+
             _hpBar.Draw(_player.Hp, _player.MaxHp, _player.MaxHpBoost, _player.Desc.Stats[0].MaxValue);
             _mpBar.Draw(_player.Mp, _player.MaxMp, _player.MaxMpBoost, _player.Desc.Stats[1].MaxValue);
         }

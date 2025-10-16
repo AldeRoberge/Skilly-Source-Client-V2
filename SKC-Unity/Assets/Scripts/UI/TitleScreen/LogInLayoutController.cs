@@ -47,11 +47,11 @@ namespace UI.TitleScreen
                 _usernameField.text = "";
             }
         }
-        
+
         public override void Reset(object data)
         {
             base.Reset(data);
-            
+
             SetUsernameField();
             _passwordField.text = "";
             _rememberUsernameToggle.isOn = PlayerPrefs.GetInt(Account.REMEMBER_USERNAME_KEY) == 1;
@@ -94,20 +94,20 @@ namespace UI.TitleScreen
                 _errorTextField.text = "Password too short";
                 return false;
             }
-            
+
             return true;
         }
 
         private async Task SendLoginAsync()
         {
             var logInTask = new LogInRequestHandler(
-                _usernameField.text, 
-                _passwordField.text, 
+                _usernameField.text,
+                _passwordField.text,
                 _rememberUsernameToggle.isOn);
 
             logInTask.OnError += OnLogInError;
 
-            
+
             await logInTask.SendRequestAsync();
         }
 

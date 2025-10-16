@@ -7,7 +7,9 @@ namespace Networking
 {
     public class PacketReader : BinaryReader
     {
-        public PacketReader(Stream input) : base(input, Encoding.UTF8) { }
+        public PacketReader(Stream input) : base(input, Encoding.UTF8)
+        {
+        }
 
         public override short ReadInt16()
         {

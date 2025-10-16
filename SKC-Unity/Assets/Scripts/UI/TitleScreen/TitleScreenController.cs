@@ -9,11 +9,11 @@ namespace UI.TitleScreen
 
         [SerializeField]
         private RegisterLayoutController _registerController;
-        
+
         public override void Reset(object data)
         {
             base.Reset(data);
-            
+
             ShowLoginLayout();
         }
 

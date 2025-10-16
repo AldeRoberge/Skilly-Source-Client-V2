@@ -18,13 +18,13 @@ namespace UI
 
         [SerializeField]
         private CharacterScreenController _characterView;
-        
+
         [SerializeField]
         private NewCharacterScreenController _newCharacterView;
 
         [SerializeField]
         private SkinSelectScreenController _skinSelectView;
-        
+
         [SerializeField]
         private GameScreenController _gameView;
 
@@ -78,7 +78,7 @@ namespace UI
         {
             _activeView?.gameObject.SetActive(false);
         }
-        
+
         public void EnableCurrentView()
         {
             _activeView?.gameObject.SetActive(true);

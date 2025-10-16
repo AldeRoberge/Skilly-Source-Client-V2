@@ -21,7 +21,7 @@ namespace UI.DeathScreen
         {
             var charListRequest = new CharListRequestHandler(Account.Username, Account.Password);
             await charListRequest.SendRequestAsync();
-            
+
             ViewManager.Instance.ChangeView(View.Character);
         }
     }

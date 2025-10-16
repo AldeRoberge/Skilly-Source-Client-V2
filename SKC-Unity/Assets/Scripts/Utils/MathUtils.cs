@@ -18,9 +18,10 @@ namespace Utils
                 v = ((int)(x / Mathf.PI) + 1) / 2;
                 x -= v * 2 * Mathf.PI;
             }
+
             return x;
         }
-        
+
         public static float DistanceSquared(Vector3 from, Vector3 to)
         {
             float v1 = from.x - to.x, v2 = from.y - to.y;

@@ -71,7 +71,7 @@ namespace Networking
         TradeAccepted,
         SwitchMusic
     }
-    
+
     public class PacketHandler
     {
         private ConcurrentQueue<IncomingPacket> _toBeHandled;
@@ -81,7 +81,7 @@ namespace Networking
         public readonly GameInitData InitData;
 
         public Player Player;
-        
+
         private readonly Map _map;
 
         public wRandom Random;
@@ -120,13 +120,13 @@ namespace Networking
             {
                 ViewManager.Instance.ChangeView(View.Character);
             }
-            
+
             while (_toBeHandled.TryDequeue(out var packet))
             {
                 packet.Handle(this, _map);
             }
         }
-        
+
         public void AddPacket(IncomingPacket packet)
         {
             _toBeHandled.Enqueue(packet);

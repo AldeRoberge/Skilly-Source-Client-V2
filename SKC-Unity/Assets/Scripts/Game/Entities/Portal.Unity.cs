@@ -7,7 +7,7 @@ namespace Game.Entities
     {
         [SerializeField]
         private PortalPanel _portalPanel;
-        
+
         public Panel GetPanel(InteractPanel interactPanel)
         {
             var panel = interactPanel.GetPanel<PortalPanel>();
@@ -15,6 +15,7 @@ namespace Game.Entities
             {
                 panel = Instantiate(_portalPanel, interactPanel.transform);
             }
+
             panel.Init(this);
             return panel;
         }

@@ -11,7 +11,7 @@ namespace Networking.Packets.Incoming
         public override PacketId Id => PacketId.NewTick;
         public override IncomingPacket CreateInstance() => new NewTick();
 
-        private ObjectStatus[] _objectStats;
+        private ObjectStatus[]               _objectStats;
         private Dictionary<StatType, object> _playerStats;
 
         public override void Read(PacketReader rdr)
@@ -31,7 +31,7 @@ namespace Networking.Packets.Incoming
             {
                 var key = (StatType)rdr.ReadByte();
                 _playerStats[key] = ObjectStatus.IsStringStat(key) ?
-                    (object) rdr.ReadString() : 
+                    (object)rdr.ReadString() :
                     rdr.ReadInt32();
             }
         }
@@ -47,7 +47,7 @@ namespace Networking.Packets.Incoming
             {
                 handler.Player.UpdateObjectStats(_playerStats);
             }
-            
+
             map.MovesRequested++;
         }
 
@@ -56,14 +56,14 @@ namespace Networking.Packets.Incoming
             var isMyPlayer = objectStatus.Id == playerId;
             if (!isMyPlayer)
             {
-                entity.OnNewTick(objectStatus.Position);    
+                entity.OnNewTick(objectStatus.Position);
             }
-            
+
             entity.UpdateObjectStats(objectStatus.Stats);
 
             if (!(entity is Player player))
                 return;
-            
+
             //TODO finish xp handling
         }
     }

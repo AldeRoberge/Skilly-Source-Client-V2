@@ -15,7 +15,7 @@ namespace UI.CharacterScreen
         [SerializeField]
         private NewCharacterRect _newCharacterRectPrefab;
 
-        private List<CharacterRect> _characters;
+        private List<CharacterRect>    _characters;
         private List<NewCharacterRect> _newCharacterRects;
 
         private void Awake()
@@ -27,7 +27,7 @@ namespace UI.CharacterScreen
         public override void Reset(object data)
         {
             base.Reset(data);
-            
+
             var i = 0;
             foreach (var character in _characters)
             {
@@ -38,7 +38,7 @@ namespace UI.CharacterScreen
                     i++;
                     continue;
                 }
-                
+
                 character.gameObject.SetActive(false);
             }
 
@@ -60,7 +60,7 @@ namespace UI.CharacterScreen
                     j++;
                     continue;
                 }
-                
+
                 newCharacterRect.gameObject.SetActive(false);
             }
 

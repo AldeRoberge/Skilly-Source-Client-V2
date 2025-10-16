@@ -8,14 +8,14 @@ namespace Game
     public class PlayerTextureProvider : ITextureProvider
     {
         private readonly Player _player;
-        private float _facing;
-        private Sprite _portrait;
-        
+        private          float  _facing;
+        private          Sprite _portrait;
+
         public PlayerTextureProvider(Player player)
         {
             _player = player;
         }
-        
+
         public Sprite GetTexture(int time)
         {
             var action = Action.Stand;
@@ -43,7 +43,7 @@ namespace Game
             if (_portrait == null)
             {
                 var image = _player.Desc.TextureData.Animation.ImageFromDir(Facing.Right, Action.Stand, 0);
-                var size = (int) (4 / image.rect.width * 100);
+                var size = (int)(4 / image.rect.width * 100);
                 _portrait = SpriteUtils.Redraw(image, size);
             }
 

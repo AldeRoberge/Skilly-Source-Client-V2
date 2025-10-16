@@ -9,11 +9,11 @@ namespace Models
 {
     public readonly struct GameInitData
     {
-        public readonly int WorldId;
-        public readonly int CharId;
+        public readonly int  WorldId;
+        public readonly int  CharId;
         public readonly bool NewCharacter;
-        public readonly int ClassType;
-        public readonly int SkinType;
+        public readonly int  ClassType;
+        public readonly int  SkinType;
 
         public GameInitData(int worldId, int charId, bool newCharacter, int classType, int skinType)
         {
@@ -24,12 +24,12 @@ namespace Models
             SkinType = skinType;
         }
     }
-    
+
     public readonly struct GuildInfo
     {
         public static GuildInfo None = new GuildInfo(null, GuildRank.Initiate);
 
-        public readonly string Name;
+        public readonly string    Name;
         public readonly GuildRank Rank;
 
         public GuildInfo(string name, GuildRank rank)
@@ -41,17 +41,17 @@ namespace Models
         public GuildInfo(XElement xml)
         {
             Name = xml.ParseString("Name");
-            Rank = (GuildRank) xml.ParseInt("Rank");
+            Rank = (GuildRank)xml.ParseInt("Rank");
         }
     }
 
     public enum GuildRank
     {
         Initiate = 0,
-        Member = 10,
-        Officer = 20,
-        Leader = 30,
-        Founder = 40
+        Member   = 10,
+        Officer  = 20,
+        Leader   = 30,
+        Founder  = 40
     }
 
     public readonly struct ClassStats
@@ -77,19 +77,19 @@ namespace Models
 
     public readonly struct CharacterStats
     {
-        public readonly int Id;
-        public readonly int ClassType;
-        public readonly int Level;
-        public readonly int Experience;
-        public readonly int Fame;
+        public readonly int   Id;
+        public readonly int   ClassType;
+        public readonly int   Level;
+        public readonly int   Experience;
+        public readonly int   Fame;
         public readonly int[] Stats;
         public readonly int[] Inventory;
         public readonly int[] ItemDatas;
-        public readonly int HP;
-        public readonly int MP;
-        public readonly int Tex1;
-        public readonly int Tex2;
-        public readonly int SkinType;
+        public readonly int   HP;
+        public readonly int   MP;
+        public readonly int   Tex1;
+        public readonly int   Tex2;
+        public readonly int   SkinType;
 
         public CharacterStats(XElement xml)
         {
@@ -112,8 +112,8 @@ namespace Models
     public struct TileData
     {
         public ushort TileType;
-        public short X;
-        public short Y;
+        public short  X;
+        public short  Y;
 
         public TileData(PacketReader rdr)
         {
@@ -125,7 +125,7 @@ namespace Models
 
     public struct ObjectDrop
     {
-        public int Id;
+        public int  Id;
         public bool Explode;
 
         public ObjectDrop(PacketReader rdr)
@@ -137,7 +137,7 @@ namespace Models
 
     public struct ObjectDefinition
     {
-        public ushort ObjectType;
+        public ushort       ObjectType;
         public ObjectStatus ObjectStatus;
 
         public ObjectDefinition(PacketReader rdr)
@@ -149,8 +149,8 @@ namespace Models
 
     public struct ObjectStatus
     {
-        public int Id;
-        public Vector3 Position;
+        public int                          Id;
+        public Vector3                      Position;
         public Dictionary<StatType, object> Stats;
 
         public ObjectStatus(PacketReader rdr)

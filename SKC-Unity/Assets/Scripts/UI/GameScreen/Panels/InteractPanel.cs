@@ -10,9 +10,9 @@ namespace UI.GameScreen.Panels
     {
         [SerializeField]
         private PartyPanel _partyPanel;
-        
+
         private Player _player;
-        private Panel _currentPanel;
+        private Panel  _currentPanel;
 
         private IInteractiveObject _newInteractive;
         private IInteractiveObject _closestInteractive;
@@ -22,7 +22,7 @@ namespace UI.GameScreen.Panels
         private void Awake()
         {
             _panels = new Dictionary<Type, Panel>();
-            
+
             Networking.Packets.Incoming.Update.OnMyPlayerJoined += OnMyPlayerJoined;
             Map.UpdateInteractive += SetNewInteractive;
         }

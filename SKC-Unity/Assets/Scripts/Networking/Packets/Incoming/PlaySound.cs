@@ -8,7 +8,7 @@ namespace Networking.Packets.Incoming
         public override IncomingPacket CreateInstance() => new PlaySound();
 
         private string _sound;
-        
+
         public override void Read(PacketReader rdr)
         {
             _sound = rdr.ReadString();

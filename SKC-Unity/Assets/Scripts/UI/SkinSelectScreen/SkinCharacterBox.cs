@@ -25,7 +25,7 @@ namespace UI.SkinSelectScreen
         public void Init(SkinDesc skinDesc)
         {
             _desc = skinDesc;
-            
+
             _image.sprite = skinDesc.Animation.ImageFromDir(Facing.Right, Action.Stand, 0);
         }
 

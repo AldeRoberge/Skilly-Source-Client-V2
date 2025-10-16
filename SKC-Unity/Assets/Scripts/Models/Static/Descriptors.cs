@@ -21,20 +21,20 @@ namespace Models.Static
         T7 = 1 << 7,
 
         //Bonuses
-        MaxHP = 1 << 8,
-        MaxMP = 1 << 9,
-        Attack = 1 << 10,
-        Defense = 1 << 11,
-        Speed = 1 << 12,
-        Dexterity = 1 << 13,
-        Vitality = 1 << 14,
-        Wisdom = 1 << 15,
+        MaxHP      = 1 << 8,
+        MaxMP      = 1 << 9,
+        Attack     = 1 << 10,
+        Defense    = 1 << 11,
+        Speed      = 1 << 12,
+        Dexterity  = 1 << 13,
+        Vitality   = 1 << 14,
+        Wisdom     = 1 << 15,
         RateOfFire = 1 << 16,
-        Damage = 1 << 17,
-        Cooldown = 1 << 18,
-        FameBonus = 1 << 19
+        Damage     = 1 << 17,
+        Cooldown   = 1 << 18,
+        FameBonus  = 1 << 19
     }
-    
+
     public enum StatType
     {
         MaxHp,
@@ -130,39 +130,39 @@ namespace Models.Static
         ItemData19,
         OwnerAccountId
     }
-    
+
     [Flags]
     public enum ConditionEffect : ulong
     {
-        Nothing = 1 << 0,
-        Quiet = 1 << 1,
-        Weak = 1 << 2,
-        Slowed = 1 << 3,
-        Sick = 1 << 4,
-        Dazed = 1 << 5,
-        Stunned = 1 << 6,
-        Blind = 1 << 7,
+        Nothing       = 1 << 0,
+        Quiet         = 1 << 1,
+        Weak          = 1 << 2,
+        Slowed        = 1 << 3,
+        Sick          = 1 << 4,
+        Dazed         = 1 << 5,
+        Stunned       = 1 << 6,
+        Blind         = 1 << 7,
         Hallucinating = 1 << 8,
-        Drunk = 1 << 9,
-        Confused = 1 << 10,
-        StunImmune = 1 << 11,
-        Invisible = 1 << 12,
-        Paralyzed = 1 << 13,
-        Speedy = 1 << 14,
-        Bleeding = 1 << 15,
-        Healing = 1 << 16,
-        Damaging = 1 << 17,
-        Berserk = 1 << 18,
-        Stasis = 1 << 19,
-        StasisImmune = 1 << 20,
-        Invincible = 1 << 21,
-        Invulnerable = 1 << 23,
-        Armored = 1 << 24,
-        ArmorBroken = 1 << 25,
-        Hexed = 1 << 26,
-        NinjaSpeedy = 1 << 27,
+        Drunk         = 1 << 9,
+        Confused      = 1 << 10,
+        StunImmune    = 1 << 11,
+        Invisible     = 1 << 12,
+        Paralyzed     = 1 << 13,
+        Speedy        = 1 << 14,
+        Bleeding      = 1 << 15,
+        Healing       = 1 << 16,
+        Damaging      = 1 << 17,
+        Berserk       = 1 << 18,
+        Stasis        = 1 << 19,
+        StasisImmune  = 1 << 20,
+        Invincible    = 1 << 21,
+        Invulnerable  = 1 << 23,
+        Armored       = 1 << 24,
+        ArmorBroken   = 1 << 25,
+        Hexed         = 1 << 26,
+        NinjaSpeedy   = 1 << 27,
     }
-    
+
     public enum ActivateEffectIndex
     {
         Create,
@@ -197,38 +197,38 @@ namespace Models.Static
         Backpack,
         PermaPet
     }
-    
+
     public enum ItemType
     {
-        None = -1,
-        All = 0,
-        Sword = 1,
-        Dagger = 2,
-        Bow = 3,
-        Tome = 4,
-        Shield = 5,
-        Leather = 6,
-        Plate = 7,
-        Wand = 8,
-        Ring = 9,
-        Potion = 10,
-        Spell = 11,
-        Seal = 12,
-        Cloak = 13,
-        Robe = 14,
-        Quiver = 15,
-        Helm = 16,
-        Staff = 17,
-        Poison = 18,
-        Skull = 19,
-        Trap = 20,
-        Orb = 21,
-        Prism = 22,
-        Scepter = 23,
-        Katana = 24,
+        None     = -1,
+        All      = 0,
+        Sword    = 1,
+        Dagger   = 2,
+        Bow      = 3,
+        Tome     = 4,
+        Shield   = 5,
+        Leather  = 6,
+        Plate    = 7,
+        Wand     = 8,
+        Ring     = 9,
+        Potion   = 10,
+        Spell    = 11,
+        Seal     = 12,
+        Cloak    = 13,
+        Robe     = 14,
+        Quiver   = 15,
+        Helm     = 16,
+        Staff    = 17,
+        Poison   = 18,
+        Skull    = 19,
+        Trap     = 20,
+        Orb      = 21,
+        Prism    = 22,
+        Scepter  = 23,
+        Katana   = 24,
         Shuriken = 25
     }
-    
+
     public class ObjectDesc
     {
         public readonly string Id;
@@ -236,27 +236,27 @@ namespace Models.Static
 
         public readonly string DisplayId;
 
-        public readonly bool Static;
+        public readonly bool   Static;
         public readonly string Class;
-        
+
         public readonly bool OccupySquare;
         public readonly bool FullOccupy;
         public readonly bool EnemyOccupySquare;
-        
+
         public readonly bool ProtectFromGroundDamage;
         public readonly bool ProtectFromSink;
-        
+
         public readonly bool Player;
         public readonly bool Enemy;
 
-        public readonly int Defense;
-        public readonly int Size;
-        public readonly int ShadowSize;
-        public readonly Color ShadowColor;
+        public readonly int             Defense;
+        public readonly int             Size;
+        public readonly int             ShadowSize;
+        public readonly Color           ShadowColor;
         public readonly WhileMovingDesc WhileMoving;
-        public readonly bool Flying;
-        public readonly float Z;
-        public readonly bool NoMiniMap;
+        public readonly bool            Flying;
+        public readonly float           Z;
+        public readonly bool            NoMiniMap;
         public bool ShowOnMap => Static && OccupySquare && !NoMiniMap;
 
         public readonly string Model;
@@ -274,7 +274,7 @@ namespace Models.Static
         public readonly string DeathSound;
 
         public readonly float BloodChance;
-        
+
         public readonly Dictionary<int, ProjectileDesc> Projectiles;
 
         public readonly float AngleCorrection;
@@ -287,19 +287,19 @@ namespace Models.Static
         {
             Id = id;
             Type = type;
-            
+
             DisplayId = xml.ParseString("DisplayId", Id);
 
             Static = xml.ParseBool("Static");
             Class = xml.ParseString("Class");
-            
+
             OccupySquare = xml.ParseBool("OccupySquare");
             FullOccupy = xml.ParseBool("FullOccupy");
             EnemyOccupySquare = xml.ParseBool("EnemyOccupySquare");
-            
+
             ProtectFromGroundDamage = xml.ParseBool("ProtectFromGroundDamage");
             ProtectFromSink = xml.ParseBool("ProtectFromSink");
-            
+
             Enemy = xml.ParseBool("Enemy");
             Player = xml.ParseBool("Player");
 
@@ -330,7 +330,7 @@ namespace Models.Static
             DeathSound = xml.ParseString("DeathSound");
 
             BloodChance = xml.ParseFloat("BloodProb");
-            
+
             Projectiles = new Dictionary<int, ProjectileDesc>();
             foreach (var k in xml.Elements("Projectile"))
             {
@@ -349,7 +349,7 @@ namespace Models.Static
     public class WhileMovingDesc
     {
         public readonly float Z;
-        public readonly bool Flying;
+        public readonly bool  Flying;
 
         public WhileMovingDesc(XElement xml)
         {
@@ -357,23 +357,27 @@ namespace Models.Static
             Flying = xml.ParseBool("Flying");
         }
     }
-    
+
     public class PlayerDesc : ObjectDesc
     {
         public readonly ItemType[] SlotTypes;
-        public readonly int[] Equipment;
-        public readonly int[] ItemDatas;
+        public readonly int[]      Equipment;
+        public readonly int[]      ItemDatas;
         public readonly StatDesc[] Stats;
-        public readonly int[] StartingValues;
+        public readonly int[]      StartingValues;
 
         public PlayerDesc(XElement e, string id, ushort type) : base(e, id, type)
         {
             SlotTypes = e.ParseIntArray("SlotTypes", ",").Select(x => (ItemType)x).ToArray();
 
-            var equipment = e.ParseUshortArray("Equipment", ",").Select(k => k == 0xffff ? -1 : k).ToArray();
+            var equipment = e.ParseUshortArray("Equipment", ",").Select(k => k == 0xffff ?
+                -1 :
+                k).ToArray();
             Equipment = new int[20];
             for (var k = 0; k < 20; k++)
-                Equipment[k] = k >= equipment.Length ? -1 : equipment[k];
+                Equipment[k] = k >= equipment.Length ?
+                    -1 :
+                    equipment[k];
 
             ItemDatas = new int[20];
             for (var k = 0; k < 20; k++)
@@ -387,15 +391,15 @@ namespace Models.Static
             StartingValues = Stats.Select(k => k.StartingValue).ToArray();
         }
     }
-    
+
     public class StatDesc
     {
         public readonly string Type;
-        public readonly int Index;
-        public readonly int MaxValue;
-        public readonly int StartingValue;
-        public readonly int MinIncrease;
-        public readonly int MaxIncrease;
+        public readonly int    Index;
+        public readonly int    MaxValue;
+        public readonly int    StartingValue;
+        public readonly int    MinIncrease;
+        public readonly int    MaxIncrease;
 
         public StatDesc(int index, XElement e)
         {
@@ -429,6 +433,7 @@ namespace Models.Static
                 case 6: return "HpRegen";
                 case 7: return "MpRegen";
             }
+
             return null;
         }
 
@@ -445,41 +450,42 @@ namespace Models.Static
                 case "HpRegen": return 6;
                 case "MpRegen": return 7;
             }
+
             return -1;
         }
     }
-    
+
     public class TileDesc
     {
         public readonly XElement Xml;
-        
-        public readonly string Id;
-        public readonly ushort Type;
-        public readonly TextureData TextureData;
-        public readonly bool NoWalk;
-        public readonly int Damage;
-        public readonly float Speed;
-        public readonly bool Sinking;
-        public readonly bool Sink;
-        public readonly bool Push;
-        public readonly float DX;
-        public readonly float DY;
 
-        public readonly int BlendPriority;
-        public readonly int CompositePriority;
-        public readonly bool HasEdge;
+        public readonly string      Id;
+        public readonly ushort      Type;
+        public readonly TextureData TextureData;
+        public readonly bool        NoWalk;
+        public readonly int         Damage;
+        public readonly float       Speed;
+        public readonly bool        Sinking;
+        public readonly bool        Sink;
+        public readonly bool        Push;
+        public readonly float       DX;
+        public readonly float       DY;
+
+        public readonly int         BlendPriority;
+        public readonly int         CompositePriority;
+        public readonly bool        HasEdge;
         public readonly TextureData EdgeTextureData;
         public readonly TextureData CornerTextureData;
         public readonly TextureData InnerCornerTextureData;
-        public readonly bool SameTypeEdgeMode;
+        public readonly bool        SameTypeEdgeMode;
 
         private Sprite[] _edges;
         private Sprite[] _innerCorners;
-        
+
         public TileDesc(XElement e, string id, ushort type)
         {
             Xml = e;
-            
+
             Id = id;
             Type = type;
             TextureData = new TextureData(e);
@@ -503,6 +509,7 @@ namespace Models.Static
                 {
                     CornerTextureData = new TextureData(e.Element("Corner"));
                 }
+
                 if (e.Element("InnerCorner") != null)
                 {
                     InnerCornerTextureData = new TextureData(e.Element("InnerCorner"));
@@ -547,22 +554,22 @@ namespace Models.Static
             return _innerCorners;
         }
     }
-    
+
     public class ActivateEffectDesc
     {
-        public readonly ActivateEffectIndex Index;
+        public readonly ActivateEffectIndex   Index;
         public readonly ConditionEffectDesc[] Effects;
-        public readonly ConditionEffect Effect;
-        public readonly string Id;
-        public readonly int DurationMS;
-        public readonly float Range;
-        public readonly int Amount;
-        public readonly int TotalDamage;
-        public readonly float Radius;
-        public readonly uint? Color;
-        public readonly int MaxTargets;
-        public readonly int Stat;
-        
+        public readonly ConditionEffect       Effect;
+        public readonly string                Id;
+        public readonly int                   DurationMS;
+        public readonly float                 Range;
+        public readonly int                   Amount;
+        public readonly int                   TotalDamage;
+        public readonly float                 Radius;
+        public readonly uint?                 Color;
+        public readonly int                   MaxTargets;
+        public readonly int                   Stat;
+
         public ActivateEffectDesc(XElement e)
         {
             Index = (ActivateEffectIndex)Enum.Parse(typeof(ActivateEffectIndex), e.Value.Replace(" ", ""));
@@ -589,9 +596,9 @@ namespace Models.Static
     public class ItemDesc
     {
         public const float RATE_OF_FIRE_MULTIPLIER = 0.05f;
-        public const float DAMAGE_MULTIPLIER = 0.05f;
-        public const float COOLDOWN_MULTIPLIER = 0.05f;
-        
+        public const float DAMAGE_MULTIPLIER       = 0.05f;
+        public const float COOLDOWN_MULTIPLIER     = 0.05f;
+
         public static float GetStat(int data, ItemData i, float multiplier)
         {
             var rank = GetRank(data);
@@ -602,6 +609,7 @@ namespace Models.Static
             {
                 value += rank;
             }
+
             return value * multiplier;
         }
 
@@ -634,35 +642,35 @@ namespace Models.Static
                 return false;
             return ((ItemData)data & i) != 0;
         }
-        
+
         public readonly string Id;
         public readonly ushort Type;
 
         public readonly ItemType SlotType;
-        public readonly int Tier;
-        public readonly string Description;
-        public readonly float RateOfFire;
-        public readonly bool Usable;
-        public readonly int BagType;
-        public readonly int MpCost;
-        public readonly int FameBonus;
-        public readonly int NumProjectiles;
-        public readonly float ArcGap;
-        public readonly bool Consumable;
-        public readonly bool Potion;
-        public readonly string DisplayId;
-        public readonly string SuccessorId;
-        public readonly bool Soulbound;
-        public readonly int CooldownMS;
-        public readonly bool Resurrects;
-        public readonly int Tex1;
-        public readonly int Tex2;
-        public readonly int Doses;
+        public readonly int      Tier;
+        public readonly string   Description;
+        public readonly float    RateOfFire;
+        public readonly bool     Usable;
+        public readonly int      BagType;
+        public readonly int      MpCost;
+        public readonly int      FameBonus;
+        public readonly int      NumProjectiles;
+        public readonly float    ArcGap;
+        public readonly bool     Consumable;
+        public readonly bool     Potion;
+        public readonly string   DisplayId;
+        public readonly string   SuccessorId;
+        public readonly bool     Soulbound;
+        public readonly int      CooldownMS;
+        public readonly bool     Resurrects;
+        public readonly int      Tex1;
+        public readonly int      Tex2;
+        public readonly int      Doses;
 
         public readonly KeyValuePair<int, int>[] StatBoosts;
-        public readonly ActivateEffectDesc[] ActivateEffects;
-        public readonly ProjectileDesc Projectile;
-        public readonly TextureData TextureData;
+        public readonly ActivateEffectDesc[]     ActivateEffects;
+        public readonly ProjectileDesc           Projectile;
+        public readonly TextureData              TextureData;
 
         public ItemDesc(XElement e, string id, ushort type)
         {
@@ -704,18 +712,18 @@ namespace Models.Static
 
             if (e.Element("Projectile") != null)
                 Projectile = new ProjectileDesc(e.Element("Projectile"), Type);
-            
+
             TextureData = new TextureData(e);
         }
     }
-    
+
     public class ProjectileDesc
     {
-        public readonly byte BulletType;
+        public readonly byte   BulletType;
         public readonly string ObjectId;
-        public readonly int LifetimeMS;
-        public readonly float Speed;
-        public readonly int Size;
+        public readonly int    LifetimeMS;
+        public readonly float  Speed;
+        public readonly int    Size;
 
         public readonly int Damage;
         public readonly int MinDamage; //Only for players
@@ -747,7 +755,7 @@ namespace Models.Static
             LifetimeMS = e.ParseInt("LifetimeMS");
             Speed = e.ParseFloat("Speed");
             Size = e.ParseInt("Size", -1);
-            
+
             Damage = e.ParseInt("Damage");
             MinDamage = e.ParseInt("MinDamage", Damage);
             MaxDamage = e.ParseInt("MaxDamage", Damage);
@@ -776,7 +784,7 @@ namespace Models.Static
     public class ConditionEffectDesc
     {
         public readonly ConditionEffect Effect;
-        public readonly int DurationMS;
+        public readonly int             DurationMS;
 
         public ConditionEffectDesc(ConditionEffect effect, int durationMs)
         {
@@ -793,21 +801,21 @@ namespace Models.Static
 
     public class SkinDesc
     {
-        public readonly int Type;
+        public readonly int    Type;
         public readonly string Id;
-        
+
         public readonly CharacterAnimation Animation;
-        public readonly int ClassType;
+        public readonly int                ClassType;
 
         public SkinDesc(XElement skinXml, int type, string id)
         {
             Type = type;
             Id = id;
-            
+
             var sheetName = skinXml.Element("AnimatedTexture").ParseString("File");
             var index = skinXml.Element("AnimatedTexture").ParseUshort("Index");
             Animation = AssetLibrary.GetAnimation(sheetName, index);
-            
+
             ClassType = skinXml.ParseUshort("PlayerClassType");
         }
     }

@@ -8,8 +8,8 @@ namespace Game.Entities
 {
     public class Player : Character
     {
-        private const float _MIN_MOVE_SPEED = 0.004f;
-        private const float _MAX_MOVE_SPEED = 0.0096f;
+        private const float _MIN_MOVE_SPEED  = 0.004f;
+        private const float _MAX_MOVE_SPEED  = 0.0096f;
         private const float _MIN_ATTACK_FREQ = 0.0015f;
         private const float _MAX_ATTACK_FREQ = 0.008f;
         private const float _MIN_ATTACK_MULT = 0.5f;
@@ -54,19 +54,19 @@ namespace Game.Entities
         public ItemType[] SlotTypes { get; private set; }
         public int[] Equipment { get; private set; }
         public int[] ItemDatas { get; private set; }
-        public wRandom Random;
+        public  wRandom               Random;
         private PlayerShootController _shootController;
-        public int AttackPeriod;
+        public  int                   AttackPeriod;
 
         protected override void Init(ObjectDesc desc, int objectId, bool isMyPlayer, Map map, bool rotating = true)
         {
             base.Init(desc, objectId, isMyPlayer, map, rotating);
-            
-            Desc = (PlayerDesc) desc;
-            
+
+            Desc = (PlayerDesc)desc;
+
             if (isMyPlayer)
                 _shootController = new PlayerShootController(this);
-            
+
             SlotTypes = Desc.SlotTypes;
             Equipment = new int[SlotTypes.Length];
             ItemDatas = new int[SlotTypes.Length];
@@ -80,7 +80,7 @@ namespace Game.Entities
         public override void Dispose()
         {
             base.Dispose();
-            
+
             _shootController = null;
             Random = null;
         }
@@ -88,7 +88,7 @@ namespace Game.Entities
         public override bool Tick()
         {
             base.Tick();
-            
+
             _shootController?.Tick(GameTime.Time, CameraManager.Camera);
 
             return true;
@@ -99,7 +99,7 @@ namespace Game.Entities
             var tile = Map.GetTile(Position);
             if (tile.Desc.Sinking)
             {
-                SinkLevel = (int) Mathf.Min(SinkLevel + 1, Settings.MAX_SINK_LEVEL);
+                SinkLevel = (int)Mathf.Min(SinkLevel + 1, Settings.MAX_SINK_LEVEL);
                 MoveMultiplier = 0.1f + (1 - SinkLevel / Settings.MAX_SINK_LEVEL) * (tile.Desc.Speed - 0.1f);
             }
             else
@@ -133,7 +133,7 @@ namespace Game.Entities
             var itemData = ItemDatas[0];
             var rateOfFireMod = ItemDesc.GetStat(itemData, ItemData.RateOfFire, ItemDesc.RATE_OF_FIRE_MULTIPLIER);
             var rateOfFire = container.RateOfFire;
-            
+
             rateOfFire *= 1 + rateOfFireMod;
             AttackPeriod = (int)(1 / GetAttackFrequency() * (1 / rateOfFire));
             base.SetAttack(container, attackAngle);
@@ -142,104 +142,104 @@ namespace Game.Entities
         protected override void UpdateStat(StatType statType, object value)
         {
             base.UpdateStat(statType, value);
-            
+
             switch (statType)
             {
                 case StatType.AccountId:
-                    AccountId = (int) value;
+                    AccountId = (int)value;
                     return;
                 case StatType.Exp:
-                    Exp = (int) value;
+                    Exp = (int)value;
                     return;
                 case StatType.NextLevelExp:
-                    NextLevelExp = (int) value;
+                    NextLevelExp = (int)value;
                     return;
                 case StatType.Level:
-                    Level = (int) value;
+                    Level = (int)value;
                     return;
                 case StatType.Fame:
-                    Fame = (int) value;
+                    Fame = (int)value;
                     return;
                 case StatType.NextClassQuestFame:
-                    NextClassQuestFame = (int) value;
+                    NextClassQuestFame = (int)value;
                     return;
                 case StatType.NumStars:
-                    NumStars = (int) value;
+                    NumStars = (int)value;
                     return;
                 case StatType.GuildName:
-                    GuildName = (string) value;
+                    GuildName = (string)value;
                     return;
                 case StatType.GuildRank:
-                    GuildRank = (GuildRank) value;
+                    GuildRank = (GuildRank)value;
                     return;
                 case StatType.Credits:
-                    Credits = (int) value;
+                    Credits = (int)value;
                     return;
                 case StatType.DyeLarge:
-                    DyeLarge = (int) value;
+                    DyeLarge = (int)value;
                     return;
                 case StatType.DyeSmall:
-                    DyeSmall = (int) value;
+                    DyeSmall = (int)value;
                     return;
                 case StatType.HasBackpack:
-                    HasBackpack = (bool) value;
+                    HasBackpack = (bool)value;
                     return;
                 case StatType.Mp:
-                    Mp = (int) value;
+                    Mp = (int)value;
                     return;
                 case StatType.MaxMp:
-                    MaxMp = (int) value;
+                    MaxMp = (int)value;
                     return;
                 case StatType.Oxygen:
-                    Oxygen = (int) value;
+                    Oxygen = (int)value;
                     return;
                 case StatType.HealthPotionStack:
-                    HealthPotions = (int) value;
+                    HealthPotions = (int)value;
                     return;
                 case StatType.MagicPotionStack:
-                    MagicPotions = (int) value;
+                    MagicPotions = (int)value;
                     return;
                 case StatType.Attack:
-                    Attack = (int) value;
+                    Attack = (int)value;
                     return;
                 case StatType.Defense:
-                    Defense = (int) value;
+                    Defense = (int)value;
                     return;
                 case StatType.Speed:
-                    Speed = (int) value;
+                    Speed = (int)value;
                     return;
                 case StatType.Dexterity:
-                    Dexterity = (int) value;
+                    Dexterity = (int)value;
                     return;
                 case StatType.Vitality:
-                    Vitality = (int) value;
+                    Vitality = (int)value;
                     return;
                 case StatType.Wisdom:
-                    Wisdom = (int) value;
+                    Wisdom = (int)value;
                     return;
                 case StatType.MaxHpBoost:
-                    MaxHpBoost = (int) value;
+                    MaxHpBoost = (int)value;
                     return;
                 case StatType.MaxMpBoost:
-                    MaxMpBoost = (int) value;
+                    MaxMpBoost = (int)value;
                     return;
                 case StatType.AttackBoost:
-                    AttackBoost = (int) value;
+                    AttackBoost = (int)value;
                     return;
                 case StatType.DefenseBoost:
-                    DefenseBoost = (int) value;
+                    DefenseBoost = (int)value;
                     return;
                 case StatType.SpeedBoost:
-                    SpeedBoost = (int) value;
+                    SpeedBoost = (int)value;
                     return;
                 case StatType.DexterityBoost:
-                    DexterityBoost = (int) value;
+                    DexterityBoost = (int)value;
                     return;
                 case StatType.VitalityBoost:
-                    VitalityBoost = (int) value;
+                    VitalityBoost = (int)value;
                     return;
                 case StatType.WisdomBoost:
-                    WisdomBoost = (int) value;
+                    WisdomBoost = (int)value;
                     return;
                 case StatType.Inventory0:
                 case StatType.Inventory1:
@@ -253,7 +253,7 @@ namespace Game.Entities
                 case StatType.Inventory9:
                 case StatType.Inventory10:
                 case StatType.Inventory11:
-                    Equipment[statType - StatType.Inventory0] = (int) value;
+                    Equipment[statType - StatType.Inventory0] = (int)value;
                     return;
                 case StatType.ItemData0:
                 case StatType.ItemData1:
@@ -275,7 +275,7 @@ namespace Game.Entities
                 case StatType.ItemData17:
                 case StatType.ItemData18:
                 case StatType.ItemData19:
-                    ItemDatas[statType - StatType.ItemData0] = (int) value;
+                    ItemDatas[statType - StatType.ItemData0] = (int)value;
                     return;
             }
         }
@@ -284,7 +284,7 @@ namespace Game.Entities
         {
             if (HasConditionEffect(ConditionEffect.Paralyzed))
                 return 0;
-            
+
             if (HasConditionEffect(ConditionEffect.Slowed))
                 return _MIN_MOVE_SPEED * MoveMultiplier;
 
@@ -293,10 +293,11 @@ namespace Game.Entities
             {
                 ret *= 1.5f;
             }
+
             ret *= MoveMultiplier;
             return ret;
         }
-        
+
         public float GetAttackFrequency()
         {
             if (HasConditionEffect(ConditionEffect.Dazed))
@@ -307,9 +308,10 @@ namespace Game.Entities
             {
                 ret *= 1.5f;
             }
+
             return ret;
         }
-        
+
         public float GetAttackMultiplier()
         {
             if (HasConditionEffect(ConditionEffect.Weak))

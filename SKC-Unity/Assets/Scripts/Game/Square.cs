@@ -14,7 +14,7 @@ namespace Game
         {
             26171, 44789, 20333, 70429, 98257, 59393, 33961
         };
-        
+
         public TileDesc Desc { get; private set; }
         public ushort Type { get; private set; }
         public Entity StaticObject;
@@ -51,7 +51,9 @@ namespace Game
         {
             var redrawnTexture = TileRedrawer.Redraw(this, true);
             if (Desc.Sink)
-                SinkLevel = redrawnTexture == null ? 12 : 6;
+                SinkLevel = redrawnTexture == null ?
+                    12 :
+                    6;
 
             if (redrawnTexture)
                 sprite = redrawnTexture;

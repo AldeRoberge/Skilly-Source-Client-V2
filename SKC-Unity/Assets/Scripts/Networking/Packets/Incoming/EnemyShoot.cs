@@ -10,15 +10,15 @@ namespace Networking.Packets.Incoming
         public override PacketId Id => PacketId.EnemyShoot;
         public override IncomingPacket CreateInstance() => new EnemyShoot();
 
-        private int _bulletId;
-        private int _ownerId;
-        private byte _bulletType;
+        private int     _bulletId;
+        private int     _ownerId;
+        private byte    _bulletType;
         private Vector3 _startPos;
-        private float _angle;
-        private short _damage;
-        private byte _numShots;
-        private float _angleInc;
-        
+        private float   _angle;
+        private short   _damage;
+        private byte    _numShots;
+        private float   _angleInc;
+
         public override void Read(PacketReader rdr)
         {
             _bulletId = rdr.ReadInt32();
@@ -55,7 +55,7 @@ namespace Networking.Packets.Incoming
 
                 map.AddObject(projectile, _startPos);
             }
-            
+
             TcpTicker.Send(new ShootAck(GameTime.Time));
             owner.SetAttack(null, _angle + _angleInc * ((_numShots - 1) / 2f));
         }

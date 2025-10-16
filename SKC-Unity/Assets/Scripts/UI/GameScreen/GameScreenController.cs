@@ -29,18 +29,18 @@ namespace UI.GameScreen
         {
             Reconnect.OnReconnect += OnReconnect;
         }
-        
+
         private void OnReconnect(GameInitData initData)
         {
             ViewManager.Instance.ChangeView(View.Game, initData);
         }
-        
+
         public override void Reset(object data)
         {
             Camera.main.backgroundColor = Color.black;
             StartCoroutine(Resize());
 
-            var initData = (GameInitData) data;
+            var initData = (GameInitData)data;
             _packetHandler = new PacketHandler(initData, _map);
             _packetHandler.Start();
         }
@@ -59,13 +59,13 @@ namespace UI.GameScreen
             {
                 if (_packetHandler.PlayerId == -1 || _map.WorldName == "Nexus")
                     return;
-                
+
                 TcpTicker.Send(new Escape());
             }
-            
+
             if (Input.GetKeyDown(KeyCode.G))
                 TcpTicker.Send(new PlayerText("/god"));
-            
+
             if (Screen.width != _screenWidth || Screen.height != _screenHeight)
                 StartCoroutine(Resize());
 

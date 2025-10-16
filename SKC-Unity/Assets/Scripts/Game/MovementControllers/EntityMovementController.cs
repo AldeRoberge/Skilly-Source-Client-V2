@@ -7,9 +7,9 @@ namespace Game.MovementControllers
     {
         public Vector3 Direction { get; set; }
         public Vector3 TargetPosition;
-        
+
         private readonly Entity _entity;
-        
+
         public EntityMovementController(Entity entity)
         {
             _entity = entity;

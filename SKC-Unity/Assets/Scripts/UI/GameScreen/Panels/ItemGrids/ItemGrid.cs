@@ -6,14 +6,13 @@ namespace UI.GameScreen.Panels.ItemGrids
     {
         protected Entity Owner;
         protected Player CurrentPlayer;
-        protected int IndexOffset;
-        
+        protected int    IndexOffset;
+
         public void Init(Entity owner, Player currentPlayer, int itemIndexOffset)
         {
             Owner = owner;
             CurrentPlayer = currentPlayer;
             IndexOffset = itemIndexOffset;
-            
         }
     }
 }

@@ -10,12 +10,13 @@ namespace UI.GameScreen.Panels.Components
     {
         [SerializeField]
         private Image _portraitRenderer;
+
         [SerializeField]
         private TextMeshProUGUI _nameText;
 
-        private Color _color;
-        private Color _tint;
-        private bool _longVersion;
+        private Color  _color;
+        private Color  _tint;
+        private bool   _longVersion;
         private Entity _entity;
 
         public void Init(Color color, bool longVersion, Entity entity)
@@ -23,13 +24,13 @@ namespace UI.GameScreen.Panels.Components
             _color = color;
             _longVersion = longVersion;
 
-            _nameText.fontStyle = _longVersion ? 
-                FontStyles.Normal : 
+            _nameText.fontStyle = _longVersion ?
+                FontStyles.Normal :
                 FontStyles.Bold;
-            
+
             Draw(entity);
         }
-        
+
         public void Draw(Entity entity) => Draw(entity, Color.white);
 
         public void Draw(Entity entity, Color tint)

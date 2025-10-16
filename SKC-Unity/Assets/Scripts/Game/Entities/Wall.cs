@@ -11,7 +11,7 @@ namespace Game.Entities
         protected override void Init(ObjectDesc desc, int objectId, bool isMyPlayer, Map map, bool rotating = true)
         {
             base.Init(desc, objectId, false, map, false);
-            
+
             Renderer.sprite = Desc.TopTextureData.GetTexture(ObjectId);
             foreach (var side in _sides)
             {
@@ -26,7 +26,6 @@ namespace Game.Entities
 
         public override void Draw()
         {
-            
         }
     }
 }

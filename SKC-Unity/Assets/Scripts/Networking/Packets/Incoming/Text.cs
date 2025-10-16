@@ -8,12 +8,12 @@ namespace Networking.Packets.Incoming
         public override IncomingPacket CreateInstance() => new Text();
 
         private string _name;
-        private int _objectId;
-        private int _numStars;
-        private byte _bubbleTime;
+        private int    _objectId;
+        private int    _numStars;
+        private byte   _bubbleTime;
         private string _recipient;
         private string _text;
-        
+
         public override void Read(PacketReader rdr)
         {
             _name = rdr.ReadString();

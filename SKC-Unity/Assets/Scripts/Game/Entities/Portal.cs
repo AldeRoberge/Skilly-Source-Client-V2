@@ -12,7 +12,7 @@ namespace Game.Entities
         protected override void Init(ObjectDesc desc, int objectId, bool isMyPlayer, Map map, bool rotating = true)
         {
             base.Init(desc, objectId, false, map, rotating);
-            
+
             NexusPortal = desc.NexusPortal;
             LockedPortal = desc.LockedPortal;
         }
@@ -24,7 +24,7 @@ namespace Game.Entities
             switch (stat)
             {
                 case StatType.Active:
-                    Active = (int) value != 0;
+                    Active = (int)value != 0;
                     break;
             }
         }

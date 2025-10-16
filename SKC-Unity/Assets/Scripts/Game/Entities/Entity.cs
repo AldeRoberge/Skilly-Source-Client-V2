@@ -9,11 +9,12 @@ namespace Game.Entities
     public partial class Entity : MonoBehaviour
     {
         public const float _HITBOX_RADIUS = 0.5f;
-        
+
         private static int _nextFakeObjectId;
-        
+
         [NonSerialized]
         private ConditionEffect _conditionEffects;
+
         public int Hp { get; private set; }
         public int MaxHp { get; private set; }
         public int Defense { get; protected set; }
@@ -32,7 +33,9 @@ namespace Game.Entities
             get => transform.position;
             set
             {
-                var yOffset = Desc.DrawOnGround ? -0.5f : 0;
+                var yOffset = Desc.DrawOnGround ?
+                    -0.5f :
+                    0;
                 transform.position = new Vector3(value.x, value.y + yOffset, -Z); //TODO check z value
             }
         }
@@ -42,12 +45,12 @@ namespace Game.Entities
             get => transform.rotation.eulerAngles.z * Mathf.Deg2Rad;
             set => transform.rotation = Quaternion.Euler(0, 0, value * Mathf.Rad2Deg);
         }
-        
+
         public float Z { get; set; }
         public bool Flying { get; set; }
         public bool IsMyPlayer { get; private set; }
 
-        public int SizeMult { get; private set; } = 1; 
+        public int SizeMult { get; private set; } = 1;
 
         public int AttackStart { get; set; }
         public float AttackAngle { get; set; }
@@ -81,15 +84,17 @@ namespace Game.Entities
             Size = 100;
             SizeMult = 1;
             if (Desc.TextureData.Texture)
-                SizeMult = (int) Desc.TextureData.Texture.rect.height / SpriteUtils.PIXELS_PER_UNIT;
+                SizeMult = (int)Desc.TextureData.Texture.rect.height / SpriteUtils.PIXELS_PER_UNIT;
 
             if (Desc.Model != null)
             {
                 AddModel();
                 Renderer.sprite = null;
             }
-            
-            Renderer.sortingLayerName = Desc.DrawUnder ? "DrawUnder" : "Visible";
+
+            Renderer.sortingLayerName = Desc.DrawUnder ?
+                "DrawUnder" :
+                "Visible";
             ShadowRenderer.gameObject.SetActive(!Desc.DrawOnGround);
 
             SetPositionAndRotation();
@@ -128,7 +133,7 @@ namespace Game.Entities
             movement.TargetPosition = position;
             movement.Direction = (movement.TargetPosition - Position) / 127f;
         }
-        
+
         public virtual bool Tick()
         {
             _movementController?.Tick(GameTime.DeltaTime);
@@ -139,9 +144,9 @@ namespace Game.Entities
         {
             MoveTo(pos);
 
-            if (!(_movementController is EntityMovementController movement)) 
+            if (!(_movementController is EntityMovementController movement))
                 return;
-            
+
             movement.TargetPosition = pos;
             movement.Direction = Vector3.zero;
         }
@@ -161,7 +166,7 @@ namespace Game.Entities
                     var effect = effectDesc.Effect;
                     if (effect == ConditionEffect.Nothing)
                         continue;
-                    
+
                     switch (effect)
                     {
                         case ConditionEffect.Stunned:
@@ -170,9 +175,10 @@ namespace Game.Entities
                                 Map.Overlay.AddStatusText(this, "Immune", Color.red, 3000);
                                 continue;
                             }
+
                             break;
                     }
-                    
+
                     Map.Overlay.AddStatusText(this, effect.ToString(), Color.red, 3000, offsetTime);
                     offsetTime += 500;
                 }
@@ -182,8 +188,10 @@ namespace Game.Entities
             {
                 var pierced = HasConditionEffect(ConditionEffect.ArmorBroken) ||
                               projectile != null && projectile.ProjectileDesc.ArmorPiercing;
-                
-                Map.Overlay.AddStatusText(this, "-" + damage, pierced ? Color.magenta : Color.red, 1000);
+
+                Map.Overlay.AddStatusText(this, "-" + damage, pierced ?
+                    Color.magenta :
+                    Color.red, 1000);
             }
         }
 
@@ -199,7 +207,7 @@ namespace Game.Entities
             var d = Math.Max(min, damage - def);
             if (target.HasConditionEffect(ConditionEffect.Invulnerable))
                 d = 0;
-            
+
             return d;
         }
 
@@ -211,6 +219,7 @@ namespace Game.Entities
             {
                 desc = AssetLibrary.GetPlayerDesc(type);
             }
+
             en.Init(desc, objectId, isMyPlayer, map);
             return en;
         }

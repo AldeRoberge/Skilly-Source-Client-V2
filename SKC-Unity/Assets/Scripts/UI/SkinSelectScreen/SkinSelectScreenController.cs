@@ -14,23 +14,23 @@ namespace UI.SkinSelectScreen
 
         [SerializeField]
         private Button _backButton;
-        
+
         private List<SkinCharacterBox> _skinCharacterBoxes;
-        
+
         private void Awake()
         {
             _skinCharacterBoxes = new List<SkinCharacterBox>();
-            
+
             _backButton.onClick.AddListener(OnBack);
         }
-        
+
         public override void Reset(object data)
         {
             base.Reset(data);
 
-            var classType = (ushort) data;
+            var classType = (ushort)data;
             var skins = AssetLibrary.ClassType2Skins[classType];
-                
+
             var i = 0;
             foreach (var character in _skinCharacterBoxes)
             {
@@ -41,7 +41,7 @@ namespace UI.SkinSelectScreen
                     i++;
                     continue;
                 }
-                
+
                 character.gameObject.SetActive(false);
             }
 
@@ -54,7 +54,7 @@ namespace UI.SkinSelectScreen
                 i++;
             }
         }
-        
+
         private void OnBack()
         {
             ViewManager.Instance.ChangeView(View.NewCharacter);

@@ -6,8 +6,8 @@ namespace Game.Entities
     public class EntityPool
     {
         private readonly Dictionary<string, Queue<Entity>> _entityPool;
-        private readonly Dictionary<string, Entity> _entityPrefabs;
-        private readonly Transform _wrapperParent;
+        private readonly Dictionary<string, Entity>        _entityPrefabs;
+        private readonly Transform                         _wrapperParent;
 
         public EntityPool(Dictionary<string, Entity> prefabs, Transform wrapperParent)
         {
@@ -23,7 +23,7 @@ namespace Game.Entities
                 Debug.LogWarning("PREFAB NOT IMPLEMENTED");
                 return null;
             }
-            
+
             if (!_entityPool.TryGetValue(type, out var queue))
                 _entityPool[type] = queue = new Queue<Entity>();
 

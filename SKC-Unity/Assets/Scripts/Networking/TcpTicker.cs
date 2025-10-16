@@ -20,21 +20,21 @@ namespace Networking
 
     public static class TcpTicker
     {
-        private const int BUFFER_SIZE = 0x50000;
-        private const int PREFIX_LENGTH = 5;
+        private const int BUFFER_SIZE           = 0x50000;
+        private const int PREFIX_LENGTH         = 5;
         private const int PREFIX_LENGTH_WITH_ID = PREFIX_LENGTH - 1;
-        
+
         private static Task _tickingTask;
         private static bool _crashed;
         public static bool Running => _tickingTask != null && !_tickingTask.IsCompleted;
 
-        private static readonly SendState _Send = new SendState();
+        private static readonly SendState    _Send    = new SendState();
         private static readonly ReceiveState _Receive = new ReceiveState();
-        
+
         private static Socket _socket;
 
         private static ConcurrentQueue<OutgoingPacket> _pending;
-        
+
         private static PacketHandler _packetHandler;
 
         private static readonly Dictionary<PacketId, IncomingPacket> _IncomingPackets =
@@ -60,7 +60,7 @@ namespace Networking
                 Debug.LogWarning("TcpTicker already started");
                 return;
             }
-            
+
             try
             {
                 _socket = new Socket(SocketType.Stream, ProtocolType.Tcp);
@@ -75,7 +75,7 @@ namespace Networking
             }
 
             Debug.Log("Connected!");
-            
+
             _packetHandler = packetHandler;
             _pending = new ConcurrentQueue<OutgoingPacket>();
             _crashed = false;
@@ -87,12 +87,12 @@ namespace Networking
         {
             if (!Running && !_crashed)
                 return;
-            
+
             _Send.Reset();
             _Receive.Reset();
             _tickingTask = null;
             _crashed = false;
-            
+
             try
             {
                 _socket.Shutdown(SocketShutdown.Both);
@@ -100,9 +100,9 @@ namespace Networking
             }
             catch (Exception e)
             {
-               Debug.Log(e.Message); 
+                Debug.Log(e.Message);
             }
-            
+
             Debug.Log("Disconnected!");
         }
 
@@ -114,7 +114,7 @@ namespace Networking
                 Debug.LogError("Can not add packet to inactive ticker");
                 return;
             }
-            
+
             _pending.Enqueue(packet);
         }
 
@@ -135,7 +135,7 @@ namespace Networking
                 _crashed = true;
             }
         }
-        
+
         // called on worker thread
         private static void StartSend()
         {
@@ -148,14 +148,16 @@ namespace Networking
                         {
                             wtr.Write((byte)packet.Id);
                             packet.Write(wtr);
-                            
-                            var bytes = ((MemoryStream) wtr.BaseStream).ToArray();
+
+                            var bytes = ((MemoryStream)wtr.BaseStream).ToArray();
                             _Send.PacketBytes = bytes;
                             _Send.PacketLength = bytes.Length;
                         }
+
                         _Send.State = SocketEventState.InProgress;
                         StartSend();
                     }
+
                     break;
                 case SocketEventState.InProgress:
                     Buffer.BlockCopy(_Send.PacketBytes, 0, _Send.Data, PREFIX_LENGTH_WITH_ID, _Send.PacketLength);
@@ -169,7 +171,7 @@ namespace Networking
                     break;
             }
         }
-        
+
         // called on worker thread
         private static void StartReceive()
         {
@@ -183,6 +185,7 @@ namespace Networking
                         _Receive.State = SocketEventState.InProgress;
                         StartReceive();
                     }
+
                     break;
                 case SocketEventState.InProgress:
                     if (_Receive.PacketLength < PREFIX_LENGTH ||
@@ -195,7 +198,7 @@ namespace Networking
                     {
                         if (_socket.Available != 0)
                             _socket.Receive(_Receive.PacketBytes, PREFIX_LENGTH, _Receive.PacketLength - PREFIX_LENGTH, SocketFlags.None);
-                        var packetId = (PacketId) _Receive.GetPacketId();
+                        var packetId = (PacketId)_Receive.GetPacketId();
                         var packetBody = _Receive.GetPacketBody();
                         Debug.Log($"Processing packet {packetId}");
                         var packet = _IncomingPackets[packetId].CreateInstance();
@@ -203,6 +206,7 @@ namespace Networking
                         {
                             packet.Read(rdr);
                         }
+
                         _packetHandler.AddPacket(packet);
                         _Receive.Reset();
                     }
@@ -211,12 +215,12 @@ namespace Networking
                     break;
             }
         }
-        
+
         private class ReceiveState
         {
-            public int PacketLength;
-            public readonly byte[] PacketBytes;
-            public SocketEventState State;
+            public          int              PacketLength;
+            public readonly byte[]           PacketBytes;
+            public          SocketEventState State;
 
             public ReceiveState()
             {
@@ -245,9 +249,9 @@ namespace Networking
 
         private class SendState
         {
-            public int BytesWritten;
-            public int PacketLength;
-            public byte[] PacketBytes;
+            public int              BytesWritten;
+            public int              PacketLength;
+            public byte[]           PacketBytes;
             public SocketEventState State;
 
             public readonly byte[] Data;

@@ -8,13 +8,13 @@ namespace Networking.Packets.Incoming
     public class Update : IncomingPacket
     {
         public static Action<Player> OnMyPlayerJoined;
-        
+
         public override PacketId Id => PacketId.Update;
         public override IncomingPacket CreateInstance() => new Update();
-        
-        private TileData[] _tiles;
+
+        private TileData[]         _tiles;
         private ObjectDefinition[] _adds;
-        private ObjectDrop[] _drops;
+        private ObjectDrop[]       _drops;
 
         public override void Read(PacketReader rdr)
         {
@@ -29,7 +29,7 @@ namespace Networking.Packets.Incoming
             {
                 _adds[i] = new ObjectDefinition(rdr);
             }
-            
+
             _drops = new ObjectDrop[rdr.ReadInt16()];
             for (var i = 0; i < _drops.Length; i++)
             {
@@ -48,17 +48,17 @@ namespace Networking.Packets.Incoming
             {
                 var isMyPlayer = add.ObjectStatus.Id == handler.PlayerId;
                 var entity = Entity.Resolve(add.ObjectType, add.ObjectStatus.Id, isMyPlayer, map);
-                
+
                 map.AddObject(entity, add.ObjectStatus.Position);
 
                 if (entity.ObjectId == handler.PlayerId)
                 {
                     OnMyPlayerJoined?.Invoke(entity as Player);
                 }
-                
+
                 entity.UpdateObjectStats(add.ObjectStatus.Stats);
             }
-            
+
             map.MiniMap.Apply();
 
             foreach (var drop in _drops)

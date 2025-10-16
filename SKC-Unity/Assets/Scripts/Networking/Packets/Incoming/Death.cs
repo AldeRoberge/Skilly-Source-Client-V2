@@ -10,10 +10,10 @@ namespace Networking.Packets.Incoming
         public override PacketId Id => PacketId.Death;
         public override IncomingPacket CreateInstance() => new Death();
 
-        private int _accountId;
-        private int _charId;
+        private int    _accountId;
+        private int    _charId;
         private string _killer;
-        
+
         public override void Read(PacketReader rdr)
         {
             _accountId = rdr.ReadInt32();

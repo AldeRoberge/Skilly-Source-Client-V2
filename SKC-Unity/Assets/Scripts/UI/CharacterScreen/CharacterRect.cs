@@ -15,7 +15,7 @@ namespace UI.CharacterScreen
         private Button _frameButton;
 
         private CharacterStats _stats;
-        
+
         private void Awake()
         {
             _frameButton.onClick.AddListener(OnFrameClick);

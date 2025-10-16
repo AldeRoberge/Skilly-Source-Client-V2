@@ -11,6 +11,7 @@ namespace UI.GameScreen.Panels
     {
         [SerializeField]
         private TextMeshProUGUI _nameText;
+
         [SerializeField]
         private TextMeshProUGUI _fullText;
 
@@ -47,9 +48,11 @@ namespace UI.GameScreen.Panels
                 name = name.Remove(0, lockedString.Length);
 
             _nameText.text = name;
-            
+
             var newPos = _nameText.rectTransform.anchoredPosition;
-            newPos.y = _nameText.rectTransform.rect.height > 30 ? 0 : 6;
+            newPos.y = _nameText.rectTransform.rect.height > 30 ?
+                0 :
+                6;
             _nameText.rectTransform.anchoredPosition = newPos;
 
             if (!_parent.LockedPortal && _parent.Active && _fullText.gameObject.activeSelf)

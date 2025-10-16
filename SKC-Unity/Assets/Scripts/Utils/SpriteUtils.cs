@@ -6,9 +6,9 @@ namespace Utils
 {
     public static class SpriteUtils
     {
-        public const int PIXELS_PER_UNIT = 8;
-        public static readonly Vector2 Pivot = new Vector2(0.5f, 0);
-        
+        public const           int     PIXELS_PER_UNIT = 8;
+        public static readonly Vector2 Pivot           = new Vector2(0.5f, 0);
+
         private static readonly Dictionary<Sprite, Dictionary<int, Sprite>> RedrawCache =
             new Dictionary<Sprite, Dictionary<int, Sprite>>();
 
@@ -47,9 +47,9 @@ namespace Utils
         public static Color MostCommonColor(Sprite sprite)
         {
             var dict = new Dictionary<Color, int>();
-            for (var x = (int) sprite.textureRect.x; x < sprite.textureRect.xMax; x++)
+            for (var x = (int)sprite.textureRect.x; x < sprite.textureRect.xMax; x++)
             {
-                for (var y = (int) sprite.textureRect.y; y < sprite.textureRect.yMax; y++)
+                for (var y = (int)sprite.textureRect.y; y < sprite.textureRect.yMax; y++)
                 {
                     var color = sprite.texture.GetPixel(x, y);
                     if (color == Color.clear)
@@ -91,7 +91,7 @@ namespace Utils
                     to.SetPixel(x, y, color);
                 }
             }
-            
+
             to.Apply();
         }
 
@@ -104,31 +104,34 @@ namespace Utils
         public static Sprite Rotate(Sprite sprite, int clockwiseTurns)
         {
             var rect = sprite.textureRect;
-            var size = (int) rect.width;
-            var colors = sprite.texture.GetPixels((int) rect.x, (int) rect.y, size, size);
-            
+            var size = (int)rect.width;
+            var colors = sprite.texture.GetPixels((int)rect.x, (int)rect.y, size, size);
+
             while (clockwiseTurns > 0)
             {
                 var tempColors = colors.ToArray();
-                for (var x = 0; x < size; x++) {
-                    for (var y = 0; y < size; y++) {
+                for (var x = 0; x < size; x++)
+                {
+                    for (var y = 0; y < size; y++)
+                    {
                         colors[x + y * size] = tempColors[y + (size - x - 1) * size];
                     }
                 }
-                
+
                 clockwiseTurns--;
             }
-            
+
             while (clockwiseTurns < 0)
             {
                 var tempColors = colors.ToArray();
-                for (var x = 0; x < size; x++) {
-                    for (var y = 0; y < size; y++) {
+                for (var x = 0; x < size; x++)
+                {
+                    for (var y = 0; y < size; y++)
+                    {
                         colors[x + y * size] = tempColors[(size - y - 1) + x * size];
-                        
                     }
                 }
-                
+
                 clockwiseTurns++;
             }
 
@@ -147,21 +150,22 @@ namespace Utils
             {
                 for (var x = 0; x < sprite.rect.width; x++)
                 {
-                    var color = sprite.texture.GetPixel((int) sprite.rect.x + x, (int) sprite.rect.y + y);
+                    var color = sprite.texture.GetPixel((int)sprite.rect.x + x, (int)sprite.rect.y + y);
                     smallTex.SetPixel(x, y, color);
                 }
             }
+
             smallTex.Apply();
             return smallTex;
         }
-        
+
         public static bool IsTransparent(this Sprite sprite)
         {
             for (var y = sprite.rect.y; y < sprite.rect.yMax; y++)
             {
                 for (var x = sprite.rect.x; x < sprite.rect.xMax; x++)
                 {
-                    var alpha = sprite.texture.GetPixel((int) x, (int) y).a;
+                    var alpha = sprite.texture.GetPixel((int)x, (int)y).a;
                     if (alpha > 0)
                         return false;
                 }
@@ -179,10 +183,11 @@ namespace Utils
             {
                 for (var x = 0; x < width; x++)
                 {
-                    var color = sprite.texture.GetPixel((int) sprite.rect.x + x, (int) sprite.rect.y + y);
+                    var color = sprite.texture.GetPixel((int)sprite.rect.x + x, (int)sprite.rect.y + y);
                     mirrored.SetPixel(width - x - 1, y, color);
                 }
             }
+
             mirrored.Apply();
 
             var rect = new Rect(0, 0, sprite.rect.width, sprite.rect.height);
@@ -190,7 +195,7 @@ namespace Utils
             var mirroredSprite = Sprite.Create(mirrored, rect, pivot, PIXELS_PER_UNIT);
             return mirroredSprite;
         }
-        
+
         public static List<Sprite> CreateSprites(Texture2D texture, Rect targetRect, int imageWidth, int imageHeight)
         {
             List<Sprite> images = new List<Sprite>();
@@ -208,7 +213,7 @@ namespace Utils
 
             return images;
         }
-        
+
         public static Sprite MergeSprites(Sprite first, Sprite second)
         {
             var rect = first.rect;
@@ -217,7 +222,7 @@ namespace Utils
             return Sprite.Create(first.texture, rect, pivot, PIXELS_PER_UNIT);
         }
     }
-    
+
     public static class TextureScaler
     {
         /// <summary>
@@ -262,7 +267,7 @@ namespace Utils
             var rawTexture = sprite.texture;
             var smallTexture = new Texture2D((int)sprite.rect.width + 2, (int)sprite.rect.height + 2, TextureFormat.ARGB32, true);
             var rawPixels = rawTexture.GetPixels((int)sprite.rect.x, (int)sprite.rect.y, (int)sprite.rect.width, (int)sprite.rect.height);
-            
+
             for (var i = 0; i < smallTexture.height; i++)
             {
                 for (var j = 0; j < smallTexture.width; j++)
@@ -270,10 +275,10 @@ namespace Utils
                     smallTexture.SetPixel(j, i, Color.clear);
                 }
             }
-            
+
             smallTexture.SetPixels(1, 1, (int)sprite.rect.width, (int)sprite.rect.height, rawPixels);
             smallTexture.Apply(true);
-            
+
             var w = (int)(multiplier * size / 100 * smallTexture.width);
             var h = (int)(multiplier * size / 100 * smallTexture.height);
             var pivot = new Vector2(((sprite.pivot.x + 1) / smallTexture.width), multiplier / h);

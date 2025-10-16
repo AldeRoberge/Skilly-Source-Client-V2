@@ -29,10 +29,10 @@ namespace Game
         private Transform _entityParentTransform;
 
         public MapOverlay Overlay;
-        public MiniMap MiniMap;
+        public MiniMap    MiniMap;
 
         private Dictionary<string, Entity> _entityPrefabs;
-        public Dictionary<int, Entity> Entities;
+        public  Dictionary<int, Entity>    Entities;
 
         private HashSet<Entity> _interactiveObjects;
 
@@ -106,7 +106,7 @@ namespace Game
                     TcpTicker.Send(new GotoAck(GameTime.Time));
                     GotosRequested--;
                 }
-                
+
                 if (MovesRequested > 0)
                 {
                     TcpTicker.Send(new Move(GameTime.Time, MyPlayer.Position));
@@ -166,11 +166,23 @@ namespace Game
             MiniMap.SetGroundTile(tileData.X, tileData.Y, tileData.TileType);
             var x = tileData.X;
             var y = tileData.Y;
-            var xEnd = x < Width - 1 ? x + 1 : x;
-            var yEnd = y < Height - 1 ? y + 1 : y;
-            for (var xi = x > 0 ? x - 1 : x; xi <= xEnd; xi++)
+            var xEnd = x < Width - 1 ?
+                x + 1 :
+                x;
+            var yEnd = y < Height - 1 ?
+                y + 1 :
+                y;
+            for (var xi = x > 0 ?
+                     x - 1 :
+                     x;
+                 xi <= xEnd;
+                 xi++)
             {
-                for (var yi = y > 0 ? y - 1 : y; yi <= yEnd; yi++)
+                for (var yi = y > 0 ?
+                         y - 1 :
+                         y;
+                     yi <= yEnd;
+                     yi++)
                 {
                     var square = GetTile(xi, yi);
                     if (square != null && (square.Desc.HasEdge || square.Type != tile.Type))
@@ -185,7 +197,7 @@ namespace Game
         public void AddObject(Entity entity, Vector3 position)
         {
             entity.Position = position;
-            
+
             // Add relevant entity data to map
             if (entity.Desc.Static)
             {
@@ -195,7 +207,7 @@ namespace Game
 
             if (entity.Desc.ShowOnMap)
             {
-                MiniMap.SetEntity((int) position.x, (int) position.y, entity.Desc.Type);
+                MiniMap.SetEntity((int)position.x, (int)position.y, entity.Desc.Type);
             }
 
             if (entity is IInteractiveObject)
@@ -341,7 +353,7 @@ namespace Game
 
         public Square GetTile(float x, float y)
         {
-            return _tilemap.GetTile<Square>(new Vector3Int((int) x, (int) y, 0));
+            return _tilemap.GetTile<Square>(new Vector3Int((int)x, (int)y, 0));
         }
 
         public Square GetTile(Vector3 pos)

@@ -7,7 +7,9 @@ namespace Networking
 {
     public class PacketWriter : BinaryWriter
     {
-        public PacketWriter(Stream input) : base(input, Encoding.UTF8) { }
+        public PacketWriter(Stream input) : base(input, Encoding.UTF8)
+        {
+        }
 
         public override void Write(short value)
         {

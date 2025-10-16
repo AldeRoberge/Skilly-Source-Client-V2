@@ -17,7 +17,7 @@ namespace UI.TitleScreen
 
         [SerializeField]
         private TMP_InputField _reTypePasswordField;
-        
+
         [SerializeField]
         private Toggle _rememberUsernameToggle;
 
@@ -32,13 +32,13 @@ namespace UI.TitleScreen
 
         [SerializeField]
         private TitleScreenController _titleScreenController;
-        
+
         private void Awake()
         {
             _playButton.onClick.AddListener(async () => await OnPlayButtonClick());
             _logInButton.onClick.AddListener(_titleScreenController.ShowLoginLayout);
         }
-        
+
         public override void Reset(object data)
         {
             base.Reset(data);
@@ -48,7 +48,7 @@ namespace UI.TitleScreen
             _reTypePasswordField.text = "";
             _errorTextField.text = "";
         }
-        
+
         private async Task OnPlayButtonClick()
         {
             _playButton.enabled = false;
@@ -68,7 +68,7 @@ namespace UI.TitleScreen
             _playButton.enabled = true;
             _logInButton.enabled = true;
         }
-        
+
         private bool ValidUsername()
         {
             if (_usernameField.text.Length > _usernameField.characterLimit)
@@ -87,7 +87,7 @@ namespace UI.TitleScreen
                 _errorTextField.text = "Password too short";
                 return false;
             }
-            
+
             return true;
         }
 
@@ -101,17 +101,17 @@ namespace UI.TitleScreen
 
             return true;
         }
-        
+
         private async Task SendRegisterAsync()
         {
             var logInTask = new RegisterRequestHandler(
-                _usernameField.text, 
-                _passwordField.text, 
+                _usernameField.text,
+                _passwordField.text,
                 _rememberUsernameToggle.isOn);
 
             logInTask.OnError += OnLogInError;
 
-            
+
             await logInTask.SendRequestAsync();
         }
 

@@ -9,10 +9,10 @@ namespace Networking.Packets.Incoming
         public override PacketId Id => PacketId.AllyShoot;
         public override IncomingPacket CreateInstance() => new AllyShoot();
 
-        private int _ownerId;
-        private int _ownerType;
+        private int   _ownerId;
+        private int   _ownerType;
         private float _angle;
-        
+
         public override void Read(PacketReader rdr)
         {
             _ownerId = rdr.ReadInt32();
@@ -30,7 +30,7 @@ namespace Networking.Packets.Incoming
             var angle = _angle - totalArc / 2;
             var startId = Projectile.NextFakeBulletId;
             Projectile.NextFakeBulletId += numShots;
-            
+
             for (var i = 0; i < numShots; i++)
             {
                 var projectile = Projectile.Create(owner, weaponXml.Projectile, startId + i, GameTime.Time, angle,

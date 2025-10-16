@@ -6,11 +6,11 @@ namespace Networking.Packets.Outgoing
     {
         public override PacketId Id => PacketId.PlayerShoot;
 
-        private readonly int _time;
+        private readonly int     _time;
         private readonly Vector2 _startingPosition;
-        private readonly float _angle;
-        private readonly bool _ability;
-        private readonly byte _numShots;
+        private readonly float   _angle;
+        private readonly bool    _ability;
+        private readonly byte    _numShots;
 
         public PlayerShoot(int time, Vector2 startingPosition, float angle, bool ability, int numShots)
         {

@@ -7,7 +7,7 @@ namespace Networking.Packets.Incoming
     public class Reconnect : IncomingPacket
     {
         public static Action<GameInitData> OnReconnect;
-        
+
         public override PacketId Id => PacketId.Reconnect;
         public override IncomingPacket CreateInstance() => new Reconnect();
 
@@ -26,7 +26,7 @@ namespace Networking.Packets.Incoming
                 false,
                 handler.InitData.ClassType,
                 handler.InitData.SkinType);
-            
+
             OnReconnect?.Invoke(newInitData);
         }
     }

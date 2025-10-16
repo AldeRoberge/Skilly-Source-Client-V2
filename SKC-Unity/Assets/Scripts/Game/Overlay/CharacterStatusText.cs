@@ -11,13 +11,13 @@ namespace Game.Overlay
 
         [SerializeField]
         private MainCameraManager _mainCamera;
-        
+
         [SerializeField]
         private TextMeshPro _text;
 
         private Entity _entity;
-        private float _zOffset;
-        private int _lifetime;
+        private float  _zOffset;
+        private int    _lifetime;
 
         private int _startTime;
 
@@ -56,7 +56,7 @@ namespace Game.Overlay
             transform.rotation = _mainCamera.Camera.transform.rotation;
             _text.enabled = true;
             var newPos = _entity.Position;
-            var drift = (float) aliveTime / _lifetime * _MAX_DRIFT;
+            var drift = (float)aliveTime / _lifetime * _MAX_DRIFT;
             newPos.z -= _zOffset + drift;
             transform.position = newPos;
         }

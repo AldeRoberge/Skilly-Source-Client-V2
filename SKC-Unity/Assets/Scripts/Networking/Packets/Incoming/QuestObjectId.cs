@@ -8,7 +8,7 @@ namespace Networking.Packets.Incoming
         public override IncomingPacket CreateInstance() => new QuestObjectId();
 
         private int _objectId;
-        
+
         public override void Read(PacketReader rdr)
         {
             _objectId = rdr.ReadInt32();

@@ -8,9 +8,9 @@ namespace Networking.Packets.Incoming
         public override PacketId Id => PacketId.Goto;
         public override IncomingPacket CreateInstance() => new Goto();
 
-        private int _objectId;
+        private int     _objectId;
         private Vector3 _pos;
-        
+
         public override void Read(PacketReader rdr)
         {
             _objectId = rdr.ReadInt32();
@@ -26,10 +26,10 @@ namespace Networking.Packets.Incoming
             var entity = map.GetEntity(_objectId);
             if (entity == null)
                 return;
-            
+
             if (_objectId == handler.PlayerId)
                 map.GotosRequested++;
-            
+
             entity.OnGoto(_pos);
         }
     }

@@ -9,16 +9,16 @@ namespace Game.MovementControllers
     public class PlayerMovementController : IMovementController
     {
         private const float _MOVE_THRESHOLD = 0.4f;
-        
+
         public Vector3 Direction { get; private set; }
-        
+
         private readonly Player _player;
 
         public PlayerMovementController(Player player)
         {
             _player = player;
         }
-        
+
         public void Tick(float deltaTime)
         {
             var rotate = KeyToInt(KeyCode.Q) - KeyToInt(KeyCode.E);
@@ -64,7 +64,7 @@ namespace Game.MovementControllers
             pos = ResolveNewLocation(pos);
             _player.MoveTo(pos);
         }
-        
+
         private Vector3 ResolveNewLocation(Vector3 pos)
         {
             if (_player.HasConditionEffect(ConditionEffect.Paralyzed))
@@ -73,8 +73,8 @@ namespace Game.MovementControllers
             var dx = pos.x - _player.Position.x;
             var dy = pos.y - _player.Position.y;
 
-            if (dx < _MOVE_THRESHOLD && 
-                dx > -_MOVE_THRESHOLD && 
+            if (dx < _MOVE_THRESHOLD &&
+                dx > -_MOVE_THRESHOLD &&
                 dy < _MOVE_THRESHOLD &&
                 dy > -_MOVE_THRESHOLD)
             {
@@ -100,7 +100,7 @@ namespace Game.MovementControllers
 
             return pos;
         }
-        
+
         private Vector3 CalcNewLocation(Vector3 pos)
         {
             var fx = 0f;
@@ -116,14 +116,18 @@ namespace Game.MovementControllers
 
             if (isFarX)
             {
-                fx = pos.x > _player.Position.x ? (int)(pos.x * 2) / 2f : (int)(_player.Position.x * 2) / 2f;
+                fx = pos.x > _player.Position.x ?
+                    (int)(pos.x * 2) / 2f :
+                    (int)(_player.Position.x * 2) / 2f;
                 if ((int)fx > (int)_player.Position.x)
                     fx -= 0.01f;
             }
 
             if (isFarY)
             {
-                fy = pos.y > _player.Position.y ? (int)(pos.y * 2) / 2f : (int)(_player.Position.y * 2) / 2f;
+                fy = pos.y > _player.Position.y ?
+                    (int)(pos.y * 2) / 2f :
+                    (int)(_player.Position.y * 2) / 2f;
                 if ((int)fy > (int)_player.Position.y)
                     fy -= 0.01f;
             }
@@ -140,8 +144,12 @@ namespace Game.MovementControllers
                 return pos;
             }
 
-            var ax = pos.x > _player.Position.x ? pos.x - fx : fx - pos.x;
-            var ay = pos.y > _player.Position.y ? pos.y - fy : fy - pos.y;
+            var ax = pos.x > _player.Position.x ?
+                pos.x - fx :
+                fx - pos.x;
+            var ay = pos.y > _player.Position.y ?
+                pos.y - fy :
+                fy - pos.y;
             if (ax > ay)
             {
                 if (_player.Map.RegionUnblocked(pos.x, fy))
@@ -163,7 +171,7 @@ namespace Game.MovementControllers
                     pos.x = fx;
                     return pos;
                 }
-               
+
                 if (_player.Map.RegionUnblocked(pos.x, fy))
                 {
                     pos.y = fy;
@@ -178,7 +186,9 @@ namespace Game.MovementControllers
 
         private int KeyToInt(KeyCode keyCode)
         {
-            return Input.GetKey(keyCode) ? 1 : 0;
+            return Input.GetKey(keyCode) ?
+                1 :
+                0;
         }
     }
 }

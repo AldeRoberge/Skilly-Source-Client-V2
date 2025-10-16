@@ -8,10 +8,10 @@ namespace Networking.WebRequestHandlers
     {
         private readonly string _username;
         private readonly string _password;
-        private readonly bool _rememberUsername;
+        private readonly bool   _rememberUsername;
 
         public event Action<string> OnError;
-    
+
         public LogInRequestHandler(string username, string password, bool rememberUsername)
         {
             _username = username;
@@ -22,7 +22,7 @@ namespace Networking.WebRequestHandlers
         public async Task SendRequestAsync()
         {
             var result = await WebRequestSender.SendLogInRequestAsync(_username, _password);
-            
+
             await OnLogInRequestComplete(result);
         }
 

@@ -17,7 +17,9 @@ namespace Game
 
         public uint NextIntRange(uint min, uint max)
         {
-            return min == max ? min : min + Gen() % (max - min);
+            return min == max ?
+                min :
+                min + Gen() % (max - min);
         }
 
         private uint Gen()
@@ -30,6 +32,7 @@ namespace Game
             {
                 lb -= 2147483647;
             }
+
             return _seed = lb;
         }
     }

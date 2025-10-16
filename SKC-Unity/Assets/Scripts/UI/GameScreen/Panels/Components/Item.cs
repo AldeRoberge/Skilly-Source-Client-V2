@@ -12,16 +12,16 @@ namespace UI.GameScreen.Panels.Components
 
         [SerializeField]
         private TextMeshProUGUI _dosesText;
-        
+
         public int ItemType { get; private set; }
         public int ItemData { get; private set; }
-        
+
         public void SetType(int itemType, int itemData)
         {
             ItemType = itemType;
             ItemData = itemData;
 
-            if (itemType == (int) Models.Static.ItemType.None)
+            if (itemType == (int)Models.Static.ItemType.None)
             {
                 gameObject.SetActive(false);
                 return;
@@ -35,7 +35,7 @@ namespace UI.GameScreen.Panels.Components
             {
                 _dosesText.text = desc.Doses.ToString();
             }
-            
+
             gameObject.SetActive(true);
         }
     }

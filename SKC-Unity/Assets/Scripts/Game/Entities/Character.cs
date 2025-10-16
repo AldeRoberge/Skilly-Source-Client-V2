@@ -13,7 +13,7 @@ namespace Game.Entities
 
             if (_healthBar == null)
                 _healthBar = map.Overlay.GetHealthBar();
-            
+
             _healthBar.Init(this);
             _healthBar.gameObject.SetActive(true);
         }
@@ -21,7 +21,7 @@ namespace Game.Entities
         public override void Dispose()
         {
             base.Dispose();
-            
+
             // because this is attached to the overlay canvas, it does not get disabled when this does
             _healthBar.gameObject.SetActive(false);
         }
@@ -29,7 +29,7 @@ namespace Game.Entities
         public override void Draw()
         {
             base.Draw();
-            
+
             _healthBar.Draw();
         }
     }

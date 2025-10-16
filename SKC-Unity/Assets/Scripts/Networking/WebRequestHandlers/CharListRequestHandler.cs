@@ -21,7 +21,7 @@ namespace Networking.WebRequestHandlers
             {
                 result = await WebRequestSender.SendCharListRequestAsync(_username, _password);
             }
-            
+
             OnListRequestComplete(result);
         }
 

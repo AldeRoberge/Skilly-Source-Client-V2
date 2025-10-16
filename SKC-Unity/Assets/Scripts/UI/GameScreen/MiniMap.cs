@@ -13,7 +13,7 @@ namespace UI.GameScreen
     {
         private const int _MAP_CHUNK_SIZE = 256;
 
-        private Map _map;
+        private Map             _map;
         private MiniMapChunk[,] _chunks;
 
         private HashSet<MiniMapChunk> _needUpdateChunks;
@@ -25,7 +25,7 @@ namespace UI.GameScreen
         private RectTransform _chunkLayer;
 
         private List<float> _zoomLevels;
-        private int _zoomIndex;
+        private int         _zoomIndex;
 
         [SerializeField]
         private Image _blueArrow;
@@ -45,12 +45,12 @@ namespace UI.GameScreen
             {
                 Destroy(child.gameObject);
             }
-            
+
             _blueArrow.gameObject.SetActive(false);
-            
+
             _map = map;
-            var w = ((RectTransform) transform).sizeDelta.x;
-            var h = ((RectTransform) transform).sizeDelta.y;
+            var w = ((RectTransform)transform).sizeDelta.x;
+            var h = ((RectTransform)transform).sizeDelta.y;
 
             _zoomIndex = 0;
             _zoomLevels = new List<float>();
@@ -60,6 +60,7 @@ namespace UI.GameScreen
             {
                 _zoomLevels.Add(zoom);
             }
+
             OnZoomChange();
 
             var xChunks = Convert(map.Width - 1) + 1;
@@ -81,6 +82,7 @@ namespace UI.GameScreen
                     {
                         pixelArray[i] = Color.black;
                     }
+
                     texture.SetPixels(pixelArray);
                     texture.Apply();
 
@@ -104,7 +106,7 @@ namespace UI.GameScreen
             var staticObject = _map.GetTile(x, y).StaticObject;
             if (staticObject != null && staticObject.Desc.ShowOnMap)
                 return;
-            
+
             var color = AssetLibrary.GetTileColor(tileType);
             SetPixel(x, y, color);
         }
@@ -134,7 +136,7 @@ namespace UI.GameScreen
             {
                 chunk.Sprite.texture.Apply();
             }
-            
+
             _needUpdateChunks.Clear();
         }
 
@@ -167,9 +169,9 @@ namespace UI.GameScreen
             {
                 if (!_blueArrow.gameObject.activeSelf)
                     _blueArrow.gameObject.SetActive(true);
-                
+
                 _blueArrow.transform.rotation = _mainCamera.Camera.transform.rotation;
-                
+
                 if (_zoomIndex == 0)
                 {
                     var arrowPos = _map.MyPlayer.Position;
@@ -179,9 +181,9 @@ namespace UI.GameScreen
                     _chunkLayer.anchoredPosition = Vector2.zero;
                     return;
                 }
-                
+
                 _blueArrow.rectTransform.anchoredPosition = Vector2.zero;
-                
+
                 var pos = -_map.MyPlayer.Position;
                 pos *= _zoomLevels[_zoomIndex];
                 pos += new Vector3(96, -96);

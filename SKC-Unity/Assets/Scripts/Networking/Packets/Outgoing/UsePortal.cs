@@ -5,7 +5,7 @@ namespace Networking.Packets.Outgoing
         public override PacketId Id => PacketId.UsePortal;
 
         private readonly int _portalId;
-        
+
         public UsePortal(int portalId)
         {
             _portalId = portalId;

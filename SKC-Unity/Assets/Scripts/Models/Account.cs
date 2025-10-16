@@ -8,10 +8,10 @@ namespace Models
 {
     public static class Account
     {
-        public const string USERNAME_KEY = "username";
+        public const string USERNAME_KEY          = "username";
         public const string REMEMBER_USERNAME_KEY = "rememberUsername";
         public static bool Exists => !string.IsNullOrEmpty(Username);
-    
+
         public static string Username { get; private set; }
         public static string Password { get; private set; }
         public static int MaxCharacters { get; private set; }
@@ -41,8 +41,10 @@ namespace Models
             {
                 PlayerPrefs.SetString(USERNAME_KEY, username);
             }
-            
-            PlayerPrefs.SetInt(REMEMBER_USERNAME_KEY, rememberUsername ? 1 : 0);
+
+            PlayerPrefs.SetInt(REMEMBER_USERNAME_KEY, rememberUsername ?
+                1 :
+                0);
         }
 
         private static void Reset()

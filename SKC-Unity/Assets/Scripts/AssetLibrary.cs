@@ -9,21 +9,22 @@ public static class AssetLibrary
 {
     private static readonly Dictionary<string, List<CharacterAnimation>> _Animations =
         new Dictionary<string, List<CharacterAnimation>>();
-    
+
     private static readonly Dictionary<string, List<Sprite>> _Images = new Dictionary<string, List<Sprite>>();
 
     private static readonly Dictionary<string, GameObject> _Models = new Dictionary<string, GameObject>();
 
     private static readonly Dictionary<int, Color> _Type2Color = new Dictionary<int, Color>();
 
-    private static readonly Dictionary<int, ObjectDesc> _Type2ObjectDesc = new Dictionary<int, ObjectDesc>();
-    private static readonly Dictionary<string, ObjectDesc> _Id2ObjectDesc = new Dictionary<string, ObjectDesc>();
-    private static readonly Dictionary<int, TileDesc> _Type2TileDesc = new Dictionary<int, TileDesc>();
-    private static readonly Dictionary<int, ItemDesc> _Type2ItemDesc = new Dictionary<int, ItemDesc>();
-    public static readonly Dictionary<int, PlayerDesc> Type2PlayerDesc = new Dictionary<int, PlayerDesc>();
+    private static readonly Dictionary<int, ObjectDesc>    _Type2ObjectDesc = new Dictionary<int, ObjectDesc>();
+    private static readonly Dictionary<string, ObjectDesc> _Id2ObjectDesc   = new Dictionary<string, ObjectDesc>();
+    private static readonly Dictionary<int, TileDesc>      _Type2TileDesc   = new Dictionary<int, TileDesc>();
+    private static readonly Dictionary<int, ItemDesc>      _Type2ItemDesc   = new Dictionary<int, ItemDesc>();
+    public static readonly  Dictionary<int, PlayerDesc>    Type2PlayerDesc  = new Dictionary<int, PlayerDesc>();
+
     public static readonly Dictionary<int, List<SkinDesc>> ClassType2Skins =
         new Dictionary<int, List<SkinDesc>>();
-    
+
     public static void AddAnimations(Texture2D texture, SpriteSheetData data)
     {
         if (!_Animations.ContainsKey(data.Id))
@@ -36,7 +37,7 @@ public static class AssetLibrary
                 var rect = new Rect(x, y, data.AnimationWidth, data.AnimationHeight);
                 var frames = SpriteUtils.CreateSprites(texture, rect, data.ImageWidth, data.ImageHeight);
                 var animation = new CharacterAnimation(frames, data.StartFacing);
-                
+
                 _Animations[data.Id].Add(animation);
             }
         }
@@ -55,14 +56,14 @@ public static class AssetLibrary
     {
         _Models[model.name] = model;
     }
-    
+
     public static void ParseXml(XElement xml)
     {
         foreach (var objectXml in xml.Elements("Object"))
         {
             var id = objectXml.ParseString("@id");
             var type = objectXml.ParseUshort("@type");
-            
+
             try
             {
                 switch (objectXml.ParseString("Class"))
@@ -71,9 +72,9 @@ public static class AssetLibrary
                         var skinDesc = new SkinDesc(objectXml, type, id);
                         if (!ClassType2Skins.TryGetValue(skinDesc.ClassType, out var skinList))
                             skinList = new List<SkinDesc>();
-                        
+
                         skinList.Add(skinDesc);
-                        
+
                         ClassType2Skins[skinDesc.ClassType] = skinList;
                         break;
                     case "Player":
@@ -84,7 +85,7 @@ public static class AssetLibrary
                         _Type2ItemDesc[type] = new ItemDesc(objectXml, id, type);
                         break;
                 }
-            
+
                 _Id2ObjectDesc[id] = _Type2ObjectDesc[type] = new ObjectDesc(objectXml, id, type);
             }
             catch (Exception e)
@@ -110,7 +111,7 @@ public static class AssetLibrary
 
         var desc = _Type2ObjectDesc[type];
         var color = SpriteUtils.MostCommonColor(desc.TextureData.GetTexture());
-        
+
         _Type2Color[type] = color;
         return color;
     }
@@ -119,7 +120,7 @@ public static class AssetLibrary
     {
         if (_Type2Color.ContainsKey(type))
             return _Type2Color[type];
-        
+
         var desc = _Type2TileDesc[type];
         Color color;
         if (desc.Xml.Element("Color") != null)
@@ -190,23 +191,23 @@ public readonly struct SpriteSheetData
 {
     public readonly string Id;
     public readonly string SheetName;
-    public readonly int AnimationWidth;
-    public readonly int AnimationHeight;
+    public readonly int    AnimationWidth;
+    public readonly int    AnimationHeight;
     public readonly Facing StartFacing;
-    public readonly int ImageWidth;
-    public readonly int ImageHeight;
+    public readonly int    ImageWidth;
+    public readonly int    ImageHeight;
 
     public SpriteSheetData(XElement xml)
     {
         Id = xml.ParseString("@id");
         SheetName = xml.ParseString("@sheetName", Id);
 
-        var animationSize = xml.ParseIntArray("AnimationSize", "x", new [] {0, 0});
+        var animationSize = xml.ParseIntArray("AnimationSize", "x", new[] { 0, 0 });
         AnimationWidth = animationSize[0];
         AnimationHeight = animationSize[1];
         StartFacing = xml.ParseEnum("StartDirection", Facing.Right);
 
-        var imageSize = xml.ParseIntArray("ImageSize", "x", new [] {0, 0});
+        var imageSize = xml.ParseIntArray("ImageSize", "x", new[] { 0, 0 });
         ImageWidth = imageSize[0];
         ImageHeight = imageSize[1];
     }

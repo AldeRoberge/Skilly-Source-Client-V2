@@ -11,35 +11,35 @@ namespace Game.Entities
             {
                 var key = stat.Key;
                 var value = stat.Value;
-                
+
                 UpdateStat(key, value);
             }
         }
-        
+
         protected virtual void UpdateStat(StatType stat, object value)
         {
             switch (stat)
             {
                 case StatType.Condition:
-                    _conditionEffects = (ConditionEffect) (int) value;
+                    _conditionEffects = (ConditionEffect)(int)value;
                     return;
                 case StatType.MaxHp:
-                    MaxHp = (int) value;
+                    MaxHp = (int)value;
                     return;
                 case StatType.Hp:
-                    Hp = (int) value;
+                    Hp = (int)value;
                     return;
                 case StatType.Size:
-                    Size = (int) value;
+                    Size = (int)value;
                     return;
                 case StatType.Name:
-                    Name = (string) value;
+                    Name = (string)value;
                     return;
                 case StatType.AltTexture:
-                    AltTextureIndex = (int) value;
+                    AltTextureIndex = (int)value;
                     return;
                 case StatType.SinkLevel:
-                    SinkLevel = (int) value;
+                    SinkLevel = (int)value;
                     return;
             }
         }

@@ -13,7 +13,7 @@ namespace Game
         private int _attackPeriod;
         private int _attackStart;
         private int _time;
-        
+
         private int _nextProjectileId;
 
         public PlayerShootController(Player player)
@@ -24,14 +24,14 @@ namespace Game
         public void Tick(int time, Camera camera)
         {
             _time = time;
-            
+
             if (Input.GetMouseButton(0))
             {
                 var mousePosition = Input.mousePosition;
                 var viewportPoint = camera.ScreenToViewportPoint(mousePosition);
                 if (viewportPoint.x < 0 || viewportPoint.x > 1 || viewportPoint.y < 0 || viewportPoint.y > 1)
                     return;
-                
+
                 var playerPosition = camera.WorldToScreenPoint(_player.Position);
                 var angle = Mathf.Atan2(mousePosition.y - playerPosition.y, mousePosition.x - playerPosition.x);
                 TryShoot(angle + _player.Rotation);
@@ -51,13 +51,13 @@ namespace Game
             var weaponXml = AssetLibrary.GetItemDesc(weaponType);
             var rateOfFireMod = ItemDesc.GetStat(itemData, ItemData.RateOfFire, ItemDesc.RATE_OF_FIRE_MULTIPLIER);
             var rateOfFire = weaponXml.RateOfFire;
-            
+
             rateOfFire *= 1 + rateOfFireMod;
             _attackPeriod = (int)(1 / _player.GetAttackFrequency() * (1 / rateOfFire));
             _player.AttackPeriod = _attackPeriod;
             if (_time < _attackStart + _attackPeriod)
                 return;
-            
+
             _attackStart = _time;
             _player.AttackStart = _time;
             _player.AttackAngle = attackAngle;
@@ -74,20 +74,20 @@ namespace Game
             var damageMod = ItemDesc.GetStat(itemData, ItemData.Damage, ItemDesc.DAMAGE_MULTIPLIER);
             var startId = _nextProjectileId;
             _nextProjectileId -= numShots;
-            
+
             for (var i = 0; i < numShots; i++)
             {
                 var minDamage = weaponXml.Projectile.MinDamage + (int)(weaponXml.Projectile.MinDamage * damageMod);
                 var maxDamage = weaponXml.Projectile.MaxDamage + (int)(weaponXml.Projectile.MaxDamage * damageMod);
-                var damage = (int)(_player.Random.NextIntRange((uint) minDamage, (uint) maxDamage) *
-                             _player.GetAttackMultiplier());
+                var damage = (int)(_player.Random.NextIntRange((uint)minDamage, (uint)maxDamage) *
+                                   _player.GetAttackMultiplier());
                 var projectile = Projectile.Create(_player, weaponXml.Projectile, startId - i, time, angle,
                     _player.Position, damage, _player.Map);
 
                 _player.Map.AddObject(projectile, projectile.StartPosition);
                 angle += arcGap;
             }
-            
+
             TcpTicker.Send(new PlayerShoot(time, _player.Position, attackAngle, isAbility, numShots));
         }
     }

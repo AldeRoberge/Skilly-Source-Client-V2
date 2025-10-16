@@ -7,14 +7,14 @@ namespace Game
 {
     public class EntityTextureProvider : ITextureProvider
     {
-        private const int _ATTACK_PERIOD = 500;
+        private const    int    _ATTACK_PERIOD = 500;
         private readonly Entity _entity;
 
         private float _facing;
 
         private Sprite _portrait;
 
-        private readonly Sprite _texture;
+        private readonly Sprite             _texture;
         private readonly CharacterAnimation _animation;
 
         public EntityTextureProvider(Entity entity)
@@ -71,9 +71,9 @@ namespace Game
         {
             if (_portrait == null)
             {
-                var portraitTexture = _entity.Desc.Portrait != null
-                    ? _entity.Desc.Portrait.Texture
-                    : _entity.Desc.TextureData.Texture;
+                var portraitTexture = _entity.Desc.Portrait != null ?
+                    _entity.Desc.Portrait.Texture :
+                    _entity.Desc.TextureData.Texture;
                 var size = 4 / (int)portraitTexture.rect.width * 100;
                 _portrait = SpriteUtils.Redraw(portraitTexture, size);
             }

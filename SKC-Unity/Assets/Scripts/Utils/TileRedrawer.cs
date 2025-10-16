@@ -10,11 +10,11 @@ namespace Utils
     {
         private static readonly Dictionary<object[], Sprite> _Cache = new Dictionary<object[], Sprite>(new CacheComparer());
 
-        private static readonly Rect TextureRect = new Rect(0, 0, 8, 8);
-        private static readonly RectInt Rect0 = new RectInt(0, 0, 4, 4);
-        private static readonly RectInt Rect1 = new RectInt(4, 0, 4, 4);
-        private static readonly RectInt Rect2 = new RectInt(0, 4, 4, 4);
-        private static readonly RectInt Rect3 = new RectInt(4, 4, 4, 4);
+        private static readonly Rect    TextureRect = new Rect(0, 0, 8, 8);
+        private static readonly RectInt Rect0       = new RectInt(0, 0, 4, 4);
+        private static readonly RectInt Rect1       = new RectInt(4, 0, 4, 4);
+        private static readonly RectInt Rect2       = new RectInt(0, 4, 4, 4);
+        private static readonly RectInt Rect3       = new RectInt(4, 4, 4, 4);
 
         private static readonly Vector2Int Point0 = new Vector2Int(0, 0);
         private static readonly Vector2Int Point1 = new Vector2Int(4, 0);
@@ -22,12 +22,12 @@ namespace Utils
         private static readonly Vector2Int Point3 = new Vector2Int(4, 4);
 
         private static readonly List<List<List<Sprite>>> _MaskLists = GetMasks();
-        private const int _INNER = 0;
-        private const int _SIDE0 = 1;
-        private const int _SIDE1 = 2;
-        private const int _OUTER = 3;
-        private const int _INNER_P1 = 4;
-        private const int _INNER_P2 = 5;
+        private const           int                      _INNER     = 0;
+        private const           int                      _SIDE0     = 1;
+        private const           int                      _SIDE1     = 2;
+        private const           int                      _OUTER     = 3;
+        private const           int                      _INNER_P1  = 4;
+        private const           int                      _INNER_P2  = 5;
 
         public static Sprite Redraw(Square square, bool originalBackground)
         {
@@ -69,51 +69,59 @@ namespace Utils
             var redraw1 = false;
             var redraw2 = false;
             var redraw3 = false;
-            var s0 = (ushort) sig[0];
-            var s1 = (ushort) sig[1];
-            var s2 = (ushort) sig[2];
-            var s3 = (ushort) sig[3];
-            var s4 = (ushort) sig[4];
-            var s5 = (ushort) sig[5];
-            var s6 = (ushort) sig[6];
-            var s7 = (ushort) sig[7];
-            var s8 = (ushort) sig[8];
+            var s0 = (ushort)sig[0];
+            var s1 = (ushort)sig[1];
+            var s2 = (ushort)sig[2];
+            var s3 = (ushort)sig[3];
+            var s4 = (ushort)sig[4];
+            var s5 = (ushort)sig[5];
+            var s6 = (ushort)sig[6];
+            var s7 = (ushort)sig[7];
+            var s8 = (ushort)sig[8];
             if (s1 != s4)
             {
                 redraw0 = true;
                 redraw1 = true;
             }
+
             if (s3 != s4)
             {
                 redraw0 = true;
                 redraw2 = true;
             }
+
             if (s5 != s4)
             {
                 redraw1 = true;
                 redraw3 = true;
             }
+
             if (s7 != s4)
             {
                 redraw2 = true;
                 redraw3 = true;
             }
+
             if (!redraw0 && s0 != s4)
             {
                 redraw0 = true;
             }
+
             if (!redraw1 && s2 != s4)
             {
                 redraw1 = true;
             }
+
             if (!redraw2 && s6 != s4)
             {
                 redraw2 = true;
             }
+
             if (!redraw3 && s8 != s4)
             {
                 redraw3 = true;
             }
+
             if (!redraw0 && !redraw1 && !redraw2 && !redraw3)
             {
                 _Cache[sig] = null;
@@ -136,14 +144,17 @@ namespace Utils
             {
                 RedrawRect(texture, Rect0, _MaskLists[0], s4, s3, s0, s1);
             }
+
             if (redraw1)
             {
                 RedrawRect(texture, Rect1, _MaskLists[1], s4, s1, s2, s5);
             }
+
             if (redraw2)
             {
                 RedrawRect(texture, Rect2, _MaskLists[2], s4, s7, s6, s3);
             }
+
             if (redraw3)
             {
                 RedrawRect(texture, Rect3, _MaskLists[3], s4, s5, s8, s7);
@@ -229,41 +240,44 @@ namespace Utils
 
         private static Sprite DrawEdges(object[] sig)
         {
-            var orig = AssetLibrary.GetTileImage((int) sig[4]);
+            var orig = AssetLibrary.GetTileImage((int)sig[4]);
             var texture = SpriteUtils.CreateTexture(orig);
-            var desc = AssetLibrary.GetTileDesc((int) sig[4]);
+            var desc = AssetLibrary.GetTileDesc((int)sig[4]);
             var edges = desc.GetEdges();
             var innerCorners = desc.GetInnerCorners();
             for (var i = 1; i < 8; i += 2)
             {
-                if (!(bool) sig[i])
+                if (!(bool)sig[i])
                 {
                     texture.SetPixels32(edges[i].texture.GetPixels32());
                 }
             }
 
-            var s0 = (bool) sig[0];
-            var s1 = (bool) sig[1];
-            var s2 = (bool) sig[2];
-            var s3 = (bool) sig[3];
-            var s5 = (bool) sig[5];
-            var s6 = (bool) sig[6];
-            var s7 = (bool) sig[7];
-            var s8 = (bool) sig[8];
+            var s0 = (bool)sig[0];
+            var s1 = (bool)sig[1];
+            var s2 = (bool)sig[2];
+            var s3 = (bool)sig[3];
+            var s5 = (bool)sig[5];
+            var s6 = (bool)sig[6];
+            var s7 = (bool)sig[7];
+            var s8 = (bool)sig[8];
             if (edges[0] != null)
             {
                 if (s3 && s1 && !s0)
                 {
                     texture.SetPixels32(edges[0].texture.GetPixels32());
                 }
+
                 if (s1 && s5 && !s2)
                 {
                     texture.SetPixels32(edges[2].texture.GetPixels32());
                 }
+
                 if (s5 && s7 && !s8)
                 {
                     texture.SetPixels32(edges[8].texture.GetPixels32());
                 }
+
                 if (s3 && s7 && !s6)
                 {
                     texture.SetPixels32(edges[6].texture.GetPixels32());
@@ -276,56 +290,63 @@ namespace Utils
                 {
                     texture.SetPixels32(innerCorners[0].texture.GetPixels32());
                 }
+
                 if (!s1 && !s5)
                 {
                     texture.SetPixels32(innerCorners[2].texture.GetPixels32());
                 }
+
                 if (!s5 && !s7)
                 {
                     texture.SetPixels32(innerCorners[8].texture.GetPixels32());
                 }
+
                 if (!s7 && !s3)
                 {
                     texture.SetPixels32(innerCorners[6].texture.GetPixels32());
                 }
             }
-            
+
             texture.Apply();
             return Sprite.Create(texture, TextureRect, SpriteUtils.Pivot, SpriteUtils.PIXELS_PER_UNIT);
         }
 
         private static Sprite BuildComposite(object[] sig)
         {
-            var texture = new Texture2D((int) TextureRect.width, (int) TextureRect.height);
+            var texture = new Texture2D((int)TextureRect.width, (int)TextureRect.height);
             texture.filterMode = FilterMode.Point;
-            var s0 = (int) sig[0];
-            var s1 = (int) sig[1];
-            var s2 = (int) sig[2];
-            var s3 = (int) sig[3];
+            var s0 = (int)sig[0];
+            var s1 = (int)sig[1];
+            var s2 = (int)sig[2];
+            var s3 = (int)sig[3];
             if (s0 != 255)
             {
                 var neighbor = AssetLibrary.GetTileImage(s0);
                 var pixels = neighbor.texture.GetPixels(Point0.x, Point0.y, Rect0.width, Rect0.height);
                 texture.SetPixels(Point0.x, Point0.y, Rect0.width, Rect0.height, pixels);
             }
+
             if (s1 != 255)
             {
                 var neighbor = AssetLibrary.GetTileImage(s1);
                 var pixels = neighbor.texture.GetPixels(Point1.x, Point1.y, Rect1.width, Rect1.height);
                 texture.SetPixels(Point1.x, Point1.y, Rect1.width, Rect1.height, pixels);
             }
+
             if (s2 != 255)
             {
                 var neighbor = AssetLibrary.GetTileImage(s2);
                 var pixels = neighbor.texture.GetPixels(Point2.x, Point2.y, Rect2.width, Rect2.height);
                 texture.SetPixels(Point2.x, Point2.y, Rect2.width, Rect2.height, pixels);
             }
+
             if (s3 != 255)
             {
                 var neighbor = AssetLibrary.GetTileImage(s3);
                 var pixels = neighbor.texture.GetPixels(Point3.x, Point3.y, Rect3.width, Rect3.height);
                 texture.SetPixels(Point3.x, Point3.y, Rect3.width, Rect3.height, pixels);
             }
+
             texture.Apply();
             return Sprite.Create(texture, TextureRect, SpriteUtils.Pivot, SpriteUtils.PIXELS_PER_UNIT);
         }
@@ -351,7 +372,7 @@ namespace Utils
                         sig.Add(square.Type);
                         continue;
                     }
-                    
+
                     sig.Add(n.Type);
                 }
             }
@@ -385,12 +406,15 @@ namespace Utils
                     {
                         b = n == null || n.Type != 255;
                     }
+
                     sig.Add(b);
                     hasEdge = hasEdge || !b;
                 }
             }
 
-            return hasEdge ? sig.ToArray() : null;
+            return hasEdge ?
+                sig.ToArray() :
+                null;
         }
 
         private static object[] GetCompositeSig(Square square)
@@ -403,14 +427,24 @@ namespace Utils
             var n2 = map.GetTile(x - 1, y);
             var n3 = map.GetTile(x + 1, y);
             var n4 = map.GetTile(x, y + 1);
-            var p1 = n1 != null ? n1.Desc.CompositePriority : -1;
-            var p2 = n2 != null ? n2.Desc.CompositePriority : -1;
-            var p3 = n3 != null ? n3.Desc.CompositePriority : -1;
-            var p4 = n4 != null ? n4.Desc.CompositePriority : -1;
+            var p1 = n1 != null ?
+                n1.Desc.CompositePriority :
+                -1;
+            var p2 = n2 != null ?
+                n2.Desc.CompositePriority :
+                -1;
+            var p3 = n3 != null ?
+                n3.Desc.CompositePriority :
+                -1;
+            var p4 = n4 != null ?
+                n4.Desc.CompositePriority :
+                -1;
             if (p1 < 0 && p2 < 0)
-            { 
+            {
                 var n0 = map.GetTile(x - 1, y - 1);
-                sig[0] = n0 == null || n0.Desc.CompositePriority < 0 ? 255 : n0.Type;
+                sig[0] = n0 == null || n0.Desc.CompositePriority < 0 ?
+                    255 :
+                    n0.Type;
             }
             else if (p1 < p2)
             {
@@ -420,11 +454,13 @@ namespace Utils
             {
                 sig[0] = n1.Type;
             }
-            
+
             if (p1 < 0 && p3 < 0)
-            { 
+            {
                 var n0 = map.GetTile(x + 1, y - 1);
-                sig[1] = n0 == null || n0.Desc.CompositePriority < 0 ? 255 : n0.Type;
+                sig[1] = n0 == null || n0.Desc.CompositePriority < 0 ?
+                    255 :
+                    n0.Type;
             }
             else if (p1 < p3)
             {
@@ -434,11 +470,13 @@ namespace Utils
             {
                 sig[1] = n1.Type;
             }
-            
+
             if (p2 < 0 && p4 < 0)
-            { 
+            {
                 var n0 = map.GetTile(x - 1, y + 1);
-                sig[2] = n0 == null || n0.Desc.CompositePriority < 0 ? 255 : n0.Type;
+                sig[2] = n0 == null || n0.Desc.CompositePriority < 0 ?
+                    255 :
+                    n0.Type;
             }
             else if (p2 < p4)
             {
@@ -448,11 +486,13 @@ namespace Utils
             {
                 sig[2] = n2.Type;
             }
-            
+
             if (p3 < 0 && p4 < 0)
-            { 
+            {
                 var n0 = map.GetTile(x + 1, y + 1);
-                sig[3] = n0 == null || n0.Desc.CompositePriority < 0 ? 255 : n0.Type;
+                sig[3] = n0 == null || n0.Desc.CompositePriority < 0 ?
+                    255 :
+                    n0.Type;
             }
             else if (p3 < p4)
             {
@@ -465,7 +505,7 @@ namespace Utils
 
             return sig;
         }
-        
+
         private class CacheComparer : IEqualityComparer<object[]>
         {
             public bool Equals(object[] x, object[] y)

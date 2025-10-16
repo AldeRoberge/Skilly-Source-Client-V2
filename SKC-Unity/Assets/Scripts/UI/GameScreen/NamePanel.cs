@@ -31,7 +31,7 @@ namespace UI.GameScreen
         {
             if (_player == null)
                 return;
-            
+
             _portrait.sprite = _player.TextureProvider.GetPortrait();
             _nameText.text = _player.Name;
         }

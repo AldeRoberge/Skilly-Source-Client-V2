@@ -68,7 +68,7 @@ namespace UI.GameScreen
                 textColorInt = 6206769;
             }
 
-            var textColor = ParseUtils.ColorFromUInt((uint) textColorInt);
+            var textColor = ParseUtils.ColorFromUInt((uint)textColorInt);
             if (_textColor != textColor)
             {
                 SetTextColor(textColor);
@@ -76,7 +76,7 @@ namespace UI.GameScreen
 
             if (_max > 0)
             {
-                _scrollbar.size = (float) _val / _max;
+                _scrollbar.size = (float)_val / _max;
                 _valueText.text = _val + "/" + _max;
             }
             else
@@ -90,7 +90,9 @@ namespace UI.GameScreen
 
             if (_boost != 0)
             {
-                _valueText.text += " (" + (_boost > 0 ? "+" : "") + _boost + ")";
+                _valueText.text += " (" + (_boost > 0 ?
+                    "+" :
+                    "") + _boost + ")";
             }
         }
 

@@ -10,7 +10,7 @@ namespace Game.Entities
     public partial class Projectile : Entity
     {
         public static int NextFakeBulletId;
-        
+
         public Entity Owner { get; private set; }
         public ProjectileDesc ProjectileDesc { get; private set; }
         public int BulletId { get; private set; }
@@ -49,15 +49,18 @@ namespace Game.Entities
             {
                 size = Desc.Size;
             }
+
             Size = 8 * (size / 100);
             Hit.Clear();
-            
+
             SetRotation();
         }
-        
+
         private void SetRotation()
         {
-            var spin = Desc.Rotation == 0 ? 0 : GameTime.Time / Desc.Rotation;
+            var spin = Desc.Rotation == 0 ?
+                0 :
+                GameTime.Time / Desc.Rotation;
             spin += Angle + Desc.AngleCorrection;
             Rotation = spin;
         }
@@ -65,7 +68,7 @@ namespace Game.Entities
         public static Projectile Create(Entity owner, ProjectileDesc desc, int bulletId, float startTime, float angle,
             Vector3 startPos, int damage, Map map)
         {
-            var prj = (Projectile) map.EntityPool.Get("Projectile");
+            var prj = (Projectile)map.EntityPool.Get("Projectile");
             prj.Init(AssetLibrary.GetObjectDesc(desc.ObjectId), GetNextFakeObjectId(), false, map, false);
             prj.SetValues(owner, desc, bulletId, startTime, angle, startPos, damage);
             return prj;
@@ -97,6 +100,7 @@ namespace Game.Entities
                 {
                     //TODO square hit effect
                 }
+
                 return false;
             }
 
@@ -112,6 +116,7 @@ namespace Game.Entities
                 {
                     //TODO square hit effect
                 }
+
                 return false;
             }
 
@@ -145,12 +150,12 @@ namespace Game.Entities
             {
                 return false;
             }
+
             return true;
         }
 
         public override void Draw()
         {
-            
         }
 
         public override bool MoveTo(Vector3 position)
@@ -171,7 +176,9 @@ namespace Game.Entities
             if (ProjectileDesc.Accelerate) speed *= elapsed / ProjectileDesc.LifetimeMS;
             if (ProjectileDesc.Decelerate) speed *= 2 - elapsed / ProjectileDesc.LifetimeMS;
             var dist = elapsed * (speed / 10000f);
-            var phase = BulletId % 2 == 0 ? 0 : Mathf.PI;
+            var phase = BulletId % 2 == 0 ?
+                0 :
+                Mathf.PI;
             if (ProjectileDesc.Wavy)
             {
                 const float periodFactor = 6 * Mathf.PI;
@@ -183,8 +190,12 @@ namespace Game.Entities
             else if (ProjectileDesc.Parametric)
             {
                 var t = elapsed / ProjectileDesc.LifetimeMS * 2 * Mathf.PI;
-                var x = Mathf.Sin(t) * (BulletId % 2 == 1 ? 1 : -1);
-                var y = Mathf.Sin(2 * t) * (BulletId % 4 < 2 ? 1 : -1);
+                var x = Mathf.Sin(t) * (BulletId % 2 == 1 ?
+                    1 :
+                    -1);
+                var y = Mathf.Sin(2 * t) * (BulletId % 4 < 2 ?
+                    1 :
+                    -1);
                 var sin = Mathf.Sin(Angle);
                 var cos = Mathf.Cos(Angle);
                 p.x += (x * cos - y * sin) * ProjectileDesc.Magnitude;
@@ -200,6 +211,7 @@ namespace Game.Entities
                         dist = halfway - (dist - halfway);
                     }
                 }
+
                 p.x += dist * Mathf.Cos(Angle);
                 p.y += dist * Mathf.Sin(Angle);
                 if (ProjectileDesc.Amplitude != 0)
@@ -217,14 +229,14 @@ namespace Game.Entities
         {
             var minDistSquared = float.MaxValue;
             Entity minEn = null;
-            
+
             if (DamagesEnemies)
             {
                 foreach (var entity in Map.Entities.Values)
                 {
                     if (!entity.Desc.Enemy || !CanHit(entity))
                         continue;
-                    
+
                     if (Mathf.Abs(Position.x - entity.Position.x) <= _HITBOX_RADIUS &&
                         Mathf.Abs(Position.y - entity.Position.y) <= _HITBOX_RADIUS)
                     {
