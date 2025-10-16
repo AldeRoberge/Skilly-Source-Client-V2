@@ -1,9 +1,4 @@
-﻿
-
-
-
-
-namespace SKC
+﻿namespace SKC
 {
     public class Mountains : IBehaviorDatabase
     {

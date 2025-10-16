@@ -3,6 +3,10 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net8.0</TargetFramework>
+    <Title>Skilly-Source-Client-V2</Title>
+    <Authors>Schmutz02</Authors>
+    <PackageProjectUrl>https://schmutz02.github.io/</PackageProjectUrl>
+    <PackageIcon>icon.png</PackageIcon>
   </PropertyGroup>
 
   <ItemGroup>

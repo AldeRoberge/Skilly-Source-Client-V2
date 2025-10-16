@@ -8,119 +8,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="82bab5b0-264c-4af7-bb68-e20a8d445af2" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.RotMG/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.RotMG/.idea/.name" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.RotMG/.idea/AndroidProjectSystem.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.RotMG/.idea/copilot.data.migration.agent.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.RotMG/.idea/copilot.data.migration.ask.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.RotMG/.idea/copilot.data.migration.ask2agent.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.RotMG/.idea/copilot.data.migration.edit.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.RotMG/.idea/encodings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.RotMG/.idea/indexLayout.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.RotMG/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/Database.Status.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Common/Database.Status.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/icon.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.RotMG/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.RotMG/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Common/Database.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Common/Database.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/Descriptors.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Common/Descriptors.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/Models.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Common/Models.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/Resources.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Common/Resources.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/Settings.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Common/Settings.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/Structures.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Common/Structures.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game/ChunkController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Game/ChunkController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game/Entities/ClosedVaultChest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Game/Entities/ClosedVaultChest.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game/Entities/ConnectedObject.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Game/Entities/ConnectedObject.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game/Entities/Container.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Game/Entities/Container.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game/Entities/Decoy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Game/Entities/Decoy.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Game/Entities/Enemy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Game/Entities/Enemy.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game/Entities/GiftChest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Game/Entities/GiftChest.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game/Entities/GuildMerchant.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Game/Entities/GuildMerchant.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game/Entities/OneWayContainer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Game/Entities/OneWayContainer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game/Entities/Placeholder.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Game/Entities/Placeholder.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Game/Entities/Player.Chat.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Game/Entities/Player.Chat.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game/Entities/Player.Ground.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Game/Entities/Player.Ground.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game/Entities/Player.Inventory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Game/Entities/Player.Inventory.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game/Entities/Player.Leveling.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Game/Entities/Player.Leveling.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game/Entities/Player.Projectiles.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Game/Entities/Player.Projectiles.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game/Entities/Player.Stats.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Game/Entities/Player.Stats.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game/Entities/Player.Trade.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Game/Entities/Player.Trade.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game/Entities/Player.Update.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Game/Entities/Player.Update.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game/Entities/Player.UseItem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Game/Entities/Player.UseItem.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game/Entities/Player.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Game/Entities/Player.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game/Entities/Portal.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Game/Entities/Portal.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game/Entities/SellableObject.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Game/Entities/SellableObject.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game/Entities/StaticObject.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Game/Entities/StaticObject.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game/Entities/Trap.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Game/Entities/Trap.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game/Entities/VaultChest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Game/Entities/VaultChest.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Game/Entity.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Game/Entity.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game/JSMap.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Game/JSMap.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game/Logic/Behavior.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Game/Logic/Behavior.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game/Logic/BehaviorDb.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Game/Logic/BehaviorDb.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Game/Logic/Behaviors/Grenade.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Game/Logic/Behaviors/Grenade.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game/Logic/Behaviors/Prioritize.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Game/Logic/Behaviors/Prioritize.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game/Logic/Behaviors/Shoot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Game/Logic/Behaviors/Shoot.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game/Logic/Behaviors/Wander.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Game/Logic/Behaviors/Wander.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game/Logic/Conditional.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Game/Logic/Conditional.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game/Logic/Conditionals/IfConditionEffect.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Game/Logic/Conditionals/IfConditionEffect.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game/Logic/Conditionals/IfNoConditionEffect.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Game/Logic/Conditionals/IfNoConditionEffect.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Game/Logic/Database/Mountains.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Game/Logic/Database/Mountains.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game/Logic/Loot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Game/Logic/Loot.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game/Logic/Loots/ItemLoot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Game/Logic/Loots/ItemLoot.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game/Logic/Loots/MobDrop.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Game/Logic/Loots/MobDrop.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game/Logic/Loots/Threshold.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Game/Logic/Loots/Threshold.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game/Logic/Loots/TierLoot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Game/Logic/Loots/TierLoot.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game/Logic/State.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Game/Logic/State.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game/Logic/Transition.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Game/Logic/Transition.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game/Logic/Transitions/HealthTransition.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Game/Logic/Transitions/HealthTransition.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game/Logic/Transitions/TimedTransition.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Game/Logic/Transitions/TimedTransition.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game/Manager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Game/Manager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game/Map.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Game/Map.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game/Projectile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Game/Projectile.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game/SetPieces/Building.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Game/SetPieces/Building.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game/SetPieces/Castle.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Game/SetPieces/Castle.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game/SetPieces/Crystal.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Game/SetPieces/Crystal.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game/SetPieces/CubeGod.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Game/SetPieces/CubeGod.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game/SetPieces/GhostShip.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Game/SetPieces/GhostShip.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game/SetPieces/Graveyard.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Game/SetPieces/Graveyard.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game/SetPieces/Grove.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Game/SetPieces/Grove.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game/SetPieces/Hermit.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Game/SetPieces/Hermit.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game/SetPieces/KageKami.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Game/SetPieces/KageKami.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game/SetPieces/LavaFissure.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Game/SetPieces/LavaFissure.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game/SetPieces/LichyTemple.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Game/SetPieces/LichyTemple.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game/SetPieces/LordoftheLostLands.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Game/SetPieces/LordoftheLostLands.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game/SetPieces/Noise.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Game/SetPieces/Noise.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game/SetPieces/Oasis.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Game/SetPieces/Oasis.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game/SetPieces/Pentaract.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Game/SetPieces/Pentaract.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game/SetPieces/Pyre.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Game/SetPieces/Pyre.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game/SetPieces/SetPieces.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Game/SetPieces/SetPieces.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game/SetPieces/SkullShrine.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Game/SetPieces/SkullShrine.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game/SetPieces/Sphinx.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Game/SetPieces/Sphinx.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game/SetPieces/Temple.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Game/SetPieces/Temple.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game/SetPieces/TempleA.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Game/SetPieces/TempleA.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game/SetPieces/TempleB.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Game/SetPieces/TempleB.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game/SetPieces/Tower.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Game/SetPieces/Tower.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game/WMap.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Game/WMap.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game/World.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Game/World.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game/Worlds/GuildHall.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Game/Worlds/GuildHall.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game/Worlds/Nexus.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Game/Worlds/Nexus.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game/Worlds/OryxCastle.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Game/Worlds/OryxCastle.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Game/Worlds/Realm.Oryx.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Game/Worlds/Realm.Oryx.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game/Worlds/Realm.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Game/Worlds/Realm.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game/Worlds/Vault.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Game/Worlds/Vault.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game/Worlds/WorldCreator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Game/Worlds/WorldCreator.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Networking/AppServer.Handlers.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Networking/AppServer.Handlers.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Networking/AppServer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Networking/AppServer.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Networking/Client.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Networking/Client.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Networking/GameServer.Handlers.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Networking/GameServer.Handlers.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Networking/GameServer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Networking/GameServer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Networking/PacketReader.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Networking/PacketReader.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Networking/PacketWriter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Networking/PacketWriter.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RotMG.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/SKC-Server.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RotMG.sln" beforeDir="false" afterPath="$PROJECT_DIR$/SKC-Server.sln" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Utils/ConvertUtils.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Utils/ConvertUtils.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Utils/GameUtils.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Utils/GameUtils.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Utils/MathUtils.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Utils/MathUtils.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Utils/ParseUtils.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Utils/ParseUtils.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Utils/ThreadUtils.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Utils/ThreadUtils.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SKC-Server.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/SKC-Server.csproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../SKC-Unity/Assets/Scripts/Game/MainCameraManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../SKC-Unity/Assets/Scripts/Game/MainCameraManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../SKC-Unity/ProjectSettings/SceneTemplateSettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/../SKC-Unity/ProjectSettings/SceneTemplateSettings.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../SKC-Unity/UserSettings/Layouts/default-6000.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/../SKC-Unity/UserSettings/Layouts/default-6000.dwlt" afterDir="false" />
@@ -149,9 +49,13 @@
   }
 }</component>
   <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;795936c0&quot;,
   &quot;associatedIndex&quot;: 6
 }</component>
   <component name="ProjectId" id="34AGzfCM49VrlR1QQ32j9kcRx5t" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectReloadState">
     <option name="STATE" value="1" />
   </component>
@@ -163,6 +67,7 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;.NET Project.Launch Server.executor&quot;: &quot;Run&quot;,
     &quot;.NET Project.RotMG.executor&quot;: &quot;Run&quot;,
     &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
@@ -178,10 +83,10 @@
   }
 }</component>
   <component name="RunManager">
-    <configuration name="RotMG" type="DotNetProject" factoryName=".NET Project">
-      <option name="EXE_PATH" value="" />
+    <configuration name="Launch Server" type="DotNetProject" factoryName=".NET Project">
+      <option name="EXE_PATH" value="$PROJECT_DIR$/bin/Debug/net8.0/SKC-Server.exe" />
       <option name="PROGRAM_PARAMETERS" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/bin/Debug/net8.0" />
       <option name="PASS_PARENT_ENVS" value="1" />
       <option name="USE_EXTERNAL_CONSOLE" value="0" />
       <option name="ENV_FILE_PATHS" value="" />
@@ -196,7 +101,7 @@
       <option name="PROJECT_ARGUMENTS_TRACKING" value="1" />
       <option name="PROJECT_WORKING_DIRECTORY_TRACKING" value="1" />
       <option name="PROJECT_KIND" value="DotNetCore" />
-      <option name="PROJECT_TFM" value="" />
+      <option name="PROJECT_TFM" value="net8.0" />
       <method v="2">
         <option name="Build" />
       </method>
@@ -212,7 +117,7 @@
       <workItem from="1760649230646" duration="1107000" />
       <workItem from="1760650347378" duration="96000" />
       <workItem from="1760650456992" duration="2015000" />
-      <workItem from="1760654228337" duration="777000" />
+      <workItem from="1760654228337" duration="1334000" />
     </task>
     <servers />
   </component>
