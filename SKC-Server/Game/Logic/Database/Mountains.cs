@@ -9,11 +9,11 @@ namespace RotMG.Game.Logic.Database
     {
         public void Init(BehaviorDb db)
         {
-            db.Init("Medusa", 
-                new IfConditionEffect(ConditionEffectIndex.Slowed, 
+            db.Init("Medusa",
+                new IfConditionEffect(ConditionEffectIndex.Slowed,
                     new Shoot(32, 16)),
-                new Shoot(7, 1, cooldown: 5000), 
-                new Wander(.4f), 
+                new Shoot(7, 1, cooldown: 5000),
+                new Wander(.4f),
                 new Grenade(radius: 2, damage: 20, cooldown: 1500, color: 0xffFFFF00, effect: ConditionEffectIndex.Paralyzed, effectDuration: 1000),
                 new ItemLoot("Conducting Wand", 1, .1f));
 
@@ -24,8 +24,8 @@ namespace RotMG.Game.Logic.Database
                 new ItemLoot("Doom Bow", .001f, .001f));
 
             db.Init("Beer God",
-            new Wander(2),
-            new ItemLoot("Potion of Speed", min: 3));
+                new Wander(2),
+                new ItemLoot("Potion of Speed", min: 3));
 
             db.Init("Guardian of the Lost Lands",
                 new Prioritize(
