@@ -11,8 +11,8 @@ namespace RotMG
 {
     public class Program
     {
-        private static bool Terminating;
-        private static int MainThread;
+        private static bool                  Terminating;
+        private static int                   MainThread;
         private static ConcurrentQueue<Work> PendingWork;
 
         public static void Main(string[] args)
@@ -87,9 +87,15 @@ namespace RotMG
             Thread.Sleep(200);
             foreach (var c in Manager.Clients.Values.ToArray())
             {
-                try { c.Disconnect(); }
-                catch { }
+                try
+                {
+                    c.Disconnect();
+                }
+                catch
+                {
+                }
             }
+
             Thread.Sleep(200);
             try
             {
@@ -97,7 +103,9 @@ namespace RotMG
                 Thread.Yield();
                 GameServer.Stop();
             }
-            catch { }
+            catch
+            {
+            }
         }
 
         public static void StartTerminating()
@@ -121,7 +129,7 @@ namespace RotMG
                 return;
 #endif
             var message = $"<{DateTime.Now.ToShortTimeString()}> {data}";
-            PushWork(() => 
+            PushWork(() =>
             {
                 switch (type)
                 {
@@ -138,6 +146,7 @@ namespace RotMG
                         Console.BackgroundColor = ConsoleColor.Red;
                         break;
                 }
+
                 Console.Write(message);
                 Console.ResetColor();
                 Console.WriteLine();
