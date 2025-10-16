@@ -8,7 +8,7 @@
         InvalidPassword,
         TooManyRegisters
     }
-    
+
     public enum GuildCreateStatus
     {
         Success,

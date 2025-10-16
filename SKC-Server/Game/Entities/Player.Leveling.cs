@@ -9,7 +9,7 @@ namespace RotMG.Game.Entities
 {
     public partial class Player
     {
-        public const int MaxLevel = 20;
+        public const int MaxLevel   = 20;
         public const int EXPPerFame = 2000;
 
         public static int GetNextLevelEXP(int level)
@@ -32,6 +32,7 @@ namespace RotMG.Game.Entities
                 if (fame < Stars[i])
                     return Stars[i];
             }
+
             return -1;
         }
 
@@ -40,7 +41,9 @@ namespace RotMG.Game.Entities
             if (character.Experience != 0) EXP = character.Experience;
             if (character.Fame != 0) CharFame = character.Fame;
             var classStat = Client.Account.Stats.GetClassStats(Type);
-            NextClassQuestFame = GetNextClassQuestFame(classStat.BestFame > CharFame ? classStat.BestFame : CharFame);
+            NextClassQuestFame = GetNextClassQuestFame(classStat.BestFame > CharFame ?
+                classStat.BestFame :
+                CharFame);
             NextLevelEXP = GetNextLevelEXP(Level);
             GainEXP(0);
         }
@@ -54,16 +57,19 @@ namespace RotMG.Game.Entities
                 CharFame = newFame;
 
             var classStat = Client.Account.Stats.GetClassStats(Type);
-            var newClassQuestFame = GetNextClassQuestFame(classStat.BestFame > newFame ? classStat.BestFame : newFame);
+            var newClassQuestFame = GetNextClassQuestFame(classStat.BestFame > newFame ?
+                classStat.BestFame :
+                newFame);
             if (newClassQuestFame > NextClassQuestFame)
             {
                 var notification = GameServer.Notification(Id, "Class Quest Complete!", 0xFF00FF00);
                 foreach (var en in Parent.PlayerChunks.HitTest(Position, SightRadius))
                 {
-                    if (en is Player player && 
+                    if (en is Player player &&
                         (player.Client.Account.Notifications || player.Equals(this)))
                         player.Client.Send(notification);
                 }
+
                 NextClassQuestFame = newClassQuestFame;
             }
 
@@ -119,15 +125,16 @@ namespace RotMG.Game.Entities
         }
 
         public Entity Quest;
+
         public void GetNextQuest(bool prioritize)
         {
             if (Quest != null && !prioritize)
                 return;
-            
+
             var newQuest = FindQuest();
             if (newQuest == Quest)
                 return;
-            
+
             Client.Send(GameServer.QuestObjId(newQuest?.Id ?? -1));
             Quest = newQuest;
         }
@@ -139,7 +146,7 @@ namespace RotMG.Game.Entities
             destination ??= Position;
 
             foreach (var i in Parent.Quests.Values
-                .OrderBy(quest => quest.Position.Distance(destination.Value)))
+                         .OrderBy(quest => quest.Position.Distance(destination.Value)))
             {
                 if (i.Desc == null || !i.Desc.Quest) continue;
 
@@ -148,8 +155,10 @@ namespace RotMG.Game.Entities
 
                 if (Level >= x.Item2 && Level <= x.Item3)
                 {
-                    var score = (20 - Math.Abs((i.Desc.Level == -1 ? 0 : i.Desc.Level) - Level)) * x.Item1 -   //priority * level diff
-                                Position.Distance(i) / 100;    //minus 1 for every 100 tile distance
+                    var score = (20 - Math.Abs((i.Desc.Level == -1 ?
+                                    0 :
+                                    i.Desc.Level) - Level)) * x.Item1 - //priority * level diff
+                                Position.Distance(i) / 100; //minus 1 for every 100 tile distance
                     if (bestScore == null || score > bestScore)
                     {
                         bestScore = score;
@@ -157,92 +166,93 @@ namespace RotMG.Game.Entities
                     }
                 }
             }
+
             return ret;
         }
 
         private static readonly Dictionary<string, Tuple<int, int, int>> QuestDat =
-            new()  //Priority, Min, Max
-        {
-            // wandering quest enemies
-            { "Scorpion Queen",                 Tuple.Create(1, 1, 6) },
-            { "Bandit Leader",                  Tuple.Create(1, 1, 6) },
-            { "Hobbit Mage",                    Tuple.Create(3, 3, 8) },
-            { "Undead Hobbit Mage",             Tuple.Create(3, 3, 8) },
-            { "Giant Crab",                     Tuple.Create(3, 3, 8) },
-            { "Desert Werewolf",                Tuple.Create(3, 3, 8) },
-            { "Sandsman King",                  Tuple.Create(4, 4, 9) },
-            { "Goblin Mage",                    Tuple.Create(4, 4, 9) },
-            { "Elf Wizard",                     Tuple.Create(4, 4, 9) },
-            { "Dwarf King",                     Tuple.Create(5, 5, 10) },
-            { "Swarm",                          Tuple.Create(6, 6, 11) },
-            { "Shambling Sludge",               Tuple.Create(6, 6, 11) },
-            { "Great Lizard",                   Tuple.Create(7, 7, 12) },
-            { "Wasp Queen",                     Tuple.Create(8, 7, 20) },
-            { "Horned Drake",                   Tuple.Create(8, 7, 20) },
+            new() //Priority, Min, Max
+            {
+                // wandering quest enemies
+                { "Scorpion Queen", Tuple.Create(1, 1, 6) },
+                { "Bandit Leader", Tuple.Create(1, 1, 6) },
+                { "Hobbit Mage", Tuple.Create(3, 3, 8) },
+                { "Undead Hobbit Mage", Tuple.Create(3, 3, 8) },
+                { "Giant Crab", Tuple.Create(3, 3, 8) },
+                { "Desert Werewolf", Tuple.Create(3, 3, 8) },
+                { "Sandsman King", Tuple.Create(4, 4, 9) },
+                { "Goblin Mage", Tuple.Create(4, 4, 9) },
+                { "Elf Wizard", Tuple.Create(4, 4, 9) },
+                { "Dwarf King", Tuple.Create(5, 5, 10) },
+                { "Swarm", Tuple.Create(6, 6, 11) },
+                { "Shambling Sludge", Tuple.Create(6, 6, 11) },
+                { "Great Lizard", Tuple.Create(7, 7, 12) },
+                { "Wasp Queen", Tuple.Create(8, 7, 20) },
+                { "Horned Drake", Tuple.Create(8, 7, 20) },
 
-            // setpiece bosses
-            { "Deathmage",                      Tuple.Create(5, 6, 11) },
-            { "Great Coil Snake",               Tuple.Create(6, 6, 12) },
-            { "Lich",                           Tuple.Create(8, 6, 20) },
-            { "Actual Lich",                    Tuple.Create(8, 7, 20) },
-            { "Ent Ancient",                    Tuple.Create(9, 7, 20) },
-            { "Actual Ent Ancient",             Tuple.Create(9, 7, 20) },
-            { "Oasis Giant",                    Tuple.Create(10, 8, 20) },
-            { "Phoenix Lord",                   Tuple.Create(10, 9, 20) },
-            { "Ghost King",                     Tuple.Create(11,10, 20) },
-            { "Actual Ghost King",              Tuple.Create(11,10, 20) },
-            { "Cyclops God",                    Tuple.Create(12,10, 20) },
-            { "Kage Kami",                      Tuple.Create(12,10, 20) },
-            { "Red Demon",                      Tuple.Create(13,15, 20) },
+                // setpiece bosses
+                { "Deathmage", Tuple.Create(5, 6, 11) },
+                { "Great Coil Snake", Tuple.Create(6, 6, 12) },
+                { "Lich", Tuple.Create(8, 6, 20) },
+                { "Actual Lich", Tuple.Create(8, 7, 20) },
+                { "Ent Ancient", Tuple.Create(9, 7, 20) },
+                { "Actual Ent Ancient", Tuple.Create(9, 7, 20) },
+                { "Oasis Giant", Tuple.Create(10, 8, 20) },
+                { "Phoenix Lord", Tuple.Create(10, 9, 20) },
+                { "Ghost King", Tuple.Create(11, 10, 20) },
+                { "Actual Ghost King", Tuple.Create(11, 10, 20) },
+                { "Cyclops God", Tuple.Create(12, 10, 20) },
+                { "Kage Kami", Tuple.Create(12, 10, 20) },
+                { "Red Demon", Tuple.Create(13, 15, 20) },
 
                 // events
-            { "Skull Shrine",                   Tuple.Create(14,15, 20) },
-            { "Pentaract",                      Tuple.Create(14,15, 20) },
-            { "Cube God",                       Tuple.Create(14,15, 20) },
-            { "Grand Sphinx",                   Tuple.Create(14,15, 20) },
-            { "Lord of the Lost Lands",         Tuple.Create(14,15, 20) },
-            { "Hermit God",                     Tuple.Create(14,15, 20) },
-            { "Ghost Ship",                     Tuple.Create(14,15, 20) },
+                { "Skull Shrine", Tuple.Create(14, 15, 20) },
+                { "Pentaract", Tuple.Create(14, 15, 20) },
+                { "Cube God", Tuple.Create(14, 15, 20) },
+                { "Grand Sphinx", Tuple.Create(14, 15, 20) },
+                { "Lord of the Lost Lands", Tuple.Create(14, 15, 20) },
+                { "Hermit God", Tuple.Create(14, 15, 20) },
+                { "Ghost Ship", Tuple.Create(14, 15, 20) },
 
-            // dungeon bosses
-            { "Evil Chicken God",               Tuple.Create(15,1, 20) },
-            { "Bonegrind the Butcher",          Tuple.Create(15,1, 20) },
-            { "Dreadstump the Pirate King",     Tuple.Create(15,1, 20) },
-            { "Mama Megamoth",                  Tuple.Create(15,1, 20) },
-            { "Arachna the Spider Queen",       Tuple.Create(15,1, 20) },
-            { "Stheno the Snake Queen",         Tuple.Create(15,1, 20) },
-            { "Mixcoatl the Masked God",        Tuple.Create(15,1, 20) },
-            { "Limon the Sprite God",           Tuple.Create(15,1, 20) },
-            { "Septavius the Ghost God",        Tuple.Create(15,1, 20) },
-            { "Davy Jones",                     Tuple.Create(15,1, 20) },
-            { "Lord Ruthven",                   Tuple.Create(15,1, 20) },
-            { "Archdemon Malphas",              Tuple.Create(15,1, 20) },
-            { "Thessal the Mermaid Goddess",    Tuple.Create(15,1, 20) },
-            { "Dr Terrible",                    Tuple.Create(15,1, 20) },
-            { "Horrific Creation",              Tuple.Create(15,1, 20) },
-            { "Masked Party God",               Tuple.Create(15,1, 20) },
-            { "Oryx Stone Guardian Left",       Tuple.Create(15,1, 20) },
-            { "Oryx Stone Guardian Right",      Tuple.Create(15,1, 20) },
-            { "Oryx the Mad God 1",             Tuple.Create(15,1, 20) },
-            { "Oryx the Mad God 2",             Tuple.Create(15,1, 20) },
-            { "Gigacorn",                       Tuple.Create(15,1, 20) },
-            { "Desire Troll",                   Tuple.Create(15,1, 20) },
-            { "Spoiled Creampuff",              Tuple.Create(15,1, 20) },
-            { "MegaRototo",                     Tuple.Create(15,1, 20) },
-            { "Swoll Fairy",                    Tuple.Create(15,1, 20) },
-            { "Troll 3",                        Tuple.Create(15,1, 20) },
-            { "Arena Ghost Bride",              Tuple.Create(15,1, 20) },
-            { "Arena Statue Left",              Tuple.Create(15,1, 20) },
-            { "Arena Statue Right",             Tuple.Create(15,1, 20) },
-            { "Arena Grave Caretaker",          Tuple.Create(15,1, 20) },
-            { "Ghost of Skuld",                 Tuple.Create(15,1, 20) },
-            { "Tomb Defender",                  Tuple.Create(15,1, 20) },
-            { "Tomb Support",                   Tuple.Create(15,1, 20) },
-            { "Tomb Attacker",                  Tuple.Create(15,1, 20) },
-            { "Active Sarcophagus",             Tuple.Create(15,1, 20) },
-            { "shtrs Bridge Sentinel",          Tuple.Create(15,1, 20) },
-            { "shtrs The Forgotten King",       Tuple.Create(15,1, 20) },
-            { "shtrs Twilight Archmage",        Tuple.Create(15,1, 20) },
-        };
+                // dungeon bosses
+                { "Evil Chicken God", Tuple.Create(15, 1, 20) },
+                { "Bonegrind the Butcher", Tuple.Create(15, 1, 20) },
+                { "Dreadstump the Pirate King", Tuple.Create(15, 1, 20) },
+                { "Mama Megamoth", Tuple.Create(15, 1, 20) },
+                { "Arachna the Spider Queen", Tuple.Create(15, 1, 20) },
+                { "Stheno the Snake Queen", Tuple.Create(15, 1, 20) },
+                { "Mixcoatl the Masked God", Tuple.Create(15, 1, 20) },
+                { "Limon the Sprite God", Tuple.Create(15, 1, 20) },
+                { "Septavius the Ghost God", Tuple.Create(15, 1, 20) },
+                { "Davy Jones", Tuple.Create(15, 1, 20) },
+                { "Lord Ruthven", Tuple.Create(15, 1, 20) },
+                { "Archdemon Malphas", Tuple.Create(15, 1, 20) },
+                { "Thessal the Mermaid Goddess", Tuple.Create(15, 1, 20) },
+                { "Dr Terrible", Tuple.Create(15, 1, 20) },
+                { "Horrific Creation", Tuple.Create(15, 1, 20) },
+                { "Masked Party God", Tuple.Create(15, 1, 20) },
+                { "Oryx Stone Guardian Left", Tuple.Create(15, 1, 20) },
+                { "Oryx Stone Guardian Right", Tuple.Create(15, 1, 20) },
+                { "Oryx the Mad God 1", Tuple.Create(15, 1, 20) },
+                { "Oryx the Mad God 2", Tuple.Create(15, 1, 20) },
+                { "Gigacorn", Tuple.Create(15, 1, 20) },
+                { "Desire Troll", Tuple.Create(15, 1, 20) },
+                { "Spoiled Creampuff", Tuple.Create(15, 1, 20) },
+                { "MegaRototo", Tuple.Create(15, 1, 20) },
+                { "Swoll Fairy", Tuple.Create(15, 1, 20) },
+                { "Troll 3", Tuple.Create(15, 1, 20) },
+                { "Arena Ghost Bride", Tuple.Create(15, 1, 20) },
+                { "Arena Statue Left", Tuple.Create(15, 1, 20) },
+                { "Arena Statue Right", Tuple.Create(15, 1, 20) },
+                { "Arena Grave Caretaker", Tuple.Create(15, 1, 20) },
+                { "Ghost of Skuld", Tuple.Create(15, 1, 20) },
+                { "Tomb Defender", Tuple.Create(15, 1, 20) },
+                { "Tomb Support", Tuple.Create(15, 1, 20) },
+                { "Tomb Attacker", Tuple.Create(15, 1, 20) },
+                { "Active Sarcophagus", Tuple.Create(15, 1, 20) },
+                { "shtrs Bridge Sentinel", Tuple.Create(15, 1, 20) },
+                { "shtrs The Forgotten King", Tuple.Create(15, 1, 20) },
+                { "shtrs Twilight Archmage", Tuple.Create(15, 1, 20) },
+            };
     }
 }

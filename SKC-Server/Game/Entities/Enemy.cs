@@ -15,7 +15,7 @@ namespace RotMG.Game.Entities
 
         public void ApplyPoison(Player hitter, ConditionEffectDesc[] effects, int damage, int damageLeft)
         {
-            if (HasConditionEffect(ConditionEffectIndex.Invincible) || 
+            if (HasConditionEffect(ConditionEffectIndex.Invincible) ||
                 HasConditionEffect(ConditionEffectIndex.Stasis))
                 return;
 
@@ -53,18 +53,18 @@ namespace RotMG.Game.Entities
                 List<Entity> l;
                 foreach (var en in l = Parent.PlayerChunks.HitTest(Position, Player.SightRadius))
                 {
-                    if (en is not Player player) 
+                    if (en is not Player player)
                         continue;
                     var exp = baseExp;
                     if (exp > Player.GetNextLevelEXP(player.Level) / 10)
                         exp = Player.GetNextLevelEXP(player.Level) / 10;
                     if (player.GainEXP(exp))
                         foreach (var p in l)
-                            if (!p.Equals(player)) 
+                            if (!p.Equals(player))
                                 (p as Player).FameStats.LevelUpAssists++;
                 }
             }
-            
+
             if (Behavior != null && Behavior.Loot.Count > 0)
                 Behavior.Loot.Handle(this, killer);
 
@@ -78,8 +78,8 @@ namespace RotMG.Game.Entities
                 foreach (var b in Behavior.Behaviors)
                     b.Death(this);
                 foreach (var s in CurrentStates)
-                    foreach (var b in s.Behaviors)
-                        b.Death(this);
+                foreach (var b in s.Behaviors)
+                    b.Death(this);
             }
 
             Dead = true;
@@ -132,6 +132,7 @@ namespace RotMG.Game.Entities
                 Death(hitter);
                 return true;
             }
+
             return false;
         }
 

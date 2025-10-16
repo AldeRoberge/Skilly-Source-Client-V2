@@ -58,7 +58,6 @@ namespace RotMG.Common
             var paths = Directory.EnumerateFiles(CombineResourcePath("GameData/"), "*.xml", SearchOption.TopDirectoryOnly).ToArray();
             for (var i = 0; i < paths.Length; i++)
             {
-
 #if DEBUG
                 Program.Print(PrintType.Debug, $"Parsing GameData <{paths[i].Split('/').Last()}>");
 #endif
@@ -98,13 +97,13 @@ namespace RotMG.Common
                 foreach (var e in data.Elements("Ground"))
                 {
                     var id = e.ParseString("@id");
-                    var type = e.ParseUshort("@type"); 
+                    var type = e.ParseUshort("@type");
 #if DEBUG
                     if (string.IsNullOrWhiteSpace(id))
                         throw new Exception("Invalid ID.");
                     if (Type2Tile.ContainsKey(type))
                         throw new Exception($"Duplicate type <{id}:{type}>");
-                    if (Id2Tile.ContainsKey(id)) 
+                    if (Id2Tile.ContainsKey(id))
                         throw new Exception($"Duplicate ID <{id}:{type}>");
 #endif
 
@@ -163,7 +162,7 @@ namespace RotMG.Common
                 SetPieces[e.ParseString("@id")] = map;
             }
         }
-        
+
         private static void LoadWebFiles()
         {
             var paths = Directory.EnumerateFiles(CombineResourcePath("Web/"), "*", SearchOption.AllDirectories).ToArray();

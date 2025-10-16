@@ -10,7 +10,7 @@ namespace RotMG.Game.Entities
     public partial class Player : Entity, IContainer
     {
         private const int MaxLatencyMS = 2000;
-        public const int MaxPotions = 6;
+        public const  int MaxPotions   = 6;
 
         public static int[] Stars =
         [
@@ -25,6 +25,7 @@ namespace RotMG.Game.Entities
         public string GuildInvite;
 
         private int _accountId;
+
         public int AccountId
         {
             get => _accountId;
@@ -32,6 +33,7 @@ namespace RotMG.Game.Entities
         }
 
         private int _exp;
+
         public int EXP
         {
             get => _exp;
@@ -39,6 +41,7 @@ namespace RotMG.Game.Entities
         }
 
         private int _nextLevelExp;
+
         public int NextLevelEXP
         {
             get => _nextLevelExp;
@@ -46,6 +49,7 @@ namespace RotMG.Game.Entities
         }
 
         private int _level;
+
         public int Level
         {
             get => _level;
@@ -53,6 +57,7 @@ namespace RotMG.Game.Entities
         }
 
         private int _charFame;
+
         public int CharFame
         {
             get => _charFame;
@@ -60,6 +65,7 @@ namespace RotMG.Game.Entities
         }
 
         private int _fame;
+
         public int Fame
         {
             get => _fame;
@@ -67,6 +73,7 @@ namespace RotMG.Game.Entities
         }
 
         private int _nextClassQuestFame;
+
         public int NextClassQuestFame
         {
             get => _nextClassQuestFame;
@@ -74,6 +81,7 @@ namespace RotMG.Game.Entities
         }
 
         private int _numStars;
+
         public int NumStars
         {
             get => _numStars;
@@ -81,6 +89,7 @@ namespace RotMG.Game.Entities
         }
 
         private string _guildName;
+
         public string GuildName
         {
             get => _guildName;
@@ -88,6 +97,7 @@ namespace RotMG.Game.Entities
         }
 
         private int _guildRank;
+
         public int GuildRank
         {
             get => _guildRank;
@@ -95,6 +105,7 @@ namespace RotMG.Game.Entities
         }
 
         private int _credits;
+
         public int Credits
         {
             get => _credits;
@@ -102,6 +113,7 @@ namespace RotMG.Game.Entities
         }
 
         private int _tex1;
+
         public int Tex1
         {
             get => _tex1;
@@ -109,6 +121,7 @@ namespace RotMG.Game.Entities
         }
 
         private int _tex2;
+
         public int Tex2
         {
             get => _tex2;
@@ -116,6 +129,7 @@ namespace RotMG.Game.Entities
         }
 
         private int _skinType;
+
         public int SkinType
         {
             get => _skinType;
@@ -123,6 +137,7 @@ namespace RotMG.Game.Entities
         }
 
         private bool _hasBackpack;
+
         public bool HasBackpack
         {
             get => _hasBackpack;
@@ -130,6 +145,7 @@ namespace RotMG.Game.Entities
         }
 
         private int _mp;
+
         public int MP
         {
             get => _mp;
@@ -137,6 +153,7 @@ namespace RotMG.Game.Entities
         }
 
         private int _maxMp;
+
         public int MaxMP
         {
             get => _maxMp;
@@ -144,6 +161,7 @@ namespace RotMG.Game.Entities
         }
 
         private int _oxygen;
+
         public int Oxygen
         {
             get => _oxygen;
@@ -151,6 +169,7 @@ namespace RotMG.Game.Entities
         }
 
         private int _healthPotions;
+
         public int HealthPotions
         {
             get => _healthPotions;
@@ -158,6 +177,7 @@ namespace RotMG.Game.Entities
         }
 
         private int _magicPotions;
+
         public int MagicPotions
         {
             get => _magicPotions;
@@ -165,6 +185,7 @@ namespace RotMG.Game.Entities
         }
 
         private int _sinkLevel;
+
         public int SinkLevel
         {
             get => _sinkLevel;
@@ -245,7 +266,7 @@ namespace RotMG.Game.Entities
             AwaitingGoto = new Queue<int>();
             TradedWith = [];
             PendingTrades = [];
-            
+
             SpeedHistory = new List<float>(SpeedHistoryCount);
             for (var i = 0; i < SpeedHistoryCount; i++) //Just make some temporary history when player is first initialized
                 PushSpeedToHistory(GetMovementSpeed() * 1.5f);
@@ -265,7 +286,7 @@ namespace RotMG.Game.Entities
             {
                 if (HasConditionEffect(ConditionEffectIndex.Quiet))
                     return;
-                
+
                 var mp = MP;
                 MP = Math.Max(1, Math.Min(GetStat(0), MP + amount));
                 heal = MP - mp;
@@ -274,19 +295,21 @@ namespace RotMG.Game.Entities
             {
                 if (HasConditionEffect(ConditionEffectIndex.Sick))
                     return;
-                
+
                 var hp = Hp;
                 Hp = Math.Max(0, Math.Min(GetStat(0), Hp + amount));
                 heal = Hp - hp;
             }
 
-            if (heal <= 0) 
+            if (heal <= 0)
                 return;
 
-            var notification = GameServer.Notification(Id, $"+{heal}", magic ? 0xff6084e0 : 0xff00ff00);
+            var notification = GameServer.Notification(Id, $"+{heal}", magic ?
+                0xff6084e0 :
+                0xff00ff00);
             foreach (var en in Parent.PlayerChunks.HitTest(Position, SightRadius))
             {
-                if (en is Player player && 
+                if (en is Player player &&
                     (player.Client.Account.Notifications || player.Equals(this)))
                 {
                     player.Client.Send(notification);
@@ -300,7 +323,7 @@ namespace RotMG.Game.Entities
             if (Parent.Name.Equals("Dreamland"))
                 return;
 #endif
-            if (Dead) 
+            if (Dead)
                 return;
 
             Client.Active = false;
@@ -326,18 +349,53 @@ namespace RotMG.Game.Entities
             int time;
             switch (GetMaxedStats())
             {
-                case 8: type = 0x0735; time = 600000; break;
-                case 7: type = 0x0734; time = 600000; break;
-                case 6: type = 0x072b; time = 600000; break;
-                case 5: type = 0x072a; time = 600000; break;
-                case 4: type = 0x0729; time = 600000; break;
-                case 3: type = 0x0728; time = 600000; break;
-                case 2: type = 0x0727; time = 600000; break;
-                case 1: type = 0x0726; time = 600000; break;
+                case 8:
+                    type = 0x0735;
+                    time = 600000;
+                    break;
+                case 7:
+                    type = 0x0734;
+                    time = 600000;
+                    break;
+                case 6:
+                    type = 0x072b;
+                    time = 600000;
+                    break;
+                case 5:
+                    type = 0x072a;
+                    time = 600000;
+                    break;
+                case 4:
+                    type = 0x0729;
+                    time = 600000;
+                    break;
+                case 3:
+                    type = 0x0728;
+                    time = 600000;
+                    break;
+                case 2:
+                    type = 0x0727;
+                    time = 600000;
+                    break;
+                case 1:
+                    type = 0x0726;
+                    time = 600000;
+                    break;
                 default:
-                    type = 0x0725; time = 300000;
-                    if (Level < 20) { type = 0x0724; time = 60000; }
-                    if (Level <= 1) { type = 0x0723; time = 30000; }
+                    type = 0x0725;
+                    time = 300000;
+                    if (Level < 20)
+                    {
+                        type = 0x0724;
+                        time = 60000;
+                    }
+
+                    if (Level <= 1)
+                    {
+                        type = 0x0723;
+                        time = 30000;
+                    }
+
                     break;
             }
 
@@ -346,10 +404,7 @@ namespace RotMG.Game.Entities
             Parent.AddEntity(grave, Position);
             Parent.RemoveEntity(this);
 
-            Manager.AddTimedAction(1500, () => 
-            {
-                Client.Disconnect();
-            });
+            Manager.AddTimedAction(1500, () => { Client.Disconnect(); });
         }
 
         public bool Damage(string hitter, int damage, ConditionEffectDesc[] effects, bool pierces)
@@ -403,7 +458,7 @@ namespace RotMG.Game.Entities
 
             if (Manager.TotalTime % 60000 == 0)
                 FameStats.MinutesActive++;
-            
+
             if (Manager.TotalTime % 5000 == 0)
                 GetNextQuest(false);
 
@@ -413,9 +468,10 @@ namespace RotMG.Game.Entities
         }
 
         private int _serverStartTime = -1;
-        private int _serverTime = -1;
+        private int _serverTime      = -1;
         private int _clientStartTime = -1;
-        private int _clientTime = -1;
+        private int _clientTime      = -1;
+
         public bool ValidTime(int clientTime)
         {
             var serverTime = Manager.TotalTimeUnsynced;

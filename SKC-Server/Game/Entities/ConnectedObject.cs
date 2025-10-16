@@ -4,12 +4,12 @@ namespace RotMG.Game.Entities
 {
     public class ConnectionBuilder
     {
-        public static int[] Dot = BuildConnections(0x02020202);
+        public static int[] Dot        = BuildConnections(0x02020202);
         public static int[] UShortLine = BuildConnections(0x01020202);
-        public static int[] L = BuildConnections(0x01010202);
-        public static int[] Line = BuildConnections(0x01020102);
-        public static int[] T = BuildConnections(0x01010201);
-        public static int[] Cross = BuildConnections(0x01010101);
+        public static int[] L          = BuildConnections(0x01010202);
+        public static int[] Line       = BuildConnections(0x01020102);
+        public static int[] T          = BuildConnections(0x01010201);
+        public static int[] Cross      = BuildConnections(0x01010101);
 
         public static int[] BuildConnections(uint bits)
         {
@@ -19,6 +19,7 @@ namespace RotMG.Game.Entities
                 connections[k] = (int)bits;
                 bits = (bits >> 8) | (bits << 24);
             }
+
             return connections;
         }
     }
@@ -27,7 +28,6 @@ namespace RotMG.Game.Entities
     {
         public ConnectedObject(ushort type) : base(type)
         {
-
         }
 
         public override ObjectDefinition GetObjectDefinition()
@@ -43,8 +43,8 @@ namespace RotMG.Game.Entities
             var nearby = new bool[3, 3];
 
             for (var y = -1; y <= 1; y++)
-                for (var x = -1; x <= 1; x++)
-                    nearby[x + 1, y + 1] = (Parent.GetTile(mx + x, my + y)?.StaticObject?.Type ?? -1) == Type;
+            for (var x = -1; x <= 1; x++)
+                nearby[x + 1, y + 1] = (Parent.GetTile(mx + x, my + y)?.StaticObject?.Type ?? -1) == Type;
 
             if (nearby[1, 0] && nearby[1, 2] && nearby[0, 1] && nearby[2, 1])
                 return ConnectionBuilder.Cross[0];

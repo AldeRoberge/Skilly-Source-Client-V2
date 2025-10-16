@@ -7,20 +7,21 @@ namespace RotMG.Game.Entities
 {
     public partial class Player
     {
-        private const float MinMoveSpeed = 0.004f;
-        private const float MaxMoveSpeed = 0.0096f;
+        private const float MinMoveSpeed  = 0.004f;
+        private const float MaxMoveSpeed  = 0.0096f;
         private const float MinAttackFreq = 0.0015f;
         private const float MaxAttackFreq = 0.008f;
         private const float MinAttackMult = 0.5f;
         private const float MaxAttackMult = 2f;
-        private const float MaxSinkLevel = 18f;
+        private const float MaxSinkLevel  = 18f;
 
-        public int[] Stats;
-        public int[] Boosts;
+        public int[]                        Stats;
+        public int[]                        Boosts;
         public Dictionary<StatType, object> PrivateSVs;
 
         private float _hpRegenCounter;
         private float _mpRegenCounter;
+
         public void TickRegens()
         {
             if (HasConditionEffect(ConditionEffectIndex.Bleeding))
@@ -68,7 +69,7 @@ namespace RotMG.Game.Entities
         {
             if (HasConditionEffect(ConditionEffectIndex.Paralyzed))
                 return 0;
-            
+
             if (HasConditionEffect(ConditionEffectIndex.Slowed))
                 return MinMoveSpeed * MoveMultiplier;
 
@@ -77,6 +78,7 @@ namespace RotMG.Game.Entities
             {
                 ret *= 1.5f;
             }
+
             ret *= MoveMultiplier;
             return ret;
         }
@@ -108,6 +110,7 @@ namespace RotMG.Game.Entities
             {
                 ret *= 1.5f;
             }
+
             return ret;
         }
 

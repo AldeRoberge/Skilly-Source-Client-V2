@@ -9,12 +9,12 @@ namespace RotMG.Game.Entities
 {
     public class AoeAck
     {
-        public int Damage;
+        public int                   Damage;
         public ConditionEffectDesc[] Effects;
-        public Vector2 Position;
-        public string Hitter;
-        public float Radius;
-        public int Time;
+        public Vector2               Position;
+        public string                Hitter;
+        public float                 Radius;
+        public int                   Time;
     }
 
     public struct ProjectileAck
@@ -26,7 +26,7 @@ namespace RotMG.Game.Entities
         };
 
         public Projectile Projectile;
-        public int Time;
+        public int        Time;
 
         public override bool Equals(object obj)
         {
@@ -45,23 +45,23 @@ namespace RotMG.Game.Entities
 
     public partial class Player
     {
-        private const int TimeUntilAckTimeout = 2000;
-        private const int TickProjectilesDelay = 2000;
-        private const float RateOfFireThreshold = 1.1f;
-        private const float EnemyHitRangeAllowance = 1.7f;
-        private const float EnemyHitTrackPrecision = 8;
-        private const int EnemyHitHistoryBacktrack = 2;
+        private const int   TimeUntilAckTimeout      = 2000;
+        private const int   TickProjectilesDelay     = 2000;
+        private const float RateOfFireThreshold      = 1.1f;
+        private const float EnemyHitRangeAllowance   = 1.7f;
+        private const float EnemyHitTrackPrecision   = 8;
+        private const int   EnemyHitHistoryBacktrack = 2;
 
-        public Queue<List<Projectile>> AwaitingProjectiles;
+        public Queue<List<Projectile>>        AwaitingProjectiles;
         public Dictionary<int, ProjectileAck> AckedProjectiles;
 
         public Queue<AoeAck> AwaitingAoes; //Doesn't really belong here... But Player.Aoe.cs???
 
         public Dictionary<int, Projectile> ShotProjectiles;
-        public int NextAEProjectileId = int.MinValue; //Goes up positively from bottom (Server sided projectiles)
-        public int NextProjectileId; //Goes down negatively (Client sided projectiles)
-        public int ShotTime;
-        public int ShotDuration;
+        public int                         NextAEProjectileId = int.MinValue; //Goes up positively from bottom (Server sided projectiles)
+        public int                         NextProjectileId; //Goes down negatively (Client sided projectiles)
+        public int                         ShotTime;
+        public int                         ShotDuration;
 
         public void TickProjectiles()
         {
@@ -133,6 +133,7 @@ namespace RotMG.Game.Entities
 #endif
                     return;
                 }
+
                 var elapsed = time - p.Time;
                 var steps = (int)Math.Ceiling(p.Desc.Speed / 100f * (elapsed * EnemyHitTrackPrecision / 1000f));
                 var timeStep = (float)elapsed / steps;
@@ -166,9 +167,9 @@ namespace RotMG.Game.Entities
                             }
                         }
 #if DEBUG
-                    Console.WriteLine(pos);
-                    Console.WriteLine(target);
-                    Program.Print(PrintType.Error, "Enemy hit aborted, too far away from projectile");
+                        Console.WriteLine(pos);
+                        Console.WriteLine(target);
+                        Program.Print(PrintType.Error, "Enemy hit aborted, too far away from projectile");
 #endif
                     }
                     else //Check collisions to make sure player isn't shooting through walls etc
@@ -224,7 +225,9 @@ namespace RotMG.Game.Entities
             var startId = NextProjectileId;
             NextProjectileId -= numShots;
 
-            var desc = ability ? GetItem(1) : GetItem(0);
+            var desc = ability ?
+                GetItem(1) :
+                GetItem(0);
             if (desc == null)
             {
 #if DEBUG
@@ -344,7 +347,8 @@ namespace RotMG.Game.Entities
                     continue;
                 }
             }
-            foreach (var p in AckedProjectiles.ToArray()) 
+
+            foreach (var p in AckedProjectiles.ToArray())
             {
                 var elapsed = time - p.Value.Time;
                 if (elapsed > p.Value.Projectile.Desc.LifetimeMS)
@@ -370,6 +374,7 @@ namespace RotMG.Game.Entities
 #endif
                             return true;
                         }
+
                         AckedProjectiles.Remove(p.Key);
 #if DEBUG
                         Program.Print(PrintType.Error, "Collided on server");
@@ -383,6 +388,7 @@ namespace RotMG.Game.Entities
 #endif
                 }
             }
+
             return false;
         }
 
@@ -407,9 +413,9 @@ namespace RotMG.Game.Entities
         public override bool HitByProjectile(Projectile projectile)
         {
             return Damage(Resources.Type2Object[projectile.Desc.ContainerType].DisplayId,
-                   projectile.Damage, 
-                   projectile.Desc.Effects, 
-                   projectile.Desc.ArmorPiercing);
+                projectile.Damage,
+                projectile.Desc.Effects,
+                projectile.Desc.ArmorPiercing);
         }
 
         public void AwaitProjectiles(List<Projectile> projectiles)

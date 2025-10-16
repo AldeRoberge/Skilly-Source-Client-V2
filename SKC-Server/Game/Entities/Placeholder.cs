@@ -4,7 +4,6 @@
     {
         public Placeholder(int? lifetime = null) : base(0x070f, lifetime)
         {
-
         }
     }
 }

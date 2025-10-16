@@ -40,7 +40,7 @@ namespace RotMG.Game.Entities
         {
             return true;
         }
-        
+
         public void Chat(string text)
         {
             if (text.Length <= 0 || text.Length > 128)
@@ -98,6 +98,7 @@ namespace RotMG.Game.Entities
                             account.Save();
                             SendInfo(account.Name + " has been banned");
                         }
+
                         break;
                     case "/unban":
                         if (Client.Account.Ranked)
@@ -107,13 +108,14 @@ namespace RotMG.Game.Entities
                                 SendError("Usage: /unban <name>");
                                 return;
                             }
-                            
+
                             if (!Database.AccountExists(j[0], out var account))
                                 SendError($"Player {j[0]} doesn't exist");
                             account.Banned = false;
                             account.Save();
                             SendInfo(account.Name + " has been unbanned");
                         }
+
                         break;
                     case "/mute":
                         if (Client.Account.Ranked)
@@ -130,6 +132,7 @@ namespace RotMG.Game.Entities
                             account.Save();
                             SendInfo(account.Name + " has been muted");
                         }
+
                         break;
                     case "/unmute":
                         if (Client.Account.Ranked)
@@ -146,6 +149,7 @@ namespace RotMG.Game.Entities
                             account.Save();
                             SendInfo(account.Name + " has been unmuted");
                         }
+
                         break;
                     case "/song":
                     case "/currentsong":
@@ -155,7 +159,7 @@ namespace RotMG.Game.Entities
                         if (Client.Account.Ranked)
                         {
                             var songs = Directory.EnumerateFiles(Resources
-                                .CombineResourcePath("Web/music/"), "*", SearchOption.AllDirectories)
+                                    .CombineResourcePath("Web/music/"), "*", SearchOption.AllDirectories)
                                 .Select(x =>
                                 {
                                     var s = x.Split("/").Last();
@@ -164,6 +168,7 @@ namespace RotMG.Game.Entities
                                 .Aggregate("Song choices: ", (c, p) => c + p + ", ");
                             SendInfo(songs.Substring(0, songs.Length - 2));
                         }
+
                         break;
                     case "/changesong":
                         if (Client.Account.Ranked)
@@ -188,6 +193,7 @@ namespace RotMG.Game.Entities
                                 player.Client.Send(GameServer.SwitchMusic(j[0]));
                             }
                         }
+
                         break;
                     case "/commands":
                         if (!Client.Account.Ranked)
@@ -195,6 +201,7 @@ namespace RotMG.Game.Entities
                             SendInfo(string.Join(", ", _unrankedCommands));
                             return;
                         }
+
                         SendInfo(string.Join(", ", _unrankedCommands.Concat(_rankedCommands)));
                         break;
                     case "/trade":
@@ -205,16 +212,18 @@ namespace RotMG.Game.Entities
                                 TradeRequest(PotentialPartner.Name);
                                 return;
                             }
-                            
+
                             SendError("No pending trades");
                             return;
                         }
+
                         var partner = Manager.GetPlayer(j[0]);
                         if (partner == null)
                         {
                             SendError("Player " + j[0] + " not found");
                             return;
                         }
+
                         TradeRequest(partner.Name);
                         break;
                     case "/announce":
@@ -226,10 +235,12 @@ namespace RotMG.Game.Entities
                                 SendError("Usage: /announce <message>");
                                 return;
                             }
+
                             var announce = GameServer.Text("", 0, -1, 0, "", "<ANNOUNCEMENT> " + input);
                             foreach (var client in Manager.Clients.Values)
                                 client.Send(announce);
                         }
+
                         break;
                     case "/g":
                     case "/guild":
@@ -238,13 +249,15 @@ namespace RotMG.Game.Entities
                             SendError("Not in a guild");
                             return;
                         }
+
                         var guild = GameServer.Text(Name, Id, NumStars, 5, "*Guild*", input);
-                        
+
                         foreach (var client in Manager.Clients.Values)
                         {
                             if (client.Account.GuildName == Client.Account.GuildName)
                                 client.Send(guild);
                         }
+
                         break;
                     case "/tell":
                         if (j.Length == 0 || string.IsNullOrEmpty(j[0]) || string.Equals(j[0], Client.Account.Name, StringComparison.CurrentCultureIgnoreCase))
@@ -270,6 +283,7 @@ namespace RotMG.Game.Entities
                                 SendError("Usage: /legendary <slot>");
                                 return;
                             }
+
                             var slot = int.Parse(j[0]);
                             if (Inventory[slot] != -1)
                             {
@@ -277,11 +291,14 @@ namespace RotMG.Game.Entities
                                 var roll = Resources.Type2Item[(ushort)i].Roll();
                                 while ((roll.Item2 & ItemData.T7) == 0)
                                     roll = Resources.Type2Item[(ushort)i].Roll();
-                                ItemDatas[slot] = !roll.Item1 ? -1 : (int)roll.Item2;
+                                ItemDatas[slot] = !roll.Item1 ?
+                                    -1 :
+                                    (int)roll.Item2;
                                 UpdateInventorySlot(slot);
                                 RecalculateEquipBonuses();
                             }
                         }
+
                         break;
                     case "/roll":
                         if (Client.Account.Ranked)
@@ -292,12 +309,15 @@ namespace RotMG.Game.Entities
                                 {
                                     var roll = Resources.Type2Item[(ushort)Inventory[k]].Roll();
                                     var i = Inventory[k];
-                                    ItemDatas[k] = !roll.Item1 ? -1 : (int)roll.Item2;
+                                    ItemDatas[k] = !roll.Item1 ?
+                                        -1 :
+                                        (int)roll.Item2;
                                     UpdateInventorySlot(k);
                                     RecalculateEquipBonuses();
                                 }
                             }
                         }
+
                         break;
                     case "/disconnect":
                     case "/dcAll":
@@ -306,10 +326,16 @@ namespace RotMG.Game.Entities
                         {
                             foreach (var c in Manager.Clients.Values.ToArray())
                             {
-                                try { c.Disconnect(); }
-                                catch { }
+                                try
+                                {
+                                    c.Disconnect();
+                                }
+                                catch
+                                {
+                                }
                             }
                         }
+
                         break;
                     case "/terminate":
                     case "/stop":
@@ -318,6 +344,7 @@ namespace RotMG.Game.Entities
                             Program.StartTerminating();
                             return;
                         }
+
                         break;
                     case "/gimme":
                     case "/give":
@@ -328,6 +355,7 @@ namespace RotMG.Game.Entities
                                 SendError("Usage: /give <item name>");
                                 return;
                             }
+
                             if (Resources.IdLower2Item.TryGetValue(input.ToLower(), out var item))
                             {
                                 if (GiveItem(item.Type))
@@ -336,6 +364,7 @@ namespace RotMG.Game.Entities
                             }
                             else SendError($"Item <{input}> not found in GameData");
                         }
+
                         break;
                     case "/gift":
                         if (Client.Account.Ranked)
@@ -372,6 +401,7 @@ namespace RotMG.Game.Entities
 
                             (Parent as Realm).Close();
                         }
+
                         break;
                     case "/rank":
                         if (Client.Account.Ranked)
@@ -381,6 +411,7 @@ namespace RotMG.Game.Entities
                                 SendError("Usage: /rank <player>");
                                 return;
                             }
+
                             if (Database.AccountExists(j[0], out var acc))
                             {
                                 acc.Ranked = true;
@@ -389,6 +420,7 @@ namespace RotMG.Game.Entities
                             }
                             else SendError($"Player <{j[0]}> doesn't exist");
                         }
+
                         break;
                     case "/create":
                     case "/spawn":
@@ -404,7 +436,9 @@ namespace RotMG.Game.Entities
                             if (!int.TryParse(j[0], out spawnCount))
                                 spawnCount = -1;
                             if (Resources.IdLower2Object.TryGetValue(
-                                (spawnCount == -1 ? input : string.Join(' ', j.Skip(1))).ToLower(), out var desc))
+                                    (spawnCount == -1 ?
+                                        input :
+                                        string.Join(' ', j.Skip(1))).ToLower(), out var desc))
                             {
                                 if (spawnCount == -1) spawnCount = 1;
                                 if (desc.Player || desc.Static)
@@ -429,6 +463,7 @@ namespace RotMG.Game.Entities
                                 SendError($"Entity <{input}> not found in Game Data");
                             }
                         }
+
                         break;
                     case "/killall":
                         if (Client.Account.Ranked)
@@ -445,6 +480,7 @@ namespace RotMG.Game.Entities
 
                             SendInfo($"Killed {count} entities");
                         }
+
                         break;
                     case "/setpiece":
                         if (Client.Account.Ranked)
@@ -468,7 +504,7 @@ namespace RotMG.Game.Entities
 
                             try
                             {
-                                var setPiece = (ISetPiece) Activator.CreateInstance(System.Type.GetType(
+                                var setPiece = (ISetPiece)Activator.CreateInstance(System.Type.GetType(
                                     "RotMG.Game.SetPieces." + input, true, true));
                                 setPiece?.RenderSetPiece(Parent, (Position + 1).ToIntPoint());
                             }
@@ -477,6 +513,7 @@ namespace RotMG.Game.Entities
                                 SendError("Invalid SetPiece");
                             }
                         }
+
                         break;
                     case "/max":
                         if (Client.Account.Ranked)
@@ -486,6 +523,7 @@ namespace RotMG.Game.Entities
                             UpdateStats();
                             SendInfo("Maxed");
                         }
+
                         break;
                     case "/tq":
                         if (Client.Account.Ranked)
@@ -504,7 +542,9 @@ namespace RotMG.Game.Entities
                         if (Client.Account.Ranked)
                         {
                             ApplyConditionEffect(ConditionEffectIndex.Invincible,
-                                HasConditionEffect(ConditionEffectIndex.Invincible) ? 0 : -1);
+                                HasConditionEffect(ConditionEffectIndex.Invincible) ?
+                                    0 :
+                                    -1);
                             SendInfo($"Godmode set to {HasConditionEffect(ConditionEffectIndex.Invincible)}");
                         }
 
@@ -513,7 +553,6 @@ namespace RotMG.Game.Entities
                     case "/effect":
                         if (Client.Account.Ranked)
                         {
-
                             if (string.IsNullOrWhiteSpace(input))
                             {
                                 SendError("Invalid effect");
@@ -523,7 +562,7 @@ namespace RotMG.Game.Entities
                             ConditionEffectIndex eff;
                             if (int.TryParse(input, out var effect))
                             {
-                                eff = (ConditionEffectIndex) effect;
+                                eff = (ConditionEffectIndex)effect;
                             }
                             else if (!Enum.TryParse(input, true, out eff))
                             {
@@ -569,8 +608,8 @@ namespace RotMG.Game.Entities
                     case "/online":
                     case "/who":
                         SendInfo($"" +
-                            $"<{Manager.Clients.Values.Count(k => k.Player != null)} Player(s)> " +
-                            $"<{string.Join(", ", Manager.Clients.Values.Where(k => k.Player != null).Select(k => k.Player.Name))}>");
+                                 $"<{Manager.Clients.Values.Count(k => k.Player != null)} Player(s)> " +
+                                 $"<{string.Join(", ", Manager.Clients.Values.Where(k => k.Player != null).Select(k => k.Player.Name))}>");
                         break;
                     case "/server":
                     case "/pos":
@@ -599,11 +638,13 @@ namespace RotMG.Game.Entities
                                 realmIds.Remove(id);
                             }
                         }
+
                         if (realm == null)
                         {
                             SendInfo("No available realms");
                             return;
                         }
+
                         Client.Send(GameServer.Reconnect(realm.Id));
                         break;
                     case "/fame":
@@ -647,6 +688,7 @@ namespace RotMG.Game.Entities
                         SendError("Unknown command");
                         break;
                 }
+
                 return;
             }
 
@@ -656,7 +698,9 @@ namespace RotMG.Game.Entities
                 return;
             }
 
-            var name = Client.Account.Ranked ? "@" + Name : Name;
+            var name = Client.Account.Ranked ?
+                "@" + Name :
+                Name;
             var packet = GameServer.Text(name, Id, NumStars, 5, "", validText);
 
             foreach (var player in Parent.Players.Values)

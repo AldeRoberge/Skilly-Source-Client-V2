@@ -14,16 +14,16 @@ namespace RotMG.Game.Entities
             Canceled,
             Error
         }
-        
+
         private const int TradeCooldown = 3000;
-        
-        public Player TradePartner;
-        public Player PotentialPartner;
+
+        public Player       TradePartner;
+        public Player       PotentialPartner;
         public HashSet<int> TradedWith;
         public HashSet<int> PendingTrades;
-        public bool[] Trade;
-        public bool TradeAccepted;
-        public int NextTradeTime;
+        public bool[]       Trade;
+        public bool         TradeAccepted;
+        public int          NextTradeTime;
 
         public void TradeRequest(string name)
         {
@@ -62,9 +62,10 @@ namespace RotMG.Game.Entities
                 partner.PotentialPartner = this;
                 if (!PendingTrades.Contains(partner.AccountId))
                 {
-                    Manager.AddTimedAction(20000, () => {TradeTimeout(partner);});
+                    Manager.AddTimedAction(20000, () => { TradeTimeout(partner); });
                     PendingTrades.Add(partner.AccountId);
                 }
+
                 partner.Client.Send(GameServer.TradeRequested(Name));
                 SendInfo($"Trade request sent to {partner.Name}");
             }
@@ -80,7 +81,7 @@ namespace RotMG.Game.Entities
                 partner.TradeAccepted = false;
                 partner.PotentialPartner = null;
                 partner.TradedWith.Add(AccountId);
-                
+
                 var myItems = new TradeItem[12];
                 var theirItems = new TradeItem[12];
                 for (var i = 0; i < 12; i++)
@@ -92,7 +93,7 @@ namespace RotMG.Game.Entities
                         SlotType = Resources.Type2Player[Type].SlotTypes[i],
                         Included = false,
                         Tradeable = Inventory[i] != -1 && i >= 4 &&
-                                    !Resources.Type2Item[(ushort) Inventory[i]].Soulbound &&
+                                    !Resources.Type2Item[(ushort)Inventory[i]].Soulbound &&
                                     Client.Account.Ranked == TradePartner.Client.Account.Ranked
                     };
 
@@ -103,11 +104,11 @@ namespace RotMG.Game.Entities
                         SlotType = Resources.Type2Player[partner.Type].SlotTypes[i],
                         Included = false,
                         Tradeable = partner.Inventory[i] != -1 && i >= 4 &&
-                                    !Resources.Type2Item[(ushort) partner.Inventory[i]].Soulbound &&
+                                    !Resources.Type2Item[(ushort)partner.Inventory[i]].Soulbound &&
                                     Client.Account.Ranked == TradePartner.Client.Account.Ranked
                     };
                 }
-                
+
                 Client.Send(GameServer.TradeStart(partner.Name, myItems, theirItems));
                 partner.Client.Send(GameServer.TradeStart(Name, theirItems, myItems));
             }
@@ -129,7 +130,7 @@ namespace RotMG.Game.Entities
                 SendError("Too early to accept trade");
                 return;
             }
-            
+
             if (TradeAccepted)
             {
 #if DEBUG
@@ -165,7 +166,7 @@ namespace RotMG.Game.Entities
                 if (mySelectedTotal > TradePartner.GetTotalFreeInventorySlots() + theirSelectedTotal ||
                     theirSelectedTotal > GetTotalFreeInventorySlots() + mySelectedTotal)
                     return;
-                
+
                 TradeAccepted = true;
                 TradePartner.Client.Send(GameServer.TradeAccepted(theirOffer, myOffer));
 
@@ -250,12 +251,13 @@ namespace RotMG.Game.Entities
                     }
                 }
             }
+
             UpdateInventory();
             TradePartner.UpdateInventory();
-            
+
             SaveToCharacter();
             TradePartner.SaveToCharacter();
-            
+
             TradeDone(TradeResult.Successful);
         }
 
@@ -275,7 +277,7 @@ namespace RotMG.Game.Entities
             TradePartner.TradeAccepted = false;
             Trade = newOffer;
             NextTradeTime = Manager.TotalTime + TradeCooldown;
-            
+
             TradePartner.Client.Send(GameServer.TradeChanged(Trade));
 
             if (triedSoulbound)
@@ -297,7 +299,7 @@ namespace RotMG.Game.Entities
             var hadSoulbound = false;
             for (var i = 0; i < trade.Length; i++)
             {
-                if (trade[i] && Resources.Type2Item[(ushort) player.Inventory[i]].Soulbound)
+                if (trade[i] && Resources.Type2Item[(ushort)player.Inventory[i]].Soulbound)
                 {
                     hadSoulbound = true;
                     trade[i] = false;

@@ -8,22 +8,22 @@ namespace RotMG.Common
 {
     public struct FameStats
     {
-        public int BaseFame;
-        public int TotalFame;
+        public int             BaseFame;
+        public int             TotalFame;
         public List<FameBonus> Bonuses;
     }
 
     public struct FameBonus
     {
         public string Name;
-        public int Fame;
+        public int    Fame;
     }
 
     public struct TileData
     {
         public ushort TileType;
-        public short X;
-        public short Y;
+        public short  X;
+        public short  Y;
 
         public void Write(PacketWriter wtr)
         {
@@ -35,7 +35,7 @@ namespace RotMG.Common
 
     public struct ObjectDrop
     {
-        public int Id;
+        public int  Id;
         public bool Explode;
 
         public void Write(PacketWriter wtr)
@@ -47,7 +47,7 @@ namespace RotMG.Common
 
     public struct ObjectDefinition
     {
-        public ushort ObjectType;
+        public ushort       ObjectType;
         public ObjectStatus ObjectStatus;
 
         public void Write(PacketWriter wtr)
@@ -59,8 +59,8 @@ namespace RotMG.Common
 
     public struct ObjectStatus
     {
-        public int Id;
-        public Vector2 Position;
+        public int                          Id;
+        public Vector2                      Position;
         public Dictionary<StatType, object> Stats;
 
         public void Write(PacketWriter wtr)
@@ -74,7 +74,7 @@ namespace RotMG.Common
                 wtr.Write((byte)k.Key);
                 if (IsStringStat(k.Key))
                     wtr.Write((string)k.Value);
-                else 
+                else
                     wtr.Write((int)k.Value);
             }
         }
@@ -87,6 +87,7 @@ namespace RotMG.Common
                 case StatType.GuildName:
                     return true;
             }
+
             return false;
         }
     }
@@ -100,12 +101,14 @@ namespace RotMG.Common
         public static bool operator !=(IntPoint a, IntPoint b) => a.X != b.X || a.Y != b.Y;
 
         private bool Equals(IntPoint other) => X == other.X && Y == other.Y;
+
         public override bool Equals(object obj)
         {
             if (obj is IntPoint p)
             {
                 return Equals(p);
             }
+
             return false;
         }
 
@@ -128,11 +131,11 @@ namespace RotMG.Common
 
     public struct TradeItem
     {
-        public int Item;
-        public int ItemData;
+        public int      Item;
+        public int      ItemData;
         public ItemType SlotType;
-        public bool Tradeable;
-        public bool Included;
+        public bool     Tradeable;
+        public bool     Included;
 
         public void Write(PacketWriter wtr)
         {
@@ -213,7 +216,7 @@ namespace RotMG.Common
             value1.Y -= value2.Y;
             return value1;
         }
-        
+
         public static Vector2 operator -(Vector2 value1, float value2)
         {
             value1.X += value2;
@@ -297,7 +300,7 @@ namespace RotMG.Common
             result.X = value.X * val;
             result.Y = value.Y * val;
         }
-        
+
         public float Length()
         {
             return MathF.Sqrt((X * X) + (Y * Y));

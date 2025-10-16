@@ -17,13 +17,14 @@ namespace RotMG.Common
     //XML/Text files combined storage system
     public static class Database
     {
-        private const int MaxLegends = 20;
+        private const int MaxLegends                    = 20;
         private const int MinFameRequiredToEnterLegends = 0;
+
         private static readonly Dictionary<string, TimeSpan> TimeSpans = new()
         {
-            {"week", TimeSpan.FromDays(7) },
-            {"month", TimeSpan.FromDays(30) },
-            {"all", TimeSpan.MaxValue }
+            { "week", TimeSpan.FromDays(7) },
+            { "month", TimeSpan.FromDays(30) },
+            { "all", TimeSpan.MaxValue }
         };
 
         private static readonly Dictionary<string, XElement> FameLists = new()
@@ -35,17 +36,17 @@ namespace RotMG.Common
 
         private static readonly HashSet<int> Legends = [];
 
-        private const int MaxInvalidLoginAttempts = 5;
+        private const  int                      MaxInvalidLoginAttempts = 5;
         private static Dictionary<string, byte> InvalidLoginAttempts;
 
-        private const int MaxRegisteredAccounts = 1;
+        private const  int                      MaxRegisteredAccounts = 1;
         private static Dictionary<string, byte> RegisteredAccounts;
 
-        private const int ResetCooldown = 60000 * 5; //5 minutes
+        private const  int ResetCooldown = 60000 * 5; //5 minutes
         private static int ResetTime;
 
         private const int CharSlotPrice = 2000; //Fame
-        private const int SkinPrice = 1000; //Credits
+        private const int SkinPrice     = 1000; //Credits
 
         public static void Init()
         {
@@ -151,9 +152,9 @@ namespace RotMG.Common
 
         public static AccountModel GuestAccount()
         {
-            return new AccountModel() 
+            return new AccountModel()
             {
-                MaxNumChars = 1, 
+                MaxNumChars = 1,
                 Stats = new StatsInfo() { ClassStats = [] },
                 AliveChars = [],
                 DeadChars = [],
@@ -172,6 +173,7 @@ namespace RotMG.Common
                     if (classStat.BestFame >= Player.Stars[i])
                         stars++;
                 }
+
             return stars;
         }
 
@@ -192,13 +194,17 @@ namespace RotMG.Common
         public static int IdFromUsername(string username)
         {
             var value = GetKey($"login.username.{username}");
-            return string.IsNullOrWhiteSpace(value) ? -1 : int.Parse(value);
+            return string.IsNullOrWhiteSpace(value) ?
+                -1 :
+                int.Parse(value);
         }
 
         public static string UsernameFromId(int id)
         {
             var value = GetKey($"login.id.{id}");
-            return string.IsNullOrWhiteSpace(value) ? null : value;
+            return string.IsNullOrWhiteSpace(value) ?
+                null :
+                value;
         }
 
         public static bool AccountExists(string username, out AccountModel acc)
@@ -227,21 +233,21 @@ namespace RotMG.Common
         public static GuildCreateStatus CreateGuild(string guildName, out GuildModel guild)
         {
             guild = null;
-            
+
             if (string.IsNullOrWhiteSpace(guildName))
                 return GuildCreateStatus.InvalidName;
-            
+
             var rgx = new Regex(@"\s+");
             guildName = rgx.Replace(guildName, " ");
             guildName = guildName.Trim();
-            
+
             rgx = new Regex(@"^[A-Za-z\s]{1,20}$");
             if (!rgx.IsMatch(guildName))
                 return GuildCreateStatus.InvalidName;
 
             if (GetKeyLines("guilds", true).Contains(guildName.ToUpperInvariant()))
                 return GuildCreateStatus.UsedName;
-            
+
             guild = new GuildModel(guildName)
             {
                 Level = 0,
@@ -254,7 +260,7 @@ namespace RotMG.Common
             var guilds = GetKeyLines("guilds", true).ToList();
             guilds.Add(guildName.ToUpperInvariant());
             SetKeyLines("guilds", guilds.ToArray(), true);
-            
+
             guild.Save();
             return GuildCreateStatus.Success;
         }
@@ -280,12 +286,14 @@ namespace RotMG.Common
 
             if (guild.Members.Contains(acc.Id))
                 return AddGuildMemberStatus.IsAMember;
-            
+
             guild.Members.Add(acc.Id);
             guild.Save();
 
             acc.GuildName = guild.Name;
-            acc.GuildRank = founder ? 40 : 0;
+            acc.GuildRank = founder ?
+                40 :
+                0;
             acc.GuildFame = 0;
             acc.Save();
             return AddGuildMemberStatus.Success;
@@ -297,7 +305,7 @@ namespace RotMG.Common
 
             if (guild == null)
                 return false;
-            
+
             guild.Members.Remove(account.Id);
             guild.Save();
 
@@ -431,6 +439,7 @@ namespace RotMG.Common
                 acc.Connected = false;
                 acc.Save();
             }
+
             return accountInUse;
         }
 
@@ -448,7 +457,9 @@ namespace RotMG.Common
             var hash = GetKey($"login.hash.{id}");
             var match = (password + GetKey($"login.salt.{id}")).ToSHA1();
 
-            var acc = hash.Equals(match) ? new AccountModel(id) : null;
+            var acc = hash.Equals(match) ?
+                new AccountModel(id) :
+                null;
             if (acc == null) AddInvalidLoginAttempt(ip);
             return acc;
         }
@@ -469,7 +480,7 @@ namespace RotMG.Common
             return true;
         }
 
-        public static bool ChangePassword(AccountModel acc, string newPassword) 
+        public static bool ChangePassword(AccountModel acc, string newPassword)
         {
 #if DEBUG
             if (acc == null)
@@ -523,9 +534,10 @@ namespace RotMG.Common
             var news = new XElement("News");
             foreach (var item in Resources.News)
             {
-                if (++newsCount > maxNews)  break;
+                if (++newsCount > maxNews) break;
                 news.Add(item);
             }
+
             foreach (var d in acc.DeadChars)
             {
                 if (++newsCount > maxNews) break;
@@ -537,6 +549,7 @@ namespace RotMG.Common
                     new XElement("Link", $"fame:{character.Id}"),
                     new XElement("Date", character.DeathTime)));
             }
+
             return news;
         }
 
@@ -610,6 +623,7 @@ namespace RotMG.Common
                 acc.GuildFame += totalFame;
                 guild.Save();
             }
+
             acc.Save();
 
             if (character.Fame >= MinFameRequiredToEnterLegends && !acc.Ranked)
@@ -627,7 +641,8 @@ namespace RotMG.Common
             {
                 BaseFame = baseFame,
                 Bonuses = []
-            }; var classStats = acc.Stats.GetClassStats(character.ClassType);
+            };
+            var classStats = acc.Stats.GetClassStats(character.ClassType);
 
             //Ancestor
             if (acc.Stats.GetClassStats(character.ClassType).BestLevel == 0)
@@ -885,6 +900,7 @@ namespace RotMG.Common
                     wellEquipped += Resources.Type2Item[(ushort)character.Inventory[k]].FameBonus;
                     wellEquipped += (int)ItemDesc.GetStat(character.ItemDatas[k], ItemData.FameBonus, 1);
                 }
+
             if (wellEquipped > 0)
             {
                 var bonus = (int)(baseFame * (wellEquipped / 100.0f));
@@ -928,21 +944,22 @@ namespace RotMG.Common
 
                     list.Add(
                         new XElement("FameListElem",
-                        new XAttribute("accountId", accId),
-                        new XAttribute("charId", charId),
-                        new XElement("Name", acc.Name),
-                        new XElement("ObjectType", character.ClassType),
-                        new XElement("Tex1", character.Tex1),
-                        new XElement("Tex2", character.Tex2),
-                        new XElement("Texture", character.SkinType),
-                        new XElement("Equipment", string.Join(",", character.Inventory)),
-                        new XElement("ItemDatas", string.Join(",", character.ItemDatas)),
-                        new XElement("TotalFame", totalFame)));
+                            new XAttribute("accountId", accId),
+                            new XAttribute("charId", charId),
+                            new XElement("Name", acc.Name),
+                            new XElement("ObjectType", character.ClassType),
+                            new XElement("Tex1", character.Tex1),
+                            new XElement("Tex2", character.Tex2),
+                            new XElement("Texture", character.SkinType),
+                            new XElement("Equipment", string.Join(",", character.Inventory)),
+                            new XElement("ItemDatas", string.Join(",", character.ItemDatas)),
+                            new XElement("TotalFame", totalFame)));
                     Legends.Add(accId);
                 }
 
                 FameLists[span.Key] = list
-;            }
+                    ;
+            }
         }
 
         public static void PushLegend(int accId, int charId, int totalFame, int deathTime)
@@ -960,6 +977,7 @@ namespace RotMG.Common
 
                 SetKeyLines($"legends.{span.Key}", legends.ToArray(), true);
             }
+
             FlushLegends();
         }
 
@@ -983,7 +1001,7 @@ namespace RotMG.Common
         public static ClassStatsInfo[] CreateClassStats()
         {
             var classStats = new List<ClassStatsInfo>();
-            foreach (var player in Resources.Type2Player.Values) 
+            foreach (var player in Resources.Type2Player.Values)
             {
                 classStats.Add(new ClassStatsInfo
                 {
@@ -992,6 +1010,7 @@ namespace RotMG.Common
                     ObjectType = player.Type
                 });
             }
+
             return classStats.ToArray();
         }
 
@@ -1001,7 +1020,7 @@ namespace RotMG.Common
 
             var vault = new VaultChestModel(acc.Id, acc.VaultCount++)
             {
-                Inventory = new int[8], 
+                Inventory = new int[8],
                 ItemDatas = new int[8]
             };
             for (var i = 0; i < 8; i++)
@@ -1026,6 +1045,7 @@ namespace RotMG.Common
                     acc.Stats.Fame += amount;
                     break;
             }
+
             acc.Save();
         }
 

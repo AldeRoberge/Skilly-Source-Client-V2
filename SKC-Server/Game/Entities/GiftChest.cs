@@ -6,7 +6,7 @@ namespace RotMG.Game.Entities
 {
     public class GiftChest : OneWayContainer
     {
-        public GiftChest(List<int> items, AccountModel owner) 
+        public GiftChest(List<int> items, AccountModel owner)
             : base(items, 0x0744, -1, null)
         {
         }
@@ -19,6 +19,7 @@ namespace RotMG.Game.Entities
                 if (item != -1)
                     return;
             }
+
             var closedChest = new Entity(0x0743);
             Parent.AddEntity(closedChest, Position);
             Parent.RemoveEntity(this);

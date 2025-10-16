@@ -8,7 +8,7 @@ namespace RotMG.Game.Entities
     {
         private const int DecoyMoveTime = 1600;
 
-        public int Duration;
+        public int     Duration;
         public Vector2 Direction;
 
         public Decoy(Player player, float angle, int duration) : base(0x0715, duration)

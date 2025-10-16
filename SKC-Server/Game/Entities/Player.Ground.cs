@@ -9,17 +9,17 @@ namespace RotMG.Game.Entities
     public partial class Player
     {
         private const float MoveSpeedThreshold = 1.1f;
-        private const int TeleportCooldown = 10000;
-        private const int SpeedHistoryCount = 3; //in world ticks (10 = 1 sec history), the lower the count, the stricter the detection
+        private const int   TeleportCooldown   = 10000;
+        private const int   SpeedHistoryCount  = 3; //in world ticks (10 = 1 sec history), the lower the count, the stricter the detection
 
-        public float MoveMultiplier = 1f;
-        public int MoveTime;
-        public int AwaitingMoves;
-        public Queue<int> AwaitingGoto;
+        public float       MoveMultiplier = 1f;
+        public int         MoveTime;
+        public int         AwaitingMoves;
+        public Queue<int>  AwaitingGoto;
         public List<float> SpeedHistory;
-        public float PushX;
-        public float PushY;
-        public int NextTeleportTime;
+        public float       PushX;
+        public float       PushY;
+        public int         NextTeleportTime;
 
         public void PushSpeedToHistory(float speed)
         {
@@ -36,6 +36,7 @@ namespace RotMG.Game.Entities
                 if (SpeedHistory[i] > ret)
                     ret = SpeedHistory[i];
             }
+
             return ret;
         }
 
@@ -52,6 +53,7 @@ namespace RotMG.Game.Entities
 #endif
                 return false;
             }
+
             return true;
         }
 
@@ -108,7 +110,7 @@ namespace RotMG.Game.Entities
                 return;
             }
 
-            var tile = Parent.Tiles[(int) pos.X, (int) pos.Y];
+            var tile = Parent.Tiles[(int)pos.X, (int)pos.Y];
             var desc = Resources.Type2Tile[tile.Type];
             if (desc.Damage > 0 && !HasConditionEffect(ConditionEffectIndex.Invincible))
             {
@@ -134,7 +136,7 @@ namespace RotMG.Game.Entities
 
             MoveMultiplier = GetMoveMultiplier();
             MoveTime = time;
-            
+
             PushSpeedToHistory(GetMovementSpeed()); //Add a new entry
         }
 
@@ -183,7 +185,7 @@ namespace RotMG.Game.Entities
                 SendError("Target does not exist");
                 return false;
             }
-            
+
             if (force)
             {
                 Teleport(time, en.Position);
@@ -215,7 +217,7 @@ namespace RotMG.Game.Entities
             if (itemTp)
             {
                 var tile = Parent.GetTileF(pos.X, pos.Y);
-                if (tile == null || TileUpdates[(int) pos.X, (int) pos.Y] != tile.UpdateCount)
+                if (tile == null || TileUpdates[(int)pos.X, (int)pos.Y] != tile.UpdateCount)
                     return false;
             }
 

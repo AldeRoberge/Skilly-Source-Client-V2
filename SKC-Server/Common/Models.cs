@@ -47,9 +47,9 @@ namespace RotMG.Common
 
     public class VaultChestModel : DatabaseModel
     {
-        public readonly int Id;
-        public int[] Inventory;
-        public int[] ItemDatas;
+        public readonly int   Id;
+        public          int[] Inventory;
+        public          int[] ItemDatas;
 
         public VaultChestModel(int accountId, int key) : base($"vault.{accountId}.{key}")
         {
@@ -73,31 +73,31 @@ namespace RotMG.Common
 
     public class CharacterModel : DatabaseModel
     {
-        public readonly int Id;
-        public int Experience;
-        public int Level;
-        public int ClassType;
-        public int HP;
-        public int MP;
-        public int[] Stats;
-        public int[] Inventory;
-        public int[] ItemDatas;
-        public int Fame;
-        public int Tex1;
-        public int Tex2;
-        public int SkinType;
-        public int HealthPotions;
-        public int MagicPotions;
-        public int CreationTime;
-        public bool Deleted;
-        public bool Dead;
-        public int DeathFame;
-        public int DeathTime;
-        public bool HasBackpack;
-        public FameStatsInfo FameStats;
-        public int PetId;
+        public readonly int           Id;
+        public          int           Experience;
+        public          int           Level;
+        public          int           ClassType;
+        public          int           HP;
+        public          int           MP;
+        public          int[]         Stats;
+        public          int[]         Inventory;
+        public          int[]         ItemDatas;
+        public          int           Fame;
+        public          int           Tex1;
+        public          int           Tex2;
+        public          int           SkinType;
+        public          int           HealthPotions;
+        public          int           MagicPotions;
+        public          int           CreationTime;
+        public          bool          Deleted;
+        public          bool          Dead;
+        public          int           DeathFame;
+        public          int           DeathTime;
+        public          bool          HasBackpack;
+        public          FameStatsInfo FameStats;
+        public          int           PetId;
 
-        public CharacterModel(int accountId, int key) : base($"char.{accountId}.{key}") 
+        public CharacterModel(int accountId, int key) : base($"char.{accountId}.{key}")
         {
             Id = key;
         }
@@ -203,6 +203,7 @@ namespace RotMG.Common
                 data.Add(new XElement("PetId", PetId));
                 data.Add(FameStats.Export(appExport));
             }
+
             return data;
         }
     }
@@ -245,7 +246,10 @@ namespace RotMG.Common
         public int SpriteWorldsCompleted;
         public int TombsCompleted;
 
-        public FameStatsInfo() { }
+        public FameStatsInfo()
+        {
+        }
+
         public FameStatsInfo(XElement data)
         {
             Shots = data.ParseInt("Shots");
@@ -359,12 +363,12 @@ namespace RotMG.Common
     public class GuildModel : DatabaseModel
     {
         public readonly string Name;
-        
-        public int Level;
-        public int Fame;
-        public int TotalFame;
+
+        public int       Level;
+        public int       Fame;
+        public int       TotalFame;
         public List<int> Members;
-        public string BoardMessage;
+        public string    BoardMessage;
 
         public GuildModel(string name) : base($"guild.{name}")
         {
@@ -390,11 +394,12 @@ namespace RotMG.Common
                 data.Add(new XElement("CurrentFame", Fame));
                 data.Add(new XElement("HallType", "Guild Hall " + Level));
                 foreach (var member in from i in Members
-                        select new AccountModel(i) into acc
-                        orderby acc.GuildRank descending, 
-                                acc.GuildFame descending, 
-                                acc.Name
-                        select acc)
+                         select new AccountModel(i)
+                         into acc
+                         orderby acc.GuildRank descending,
+                             acc.GuildFame descending,
+                             acc.Name
+                         select acc)
                 {
                     data.Add(new XElement("Member",
                         new XElement("Name", member.Name),
@@ -410,6 +415,7 @@ namespace RotMG.Common
                 data.Add(new XElement("Members", string.Join(",", Members)));
                 data.Add(new XElement("BoardMessage", BoardMessage));
             }
+
             return data;
         }
     }
@@ -418,35 +424,38 @@ namespace RotMG.Common
     {
         public const int MaxDeadCharsStored = 20;
 
-        public readonly int Id; //Taken from database.
+        public readonly int    Id; //Taken from database.
         public readonly string Name; //Taken from database.
 
-        public int NextCharId;
-        public int MaxNumChars;
-        public int VaultCount;
+        public int       NextCharId;
+        public int       MaxNumChars;
+        public int       VaultCount;
         public List<int> AliveChars;
         public List<int> DeadChars;
         public List<int> OwnedSkins;
-        public bool Ranked;
-        public bool Muted;
-        public bool Banned;
-        public string GuildName;
-        public int GuildRank;
-        public int GuildFame;
+        public bool      Ranked;
+        public bool      Muted;
+        public bool      Banned;
+        public string    GuildName;
+        public int       GuildRank;
+        public int       GuildFame;
         public StatsInfo Stats;
-        public bool Connected;
-        public int RegisterTime;
-        public int LastSeen;
+        public bool      Connected;
+        public int       RegisterTime;
+        public int       LastSeen;
         public List<int> LockedIds;
         public List<int> IgnoredIds;
-        public bool AllyShots;
-        public bool AllyDamage;
-        public bool Effects;
-        public bool Sounds;
-        public bool Notifications;
+        public bool      AllyShots;
+        public bool      AllyDamage;
+        public bool      Effects;
+        public bool      Sounds;
+        public bool      Notifications;
         public List<int> Gifts;
 
-        public AccountModel() : base(null) { }
+        public AccountModel() : base(null)
+        {
+        }
+
         public AccountModel(int key) : base($"account.{key}")
         {
             Id = key;
@@ -489,7 +498,7 @@ namespace RotMG.Common
             Sounds = Data.ParseBool("Sounds", true);
             Notifications = Data.ParseBool("Notifications", true);
             Gifts = Data.ParseIntList("Gifts", ",", new List<int>());
-            
+
 
             Stats = new StatsInfo
             {
@@ -510,6 +519,7 @@ namespace RotMG.Common
                     BestLevel = e.ParseInt("BestLevel")
                 });
             }
+
             Stats.ClassStats = classStats.ToArray();
         }
 
@@ -521,8 +531,8 @@ namespace RotMG.Common
             if (appExport)
             {
                 data.Add(new XElement("Name", Name));
-                data.Add(new XElement("Guild", 
-                    new XElement("Name", GuildName), 
+                data.Add(new XElement("Guild",
+                    new XElement("Name", GuildName),
                     new XElement("Rank", GuildRank)));
             }
             else
@@ -576,11 +586,11 @@ namespace RotMG.Common
 
     public class StatsInfo : IDatabaseInfo
     {
-        public int BestCharFame;
-        public int TotalFame;
-        public int Fame;
-        public int Credits;
-        public int TotalCredits;
+        public int              BestCharFame;
+        public int              TotalFame;
+        public int              Fame;
+        public int              Credits;
+        public int              TotalCredits;
         public ClassStatsInfo[] ClassStats;
 
         public XElement Export(bool appExport = true)
