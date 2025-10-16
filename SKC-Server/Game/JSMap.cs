@@ -1,12 +1,10 @@
 ﻿using Ionic.Zlib;
 using Newtonsoft.Json;
-using RotMG.Common;
-using RotMG.Networking;
 using System;
 using System.Collections.Generic;
 using System.IO;
 
-namespace RotMG.Game
+namespace SKC
 {
     public class JSMap : Map
     {

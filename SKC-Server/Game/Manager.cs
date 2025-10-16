@@ -1,15 +1,10 @@
-﻿using RotMG.Common;
-using RotMG.Game.Entities;
-using RotMG.Game.Logic;
-using RotMG.Networking;
-using RotMG.Utils;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using RotMG.Game.Worlds;
 
-namespace RotMG.Game
+
+namespace SKC
 {
     public static class Manager
     {

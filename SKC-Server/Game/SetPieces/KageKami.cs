@@ -1,6 +1,4 @@
-﻿using RotMG.Common;
-
-namespace RotMG.Game.SetPieces
+﻿namespace SKC
 {
     internal class KageKami : ISetPiece
     {

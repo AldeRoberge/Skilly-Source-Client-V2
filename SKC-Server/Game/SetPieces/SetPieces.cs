@@ -1,12 +1,9 @@
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using RotMG.Common;
-using RotMG.Game.Worlds;
-using RotMG.Utils;
 
-namespace RotMG.Game.SetPieces
+
+namespace SKC
 {
     public interface ISetPiece
     {

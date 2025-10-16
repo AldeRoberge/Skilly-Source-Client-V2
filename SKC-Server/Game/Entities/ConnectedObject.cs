@@ -1,6 +1,4 @@
-﻿using RotMG.Common;
-
-namespace RotMG.Game.Entities
+﻿namespace SKC
 {
     public class ConnectionBuilder
     {

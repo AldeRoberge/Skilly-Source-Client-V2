@@ -3,7 +3,7 @@ using System.IO;
 using System.Net;
 using System.Text;
 
-namespace RotMG.Networking
+namespace SKC
 {
     public class PacketWriter(Stream input) : BinaryWriter(input, Encoding.UTF8)
     {

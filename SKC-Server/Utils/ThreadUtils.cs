@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading;
 
-namespace RotMG.Utils
+namespace SKC
 {
     public static class ThreadUtils
     {

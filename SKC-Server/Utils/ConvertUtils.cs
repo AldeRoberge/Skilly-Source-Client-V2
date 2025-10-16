@@ -1,10 +1,9 @@
-﻿using RotMG.Common;
-using System;
+﻿using System;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace RotMG.Utils
+namespace SKC
 {
     public static class ConvertUtils
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace RotMG.Game.Logic
+namespace SKC
 {
     public class State : IBehavior
     {

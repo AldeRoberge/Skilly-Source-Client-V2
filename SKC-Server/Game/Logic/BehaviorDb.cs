@@ -1,11 +1,10 @@
-﻿using RotMG.Common;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using RotMG.Game.Logic.Loots;
 
-namespace RotMG.Game.Logic
+
+namespace SKC
 {
     public interface IBehavior
     {

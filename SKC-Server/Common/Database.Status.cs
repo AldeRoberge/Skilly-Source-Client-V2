@@ -1,4 +1,4 @@
-﻿namespace RotMG.Common
+﻿namespace SKC
 {
     public enum RegisterStatus
     {

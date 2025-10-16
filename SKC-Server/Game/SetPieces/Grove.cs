@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using RotMG.Common;
-using RotMG.Utils;
 
-namespace RotMG.Game.SetPieces
+
+namespace SKC
 {
     internal class Grove : ISetPiece
     {

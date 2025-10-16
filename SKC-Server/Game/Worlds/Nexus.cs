@@ -1,9 +1,7 @@
 using System.Collections.Generic;
-using RotMG.Common;
-using RotMG.Game.Entities;
-using RotMG.Utils;
 
-namespace RotMG.Game.Worlds
+
+namespace SKC
 {
     public sealed class Nexus : World
     {

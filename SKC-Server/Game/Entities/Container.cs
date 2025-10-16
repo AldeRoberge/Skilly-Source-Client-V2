@@ -1,7 +1,7 @@
 ﻿using System;
-using RotMG.Common;
 
-namespace RotMG.Game.Entities
+
+namespace SKC
 {
     public interface IContainer
     {

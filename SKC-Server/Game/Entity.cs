@@ -1,12 +1,12 @@
-﻿using RotMG.Common;
-using RotMG.Game.Entities;
-using RotMG.Game.Logic;
-using RotMG.Utils;
+﻿
+
+
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace RotMG.Game
+namespace SKC
 {
     public enum StatType
     {

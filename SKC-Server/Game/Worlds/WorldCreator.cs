@@ -1,9 +1,8 @@
 using System;
 using System.Linq;
-using RotMG.Common;
-using RotMG.Networking;
 
-namespace RotMG.Game.Worlds
+
+namespace SKC
 {
     public static class WorldCreator
     {

@@ -1,9 +1,8 @@
-﻿using RotMG.Common;
-using System.Collections.Specialized;
+﻿using System.Collections.Specialized;
 using System.Net;
 using System.Xml.Linq;
 
-namespace RotMG.Networking
+namespace SKC
 {
     public static partial class AppServer
     {

@@ -1,9 +1,7 @@
-using System.Collections.Generic;
 using System.Linq;
-using RotMG.Common;
-using RotMG.Utils;
 
-namespace RotMG.Game.Worlds
+
+namespace SKC
 {
     public class OryxCastle : World
     {

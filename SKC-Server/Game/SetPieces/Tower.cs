@@ -1,8 +1,4 @@
-﻿using System;
-using RotMG.Common;
-using RotMG.Utils;
-
-namespace RotMG.Game.SetPieces
+﻿namespace SKC
 {
     internal class Tower : ISetPiece
     {

@@ -1,9 +1,6 @@
-﻿using RotMG.Common;
-using RotMG.Networking;
-using RotMG.Utils;
-using System;
+﻿using System;
 
-namespace RotMG.Game.Entities
+namespace SKC
 {
     public class StaticObject(ushort type) : Entity(type)
     {

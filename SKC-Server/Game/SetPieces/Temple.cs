@@ -1,8 +1,4 @@
-﻿using RotMG.Common;
-using RotMG.Game.Logic;
-using RotMG.Game.Logic.Loots;
-
-namespace RotMG.Game.SetPieces
+﻿namespace SKC
 {
     internal abstract class Temple : ISetPiece
     {

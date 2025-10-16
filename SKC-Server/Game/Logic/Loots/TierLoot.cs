@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Linq;
-using RotMG.Common;
 
-namespace RotMG.Game.Logic.Loots
+
+namespace SKC
 {
     public class TierLoot : MobDrop
     {

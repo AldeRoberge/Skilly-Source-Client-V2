@@ -1,4 +1,4 @@
-﻿namespace RotMG.Game.Entities
+﻿namespace SKC
 {
     public class Placeholder : Entity
     {

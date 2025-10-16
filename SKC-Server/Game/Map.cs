@@ -1,8 +1,7 @@
 using System.Collections.Generic;
-using RotMG.Common;
-using RotMG.Game.Entities;
 
-namespace RotMG.Game
+
+namespace SKC
 {
     public enum Region
     {

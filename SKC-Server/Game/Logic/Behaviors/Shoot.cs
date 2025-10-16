@@ -1,11 +1,7 @@
-﻿using RotMG.Common;
-using RotMG.Game.Entities;
-using RotMG.Networking;
-using RotMG.Utils;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
-namespace RotMG.Game.Logic.Behaviors
+namespace SKC
 {
     public class Shoot : Behavior
     {

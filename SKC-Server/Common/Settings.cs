@@ -1,8 +1,7 @@
-﻿using RotMG.Utils;
-using System.IO;
+﻿using System.IO;
 using System.Xml.Linq;
 
-namespace RotMG.Common
+namespace SKC
 {
     public static class Settings
     {

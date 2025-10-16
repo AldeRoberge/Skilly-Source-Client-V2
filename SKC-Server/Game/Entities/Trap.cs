@@ -1,8 +1,4 @@
-﻿using RotMG.Common;
-using RotMG.Networking;
-using RotMG.Utils;
-
-namespace RotMG.Game.Entities
+﻿namespace SKC
 {
     public class Trap : Entity
     {

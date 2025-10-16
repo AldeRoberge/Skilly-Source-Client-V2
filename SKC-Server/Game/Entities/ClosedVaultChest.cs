@@ -1,7 +1,4 @@
-using RotMG.Common;
-using RotMG.Networking;
-
-namespace RotMG.Game.Entities
+namespace SKC
 {
     public class ClosedVaultChest : SellableEntity
     {

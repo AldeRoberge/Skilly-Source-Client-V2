@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using Ionic.Zlib;
-using RotMG.Common;
 
-namespace RotMG.Game
+
+namespace SKC
 {
     public class WMap : Map
     {

@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RotMG", "RotMG.csproj", "{0987DDCB-6A0F-47A4-AD61-FDD27E906C68}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SKC-Server", "SKC-Server.csproj", "{0987DDCB-6A0F-47A4-AD61-FDD27E906C68}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

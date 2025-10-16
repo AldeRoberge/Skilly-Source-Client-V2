@@ -1,13 +1,8 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using RotMG.Common;
-using RotMG.Game.Entities;
-using RotMG.Game.Logic;
-using RotMG.Game.Logic.Loots;
-using RotMG.Utils;
 
-namespace RotMG.Game.SetPieces
+
+namespace SKC
 {
     public class Graveyard : ISetPiece
     {

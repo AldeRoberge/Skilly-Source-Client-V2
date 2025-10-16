@@ -1,12 +1,12 @@
-﻿using RotMG.Common;
-using RotMG.Networking;
-using RotMG.Utils;
+﻿
+
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using RotMG.Game.Worlds;
 
-namespace RotMG.Game.Entities
+
+namespace SKC
 {
     public class Enemy(ushort type) : Entity(type)
     {

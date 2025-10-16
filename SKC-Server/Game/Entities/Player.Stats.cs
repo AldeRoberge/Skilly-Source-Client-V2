@@ -1,9 +1,8 @@
-﻿using RotMG.Common;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace RotMG.Game.Entities
+namespace SKC
 {
     public partial class Player
     {

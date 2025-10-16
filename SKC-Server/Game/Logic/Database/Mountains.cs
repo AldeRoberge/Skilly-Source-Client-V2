@@ -1,9 +1,9 @@
-﻿using RotMG.Common;
-using RotMG.Game.Logic.Behaviors;
-using RotMG.Game.Logic.Conditionals;
-using RotMG.Game.Logic.Loots;
+﻿
 
-namespace RotMG.Game.Logic.Database
+
+
+
+namespace SKC
 {
     public class Mountains : IBehaviorDatabase
     {

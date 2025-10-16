@@ -1,12 +1,12 @@
-﻿using RotMG.Common;
-using RotMG.Game;
-using RotMG.Game.Entities;
+﻿
+
+
 using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
 
-namespace RotMG.Networking
+namespace SKC
 {
     public enum ProtocolState
     {

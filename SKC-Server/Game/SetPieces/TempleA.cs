@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Linq;
-using RotMG.Common;
-using RotMG.Game.Entities;
-using RotMG.Utils;
 
-namespace RotMG.Game.SetPieces
+
+namespace SKC
 {
     internal class TempleA : Temple
     {

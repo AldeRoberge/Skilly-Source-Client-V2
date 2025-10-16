@@ -1,9 +1,7 @@
-﻿using RotMG.Common;
-using RotMG.Utils;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
-namespace RotMG.Game
+namespace SKC
 {
     public class Projectile(Entity owner, ProjectileDesc desc, int id, int time, float angle, Vector2 startPos, int damage)
     {

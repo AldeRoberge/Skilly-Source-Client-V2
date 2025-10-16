@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using RotMG.Common;
 
-namespace RotMG.Game.Logic.Loots
+
+namespace SKC
 {
     public abstract class MobDrop : IBehavior
     {

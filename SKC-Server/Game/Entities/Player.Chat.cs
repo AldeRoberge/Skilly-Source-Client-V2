@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using RotMG.Common;
-using RotMG.Networking;
+
+
 using System.Linq;
 using System.Text.RegularExpressions;
-using RotMG.Game.SetPieces;
-using RotMG.Game.Worlds;
-using RotMG.Utils;
 
-namespace RotMG.Game.Entities
+
+
+
+namespace SKC
 {
     public partial class Player
     {
@@ -505,7 +505,7 @@ namespace RotMG.Game.Entities
                             try
                             {
                                 var setPiece = (ISetPiece)Activator.CreateInstance(System.Type.GetType(
-                                    "RotMG.Game.SetPieces." + input, true, true));
+                                    "SKC-Server.Game.SetPieces." + input, true, true));
                                 setPiece?.RenderSetPiece(Parent, (Position + 1).ToIntPoint());
                             }
                             catch (Exception)

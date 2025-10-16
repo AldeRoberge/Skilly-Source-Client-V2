@@ -1,13 +1,8 @@
-﻿using RotMG.Common;
-using RotMG.Game.Entities;
-using RotMG.Utils;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using RotMG.Game.Logic;
-using RotMG.Game.Worlds;
-using RotMG.Networking;
 
-namespace RotMG.Game
+
+namespace SKC
 {
     public class Tile
     {

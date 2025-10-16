@@ -3,7 +3,7 @@ using System.IO;
 using System.Net;
 using System.Text;
 
-namespace RotMG.Networking
+namespace SKC
 {
     public class PacketReader(Stream input) : BinaryReader(input, Encoding.UTF8)
     {

@@ -1,7 +1,4 @@
-using RotMG.Common;
-using RotMG.Networking;
-
-namespace RotMG.Game.Worlds
+namespace SKC
 {
     public sealed class GuildHall : World
     {

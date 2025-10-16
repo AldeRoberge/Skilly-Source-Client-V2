@@ -2,12 +2,12 @@ using System;
 using System.Buffers;
 using System.Collections.Generic;
 using System.Linq;
-using RotMG.Common;
-using RotMG.Game.Entities;
-using RotMG.Game.SetPieces;
-using RotMG.Utils;
 
-namespace RotMG.Game.Worlds
+
+
+
+
+namespace SKC
 {
     public partial class Realm
     {
@@ -583,7 +583,7 @@ namespace RotMG.Game.Worlds
 
         private void InitMobs()
         {
-            _criticalEnemyCounts = SetPieces.SetPieces.ApplySetPieces(this);
+            _criticalEnemyCounts = SetPieces.ApplySetPieces(this);
 
             foreach (var (terrain, mobs) in RegionMobs)
             {

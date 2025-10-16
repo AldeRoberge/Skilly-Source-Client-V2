@@ -1,11 +1,8 @@
 using System;
 using System.Collections.Generic;
-using RotMG.Common;
-using RotMG.Game.Entities;
-using RotMG.Networking;
-using RotMG.Utils;
 
-namespace RotMG.Game.Worlds
+
+namespace SKC
 {
     public sealed class Vault : World
     {

@@ -1,12 +1,11 @@
-﻿using RotMG.Utils;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Xml.Linq;
-using RotMG.Game;
 
-namespace RotMG.Common
+
+namespace SKC
 {
     public static class Resources
     {

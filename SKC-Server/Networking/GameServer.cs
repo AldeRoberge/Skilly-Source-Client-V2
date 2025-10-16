@@ -1,14 +1,12 @@
-﻿using RotMG.Common;
-using RotMG.Game;
-using System;
+﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
-using RotMG.Utils;
 
-namespace RotMG.Networking
+
+namespace SKC
 {
     public enum SocketEventState
     {

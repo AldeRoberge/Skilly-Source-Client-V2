@@ -1,9 +1,7 @@
-﻿using RotMG.Common;
-using RotMG.Game;
-using System;
+﻿using System;
 using System.Security.Cryptography;
 
-namespace RotMG.Utils
+namespace SKC
 {
     public static class MathUtils
     {

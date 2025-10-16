@@ -1,11 +1,10 @@
-﻿using RotMG.Utils;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Xml.Linq;
-using RotMG.Game;
 
-namespace RotMG.Common
+
+namespace SKC
 {
     public interface IDatabaseInfo
     {

@@ -1,5 +1,4 @@
-﻿using RotMG.Common;
-using System;
+﻿using System;
 using System.Collections.Specialized;
 using System.IO;
 using System.Linq;
@@ -7,9 +6,9 @@ using System.Net;
 using System.Text;
 using System.Threading;
 using System.Web;
-using RotMG.Utils;
 
-namespace RotMG.Networking
+
+namespace SKC
 {
     public static partial class AppServer
     {

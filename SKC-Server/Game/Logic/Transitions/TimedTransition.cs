@@ -1,6 +1,4 @@
-﻿using RotMG.Common;
-
-namespace RotMG.Game.Logic.Transitions
+﻿namespace SKC
 {
     public class TimedTransition : Transition
     {

@@ -1,7 +1,7 @@
-﻿using RotMG.Common;
-using RotMG.Game;
-using RotMG.Game.Entities;
-using RotMG.Utils;
+﻿
+
+
+
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -9,7 +9,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 
-namespace RotMG.Networking
+namespace SKC
 {
     public static partial class GameServer
     {

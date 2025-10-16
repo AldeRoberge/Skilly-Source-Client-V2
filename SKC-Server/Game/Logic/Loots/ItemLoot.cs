@@ -1,4 +1,4 @@
-﻿namespace RotMG.Game.Logic.Loots
+﻿namespace SKC
 {
     public class ItemLoot : MobDrop
     {

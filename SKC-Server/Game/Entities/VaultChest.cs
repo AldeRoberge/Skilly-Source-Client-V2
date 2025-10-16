@@ -1,6 +1,4 @@
-using RotMG.Common;
-
-namespace RotMG.Game.Entities
+namespace SKC
 {
     // Having an entire class might be overkill
     public class VaultChest : Container

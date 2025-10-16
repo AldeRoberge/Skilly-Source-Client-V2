@@ -1,10 +1,7 @@
-﻿using RotMG.Game;
-using RotMG.Networking;
-using RotMG.Utils;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
-namespace RotMG.Common
+namespace SKC
 {
     public struct FameStats
     {

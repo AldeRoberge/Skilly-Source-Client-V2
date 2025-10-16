@@ -1,10 +1,7 @@
-﻿using RotMG.Common;
-using RotMG.Networking;
-using RotMG.Utils;
-using System;
+﻿using System;
 using System.Linq;
 
-namespace RotMG.Game.Entities
+namespace SKC
 {
     public partial class Player
     {

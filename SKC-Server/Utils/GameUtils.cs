@@ -1,10 +1,7 @@
-﻿using RotMG.Common;
-using RotMG.Game;
-using RotMG.Game.Entities;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
-namespace RotMG.Utils
+namespace SKC
 {
     public static class GameUtils
     {

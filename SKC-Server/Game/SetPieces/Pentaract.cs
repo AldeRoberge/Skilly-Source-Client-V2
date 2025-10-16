@@ -1,7 +1,7 @@
 ﻿using System;
-using RotMG.Common;
 
-namespace RotMG.Game.SetPieces
+
+namespace SKC
 {
     internal class Pentaract : ISetPiece
     {

@@ -1,12 +1,7 @@
-﻿using System;
-using System.Linq;
-using RotMG.Common;
-using RotMG.Game.Entities;
-using RotMG.Game.Logic;
-using RotMG.Game.Logic.Loots;
-using RotMG.Utils;
+﻿using System.Linq;
 
-namespace RotMG.Game.SetPieces
+
+namespace SKC
 {
     internal class Castle : ISetPiece
     {

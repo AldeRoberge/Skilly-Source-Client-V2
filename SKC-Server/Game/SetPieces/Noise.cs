@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace RotMG.Game.SetPieces
+namespace SKC
 {
     public class Noise
     {

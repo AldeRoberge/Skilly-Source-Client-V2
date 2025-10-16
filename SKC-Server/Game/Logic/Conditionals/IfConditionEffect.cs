@@ -1,6 +1,4 @@
-﻿using RotMG.Common;
-
-namespace RotMG.Game.Logic.Conditionals
+﻿namespace SKC
 {
     public class IfConditionEffect : Conditional
     {

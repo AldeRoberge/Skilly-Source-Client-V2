@@ -1,8 +1,7 @@
-using System;
 using System.Collections.Generic;
-using RotMG.Common;
 
-namespace RotMG.Game.Entities
+
+namespace SKC
 {
     public class GiftChest : OneWayContainer
     {

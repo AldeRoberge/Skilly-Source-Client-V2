@@ -1,7 +1,4 @@
-﻿using RotMG.Common;
-using RotMG.Utils;
-
-namespace RotMG.Game.Logic.Behaviors
+﻿namespace SKC
 {
     public class WanderState
     {

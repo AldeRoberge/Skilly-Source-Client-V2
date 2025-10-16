@@ -1,9 +1,7 @@
-﻿using RotMG.Common;
-using RotMG.Utils;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
-namespace RotMG.Game
+namespace SKC
 {
     public class Chunk
     {

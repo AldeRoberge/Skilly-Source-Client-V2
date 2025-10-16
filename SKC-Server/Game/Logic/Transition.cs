@@ -1,4 +1,4 @@
-﻿namespace RotMG.Game.Logic
+﻿namespace SKC
 {
     public abstract class Transition : IBehavior
     {

@@ -1,8 +1,7 @@
 using System.Text.RegularExpressions;
-using RotMG.Common;
-using RotMG.Networking;
 
-namespace RotMG.Game.Entities
+
+namespace SKC
 {
     public class Portal(ushort type, int? lifetime = 30000) : Entity(type, lifetime)
     {

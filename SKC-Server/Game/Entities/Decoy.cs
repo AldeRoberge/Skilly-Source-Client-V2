@@ -1,8 +1,6 @@
-﻿using RotMG.Common;
-using RotMG.Networking;
-using System;
+﻿using System;
 
-namespace RotMG.Game.Entities
+namespace SKC
 {
     public class Decoy : Entity
     {

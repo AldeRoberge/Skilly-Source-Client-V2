@@ -1,4 +1,4 @@
-﻿namespace RotMG.Game.Logic.Transitions
+﻿namespace SKC
 {
     public class HealthTransition : Transition
     {

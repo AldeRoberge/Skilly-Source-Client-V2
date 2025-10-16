@@ -1,8 +1,4 @@
-using System.Collections.Generic;
-using RotMG.Common;
-using RotMG.Networking;
-
-namespace RotMG.Game.Entities
+namespace SKC
 {
     public enum BuyResult : byte
     {

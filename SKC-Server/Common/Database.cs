@@ -1,6 +1,6 @@
-﻿using RotMG.Game;
-using RotMG.Game.Entities;
-using RotMG.Utils;
+﻿
+
+
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -8,11 +8,11 @@ using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Xml.Linq;
-using RotMG.Game.Logic.Loots;
-using RotMG.Game.Worlds;
-using RotMG.Networking;
 
-namespace RotMG.Common
+
+
+
+namespace SKC
 {
     //XML/Text files combined storage system
     public static class Database

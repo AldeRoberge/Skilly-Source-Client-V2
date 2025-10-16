@@ -1,12 +1,10 @@
-﻿using RotMG.Game;
-using RotMG.Utils;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Xml.Linq;
 
-namespace RotMG.Common
+namespace SKC
 {
     public enum Currency
     {
