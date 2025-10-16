@@ -13,26 +13,26 @@ namespace RotMG.Game
 {
     public static class Manager
     {
-        public const int NexusId = -1;
-        public const int RealmId = -2;
-        public const int GuildId = -3;
+        public const int NexusId  = -1;
+        public const int RealmId  = -2;
+        public const int GuildId  = -3;
         public const int EditorId = -4;
-        public const int VaultId = -5;
+        public const int VaultId  = -5;
 
-        public static int NextWorldId;
-        public static int NextClientId;
-        public static Dictionary<int, int> AccountIdToClientId;
-        public static Dictionary<int, Client> Clients;
-        public static Dictionary<int, World> Worlds;
-        public static Dictionary<int, World> Realms;
+        public static int                      NextWorldId;
+        public static int                      NextClientId;
+        public static Dictionary<int, int>     AccountIdToClientId;
+        public static Dictionary<int, Client>  Clients;
+        public static Dictionary<int, World>   Worlds;
+        public static Dictionary<int, World>   Realms;
         public static List<Tuple<int, Action>> Timers;
-        public static BehaviorDb Behaviors;
-        public static Stopwatch TickWatch;
-        public static int TotalTicks;
-        public static int TotalTime;
-        public static int TotalTimeUnsynced;
-        public static int TickDelta;
-        public static int LastTickTime;
+        public static BehaviorDb               Behaviors;
+        public static Stopwatch                TickWatch;
+        public static int                      TotalTicks;
+        public static int                      TotalTime;
+        public static int                      TotalTimeUnsynced;
+        public static int                      TickDelta;
+        public static int                      LastTickTime;
 
         public static void Init()
         {

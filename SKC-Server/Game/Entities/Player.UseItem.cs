@@ -9,11 +9,11 @@ namespace RotMG.Game.Entities
     public partial class Player
     {
         public const float UseCooldownThreshold = 1.1f;
-        public const int MaxAbilityDist = 14;
+        public const int   MaxAbilityDist       = 14;
 
         public Queue<ushort> ShootAEs;
-        public int UseDuration;
-        public int UseTime;
+        public int           UseDuration;
+        public int           UseTime;
 
         public void UsePortal(int objectId)
         {
@@ -25,7 +25,7 @@ namespace RotMG.Game.Entities
 #endif
                 return;
             }
-            
+
             if (entity.Position.Distance(this) > ContainerMinimumDistance)
             {
 #if DEBUG
@@ -40,13 +40,13 @@ namespace RotMG.Game.Entities
                 SendError($"{portal.Desc.DungeonName} not yet implemented");
                 return;
             }
-            
+
             if (!world.AllowedAccess(Client))
             {
                 SendError("Access denied");
                 return;
             }
-            
+
             Client.Send(GameServer.Reconnect(world.Id));
             Manager.AddTimedAction(2000, Client.Disconnect);
         }
@@ -69,6 +69,7 @@ namespace RotMG.Game.Entities
                     Heal(100, false);
                     HealthPotions--;
                 }
+
                 return;
             }
             else if (slot.SlotId == MagicPotionSlotId)
@@ -78,6 +79,7 @@ namespace RotMG.Game.Entities
                     Heal(100, true);
                     MagicPotions--;
                 }
+
                 return;
             }
 
@@ -182,68 +184,72 @@ namespace RotMG.Game.Entities
 #endif
                             break;
                         }
+
                         var statMax = Resources.Type2Player[Type].Stats[eff.Stat].MaxValue;
                         if (Stats[eff.Stat] == statMax)
                         {
                             SendInfo($"{desc.Id} not consumed. Already at max");
                             return;
                         }
+
                         Stats[eff.Stat] = Math.Min(statMax, Stats[eff.Stat] + eff.Amount);
                         UpdateStats();
                         break;
                     case ActivateEffectIndex.Shuriken: //Could be optimized too, it's not great..
+                    {
+                        var nova = GameServer.ShowEffect(ShowEffectIndex.Nova, Id, 0xffeba134, new Vector2(2.5f, 0));
+
+                        foreach (var j in Parent.EntityChunks.HitTest(Position, 2.5f))
                         {
-                            var nova = GameServer.ShowEffect(ShowEffectIndex.Nova, Id, 0xffeba134, new Vector2(2.5f, 0));
-
-                            foreach (var j in Parent.EntityChunks.HitTest(Position, 2.5f))
+                            if (j is Enemy k &&
+                                !k.HasConditionEffect(ConditionEffectIndex.Invincible) &&
+                                !k.HasConditionEffect(ConditionEffectIndex.Stasis))
                             {
-                                if (j is Enemy k && 
-                                    !k.HasConditionEffect(ConditionEffectIndex.Invincible) && 
-                                    !k.HasConditionEffect(ConditionEffectIndex.Stasis))
-                                {
-                                    k.ApplyConditionEffect(ConditionEffectIndex.Dazed, 1000);
-                                }
-                            }
-
-                            var stars = new List<byte[]>();
-                            var seeked = new HashSet<Entity>();
-                            var startId = NextAEProjectileId;
-                            NextAEProjectileId += eff.Amount;
-
-                            var angle = Position.Angle(target);
-                            var cone = MathF.PI / 8;
-                            for (var i = 0; i < eff.Amount; i++)
-                            {
-                                var t = this.GetNearestEnemy(8, angle, cone, target, seeked) ?? this.GetNearestEnemy(6, seeked);
-                                if (t != null) seeked.Add(t);
-                                var d = GetNextDamage(desc.Projectile.MinDamage, desc.Projectile.MaxDamage, ItemDatas[slot.SlotId]);
-                                var a = t == null ? MathUtils.NextAngle() : Position.Angle(t.Position);
-                                var p = new List<Projectile>()
-                                {
-                                     new(this, desc.Projectile, startId + i, time, a, Position, d)
-                                };
-
-                                stars.Add(GameServer.ServerPlayerShoot(startId + i, Id, desc.Type, Position, a, 0, p));
-                                AwaitProjectiles(p);
-                            }
-
-                            foreach (var j in Parent.PlayerChunks.HitTest(Position, SightRadius))
-                            {
-                                if (j is Player k)
-                                {
-                                    if (k.Client.Account.Effects || k.Equals(this))
-                                        k.Client.Send(nova);
-                                    if (k.Client.Account.AllyShots || k.Equals(this))
-                                        foreach (var s in stars)
-                                            k.Client.Send(s);
-                                }
+                                k.ApplyConditionEffect(ConditionEffectIndex.Dazed, 1000);
                             }
                         }
+
+                        var stars = new List<byte[]>();
+                        var seeked = new HashSet<Entity>();
+                        var startId = NextAEProjectileId;
+                        NextAEProjectileId += eff.Amount;
+
+                        var angle = Position.Angle(target);
+                        var cone = MathF.PI / 8;
+                        for (var i = 0; i < eff.Amount; i++)
+                        {
+                            var t = this.GetNearestEnemy(8, angle, cone, target, seeked) ?? this.GetNearestEnemy(6, seeked);
+                            if (t != null) seeked.Add(t);
+                            var d = GetNextDamage(desc.Projectile.MinDamage, desc.Projectile.MaxDamage, ItemDatas[slot.SlotId]);
+                            var a = t == null ?
+                                MathUtils.NextAngle() :
+                                Position.Angle(t.Position);
+                            var p = new List<Projectile>()
+                            {
+                                new(this, desc.Projectile, startId + i, time, a, Position, d)
+                            };
+
+                            stars.Add(GameServer.ServerPlayerShoot(startId + i, Id, desc.Type, Position, a, 0, p));
+                            AwaitProjectiles(p);
+                        }
+
+                        foreach (var j in Parent.PlayerChunks.HitTest(Position, SightRadius))
+                        {
+                            if (j is Player k)
+                            {
+                                if (k.Client.Account.Effects || k.Equals(this))
+                                    k.Client.Send(nova);
+                                if (k.Client.Account.AllyShots || k.Equals(this))
+                                    foreach (var s in stars)
+                                        k.Client.Send(s);
+                            }
+                        }
+                    }
                         break;
                     case ActivateEffectIndex.VampireBlast: //Maybe optimize this...?
                         if (inRange)
                         {
-                            var line = GameServer.ShowEffect(ShowEffectIndex.Line, Id, 0xFFFF0000 , target);
+                            var line = GameServer.ShowEffect(ShowEffectIndex.Line, Id, 0xFFFF0000, target);
                             var burst = GameServer.ShowEffect(ShowEffectIndex.Burst, Id, 0xFFFF0000, target, new Vector2(target.X + eff.Radius, target.Y));
                             var lifeSucked = 0;
 
@@ -253,8 +259,8 @@ namespace RotMG.Game.Entities
 
                             foreach (var j in Parent.EntityChunks.HitTest(target, eff.Radius))
                             {
-                                if (j is Enemy k && 
-                                    !k.HasConditionEffect(ConditionEffectIndex.Invincible) && 
+                                if (j is Enemy k &&
+                                    !k.HasConditionEffect(ConditionEffectIndex.Invincible) &&
                                     !k.HasConditionEffect(ConditionEffectIndex.Stasis))
                                 {
                                     k.Damage(this, eff.TotalDamage, eff.Effects, true, true);
@@ -298,12 +304,13 @@ namespace RotMG.Game.Entities
                                 }
                             }
                         }
+
                         break;
                     case ActivateEffectIndex.StasisBlast:
                         if (inRange)
                         {
-                            var blast = GameServer.ShowEffect(ShowEffectIndex.Collapse, Id, 0xffffffff, 
-                                target, 
+                            var blast = GameServer.ShowEffect(ShowEffectIndex.Collapse, Id, 0xffffffff,
+                                target,
                                 new Vector2(target.X + 3, target.Y));
                             var notifications = new List<byte[]>();
 
@@ -338,6 +345,7 @@ namespace RotMG.Game.Entities
                                 }
                             }
                         }
+
                         break;
                     case ActivateEffectIndex.Trap:
                         if (inRange)
@@ -355,70 +363,71 @@ namespace RotMG.Game.Entities
                                 }
                             });
                         }
+
                         break;
                     case ActivateEffectIndex.Lightning:
+                    {
+                        var angle = Position.Angle(target);
+                        var cone = MathF.PI / 4;
+                        var start = this.GetNearestEnemy(MaxAbilityDist, angle, cone, target);
+
+                        if (start == null)
                         {
-                            var angle = Position.Angle(target);
-                            var cone = MathF.PI / 4;
-                            var start = this.GetNearestEnemy(MaxAbilityDist, angle, cone, target);
-
-                            if (start == null)
+                            var angles = new float[3] { angle, angle - cone, angle + cone };
+                            var lines = new byte[3][];
+                            for (var i = 0; i < 3; i++)
                             {
-                                var angles = new float[3] { angle, angle - cone, angle + cone };
-                                var lines = new byte[3][];
-                                for (var i = 0; i < 3; i++)
-                                {
-                                    var x = (int)(MaxAbilityDist * MathF.Cos(angles[i])) + Position.X;
-                                    var y = (int)(MaxAbilityDist * MathF.Sin(angles[i])) + Position.Y;
-                                    lines[i] = GameServer.ShowEffect(ShowEffectIndex.Line, Id, 0xffff0088, new Vector2(x, y), new Vector2(350, 0));
-                                }
-
-                                foreach (var j in Parent.PlayerChunks.HitTest(Position, SightRadius))
-                                {
-                                    if (j is Player k && k.Client.Account.Effects)
-                                    {
-                                        k.Client.Send(lines[0]);
-                                        k.Client.Send(lines[1]);
-                                        k.Client.Send(lines[2]);
-                                    }
-                                }
+                                var x = (int)(MaxAbilityDist * MathF.Cos(angles[i])) + Position.X;
+                                var y = (int)(MaxAbilityDist * MathF.Sin(angles[i])) + Position.Y;
+                                lines[i] = GameServer.ShowEffect(ShowEffectIndex.Line, Id, 0xffff0088, new Vector2(x, y), new Vector2(350, 0));
                             }
-                            else
+
+                            foreach (var j in Parent.PlayerChunks.HitTest(Position, SightRadius))
                             {
-                                Entity prev = this;
-                                var current = start;
-                                var targets = new HashSet<Entity>();
-                                var pkts = new List<byte[]>();
-                                targets.Add(current);
-                                (current as Enemy).Damage(this, eff.TotalDamage, eff.Effects, false, true);
-                                for (var i = 1; i < eff.MaxTargets + 1; i++)
+                                if (j is Player k && k.Client.Account.Effects)
                                 {
-                                    pkts.Add(GameServer.ShowEffect(ShowEffectIndex.Lightning, prev.Id, 0xffff0088,
-                                        new Vector2(current.Position.X, current.Position.Y),
-                                        new Vector2(350, 0)));
-
-                                    if (i == eff.MaxTargets) 
-                                        break;
-
-                                    var next = current.GetNearestEnemy(10, targets);
-                                    if (next == null)
-                                        break;
-
-                                    targets.Add(next);
-                                    (next as Enemy).Damage(this, eff.TotalDamage, eff.Effects, false, true);
-                                    prev = current;
-                                    current = next;
+                                    k.Client.Send(lines[0]);
+                                    k.Client.Send(lines[1]);
+                                    k.Client.Send(lines[2]);
                                 }
-
-                                foreach (var j in Parent.PlayerChunks.HitTest(Position, SightRadius))
-                                    if (j is Player k && k.Client.Account.Effects)
-                                        foreach (var p in pkts)
-                                        {
-                                            Console.WriteLine(p.Length);
-                                            k.Client.Send(p);
-                                        }
                             }
                         }
+                        else
+                        {
+                            Entity prev = this;
+                            var current = start;
+                            var targets = new HashSet<Entity>();
+                            var pkts = new List<byte[]>();
+                            targets.Add(current);
+                            (current as Enemy).Damage(this, eff.TotalDamage, eff.Effects, false, true);
+                            for (var i = 1; i < eff.MaxTargets + 1; i++)
+                            {
+                                pkts.Add(GameServer.ShowEffect(ShowEffectIndex.Lightning, prev.Id, 0xffff0088,
+                                    new Vector2(current.Position.X, current.Position.Y),
+                                    new Vector2(350, 0)));
+
+                                if (i == eff.MaxTargets)
+                                    break;
+
+                                var next = current.GetNearestEnemy(10, targets);
+                                if (next == null)
+                                    break;
+
+                                targets.Add(next);
+                                (next as Enemy).Damage(this, eff.TotalDamage, eff.Effects, false, true);
+                                prev = current;
+                                current = next;
+                            }
+
+                            foreach (var j in Parent.PlayerChunks.HitTest(Position, SightRadius))
+                                if (j is Player k && k.Client.Account.Effects)
+                                    foreach (var p in pkts)
+                                    {
+                                        Console.WriteLine(p.Length);
+                                        k.Client.Send(p);
+                                    }
+                        }
+                    }
                         break;
                     case ActivateEffectIndex.PoisonGrenade:
                         if (inRange)
@@ -446,51 +455,55 @@ namespace RotMG.Game.Entities
                                             if (j is Enemy e)
                                                 e.ApplyPoison(this, [], (int)(eff.TotalDamage / (eff.DurationMS / 1000f)), eff.TotalDamage);
                                     }
+
                                     placeholder.Parent.RemoveEntity(placeholder);
                                 }
                             });
                         }
+
                         break;
                     case ActivateEffectIndex.HealNova:
+                    {
+                        var nova = GameServer.ShowEffect(ShowEffectIndex.Nova, Id, 0xffffffff, new Vector2(eff.Range, 0));
+                        foreach (var j in Parent.PlayerChunks.HitTest(Position, Math.Max(eff.Range, SightRadius)))
                         {
-                            var nova = GameServer.ShowEffect(ShowEffectIndex.Nova, Id, 0xffffffff, new Vector2(eff.Range, 0));
-                            foreach (var j in Parent.PlayerChunks.HitTest(Position, Math.Max(eff.Range, SightRadius)))
+                            if (j is Player k)
                             {
-                                if (j is Player k)
-                                {
-                                    if (Position.Distance(j) <= eff.Range)
-                                        k.Heal(eff.Amount, false);
-                                    if (k.Client.Account.Effects || k.Equals(this))
-                                        k.Client.Send(nova);
-                                }
+                                if (Position.Distance(j) <= eff.Range)
+                                    k.Heal(eff.Amount, false);
+                                if (k.Client.Account.Effects || k.Equals(this))
+                                    k.Client.Send(nova);
                             }
                         }
+                    }
                         break;
                     case ActivateEffectIndex.ConditionEffectAura:
+                    {
+                        var color = eff.Effect == ConditionEffectIndex.Damaging ?
+                            0xffff0000 :
+                            0xffffffff;
+                        var nova = GameServer.ShowEffect(ShowEffectIndex.Nova, Id, color, new Vector2(eff.Range, 0));
+                        foreach (var j in Parent.PlayerChunks.HitTest(Position, Math.Max(eff.Range, SightRadius)))
                         {
-                            var color = eff.Effect == ConditionEffectIndex.Damaging ? 0xffff0000 : 0xffffffff;
-                            var nova = GameServer.ShowEffect(ShowEffectIndex.Nova, Id, color, new Vector2(eff.Range, 0));
-                            foreach (var j in Parent.PlayerChunks.HitTest(Position, Math.Max(eff.Range, SightRadius)))
+                            if (j is Player k)
                             {
-                                if (j is Player k)
-                                {
-                                    if (Position.Distance(j) <= eff.Range)
-                                        k.ApplyConditionEffect(eff.Effect, eff.DurationMS);
-                                    if (k.Client.Account.Effects || k.Equals(this))
-                                        k.Client.Send(nova);
-                                }
+                                if (Position.Distance(j) <= eff.Range)
+                                    k.ApplyConditionEffect(eff.Effect, eff.DurationMS);
+                                if (k.Client.Account.Effects || k.Equals(this))
+                                    k.Client.Send(nova);
                             }
                         }
+                    }
                         break;
                     case ActivateEffectIndex.ConditionEffectSelf:
-                        {
-                            ApplyConditionEffect(eff.Effect, eff.DurationMS);
+                    {
+                        ApplyConditionEffect(eff.Effect, eff.DurationMS);
 
-                            var nova = GameServer.ShowEffect(ShowEffectIndex.Nova, Id, 0xffffffff, new Vector2(1, 0));
-                            foreach (var j in Parent.PlayerChunks.HitTest(Position, SightRadius))
-                                if (j is Player k && k.Client.Account.Effects)
-                                    k.Client.Send(nova);
-                        }
+                        var nova = GameServer.ShowEffect(ShowEffectIndex.Nova, Id, 0xffffffff, new Vector2(1, 0));
+                        foreach (var j in Parent.PlayerChunks.HitTest(Position, SightRadius))
+                            if (j is Player k && k.Client.Account.Effects)
+                                k.Client.Send(nova);
+                    }
                         break;
                     case ActivateEffectIndex.Dye:
                         if (desc.Tex1 != 0)
@@ -540,6 +553,7 @@ namespace RotMG.Game.Entities
                                 }
                             }
                         }
+
                         break;
                     case ActivateEffectIndex.Backpack:
                         if (HasBackpack)
@@ -547,12 +561,13 @@ namespace RotMG.Game.Entities
                             SendError("You already have a backpack");
                             return;
                         }
-                            // callback = () =>
-                            // {
-                            //     // con.Inventory[slot.SlotId].Type = desc.Type;
-                            //     // con.UpdateInventorySlot(slot.SlotId);
-                            //     SendError("You already have a backpack.");
-                            // };
+
+                        // callback = () =>
+                        // {
+                        //     // con.Inventory[slot.SlotId].Type = desc.Type;
+                        //     // con.UpdateInventorySlot(slot.SlotId);
+                        //     SendError("You already have a backpack.");
+                        // };
                         // else
                         // {
                         //     HasBackpack = true;

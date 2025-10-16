@@ -11,12 +11,12 @@ namespace RotMG.Game
 {
     public class Tile
     {
-        public int UpdateCount;
-        public ushort Type;
-        public Region Region;
+        public int          UpdateCount;
+        public ushort       Type;
+        public Region       Region;
         public StaticObject StaticObject;
-        public bool BlocksSight;
-        public string Key;
+        public bool         BlocksSight;
+        public string       Key;
     }
 
     public class World
@@ -27,28 +27,28 @@ namespace RotMG.Game
         public int NextObjectId;
         public int NextProjectileId;
 
-        public Dictionary<int, Entity> Entities;
-        public Dictionary<int, Entity> Quests;
-        public Dictionary<int, Entity> Constants;
-        public Dictionary<int, Player> Players;
+        public Dictionary<int, Entity>       Entities;
+        public Dictionary<int, Entity>       Quests;
+        public Dictionary<int, Entity>       Constants;
+        public Dictionary<int, Player>       Players;
         public Dictionary<int, StaticObject> Statics;
 
         public ChunkController EntityChunks;
         public ChunkController PlayerChunks;
 
-        public int UpdateCount;
+        public int          UpdateCount;
         public List<string> ChatMessages;
 
         public Tile[,] Tiles;
-        public Map Map;
+        public Map     Map;
 
         public int Width;
         public int Height;
 
-        public int Background;
+        public int  Background;
         public bool ShowDisplays;
         public bool AllowTeleport;
-        public int BlockSight;
+        public int  BlockSight;
         public bool Persist;
         public bool IsTemplate;
 
@@ -59,6 +59,7 @@ namespace RotMG.Game
         public Portal Portal;
 
         private bool _closed;
+
         public bool Closed
         {
             get => _closed;
@@ -106,30 +107,31 @@ namespace RotMG.Game
             Tiles = new Tile[Width, Height];
 
             for (var x = 0; x < Width; x++)
-                for (var y = 0; y < Height; y++)
+            for (var y = 0; y < Height; y++)
+            {
+                var js = map.Tiles[x, y];
+                var tile = Tiles[x, y] = new Tile()
                 {
-                    var js = map.Tiles[x, y];
-                    var tile = Tiles[x, y] = new Tile()
-                    {
-                        Type = js.GroundType,
-                        Region = js.Region,
-                        Key = js.Key,
-                        UpdateCount = int.MaxValue / 2
-                    };
+                    Type = js.GroundType,
+                    Region = js.Region,
+                    Key = js.Key,
+                    UpdateCount = int.MaxValue / 2
+                };
 
-                    if (js.ObjectType != 0xff)
+                if (js.ObjectType != 0xff)
+                {
+                    var entity = Entity.Resolve(js.ObjectType);
+                    if (entity.Desc.Static)
                     {
-                        var entity = Entity.Resolve(js.ObjectType);
-                        if (entity.Desc.Static)
-                        {
-                            if (entity.Desc.BlocksSight)
-                                tile.BlocksSight = true;
-                            tile.StaticObject = (StaticObject)entity;
-                        }
-
-                        AddEntity(entity, new Vector2(x + 0.5f, y + 0.5f));
+                        if (entity.Desc.BlocksSight)
+                            tile.BlocksSight = true;
+                        tile.StaticObject = (StaticObject)entity;
                     }
+
+                    AddEntity(entity, new Vector2(x + 0.5f, y + 0.5f));
                 }
+            }
+
             UpdateCount = int.MaxValue / 2;
         }
 
@@ -137,15 +139,15 @@ namespace RotMG.Game
         {
             foreach (var player in Players.Values)
                 player.Client.Disconnect();
-            
+
             Dispose();
             Map = map;
             Width = map.Width;
             Height = map.Height;
-            
+
             EntityChunks = new ChunkController(Width, Height);
             PlayerChunks = new ChunkController(Width, Height);
-            
+
             Tiles = new Tile[Width, Height];
 
             for (var x = 0; x < Width; x++)
@@ -173,6 +175,7 @@ namespace RotMG.Game
                     AddEntity(entity, new Vector2(x + 0.5f, y + 0.5f));
                 }
             }
+
             UpdateCount = int.MaxValue / 2;
         }
 
@@ -266,11 +269,13 @@ namespace RotMG.Game
 #endif
                     return;
                 }
+
                 if (tile.StaticObject != null)
                 {
                     RemoveEntity(tile.StaticObject);
                     tile.StaticObject = null;
                 }
+
                 tile.StaticObject = new StaticObject(type);
                 tile.BlocksSight = tile.StaticObject.Desc.BlocksSight;
                 tile.UpdateCount++;
@@ -344,7 +349,7 @@ namespace RotMG.Game
                 return st;
             return null;
         }
-        
+
         public bool IsUnblocked(Vector2 pos, bool spawning = false)
         {
             var tile = GetTile((int)pos.X, (int)pos.Y);
@@ -357,7 +362,7 @@ namespace RotMG.Game
             var objDesc = tile.StaticObject?.Desc;
             if (objDesc != null && (objDesc.FullOccupy || objDesc.EnemyOccupySquare || (spawning && objDesc.OccupySquare)))
                 return false;
-            
+
 
             return true;
         }
@@ -381,8 +386,9 @@ namespace RotMG.Game
                 if (en is StaticObject)
                     return;
 
-                var controller = en is Player || en is Decoy 
-                    ? PlayerChunks : EntityChunks;
+                var controller = en is Player || en is Decoy ?
+                    PlayerChunks :
+                    EntityChunks;
                 controller.Insert(en);
             }
         }
@@ -445,7 +451,7 @@ namespace RotMG.Game
                 throw new Exception("Entity is null.");
             if (en.Id == 0)
                 throw new Exception("Entity has not been added yet.");
-#endif     
+#endif
             if (en is StaticObject)
             {
                 Statics.Remove(en.Id);
@@ -473,7 +479,6 @@ namespace RotMG.Game
                     Quests.Remove(en.Id);
                     foreach (var player in Players.Values)
                         player.TryGetNextQuest(en);
-                    
                 }
             }
 
@@ -489,22 +494,22 @@ namespace RotMG.Game
         {
             if (IsTemplate)
                 return;
-            
+
             AliveTime += Settings.MillisecondsPerTick;
-            
+
             if (!Persist && Players.Count <= 0 && AliveTime >= 30000)
                 Manager.RemoveWorld(this);
-            
+
             var chunks = new HashSet<Chunk>();
             foreach (Entity en in Players.Values)
             {
                 for (var k = -ChunkController.ActiveRadius; k <= ChunkController.ActiveRadius; k++)
-                    for (var j = -ChunkController.ActiveRadius; j <= ChunkController.ActiveRadius; j++)
-                    {
-                        var chunk = EntityChunks.GetChunk(en.CurrentChunk.X + k, en.CurrentChunk.Y + j);
-                        if (chunk != null)
-                            chunks.Add(chunk);
-                    }
+                for (var j = -ChunkController.ActiveRadius; j <= ChunkController.ActiveRadius; j++)
+                {
+                    var chunk = EntityChunks.GetChunk(en.CurrentChunk.X + k, en.CurrentChunk.Y + j);
+                    if (chunk != null)
+                        chunks.Add(chunk);
+                }
             }
 
             var entities = new HashSet<Entity>();
@@ -517,7 +522,7 @@ namespace RotMG.Game
                 player.SendUpdate();
 
             //Tick logic first
-            foreach (var en in entities) 
+            foreach (var en in entities)
                 if (en.TickEntity())
                     en.Tick();
 
@@ -547,6 +552,7 @@ namespace RotMG.Game
                 world.Portal = null;
                 return world;
             }
+
             return this;
         }
 
@@ -570,7 +576,7 @@ namespace RotMG.Game
             {
                 if (newWorld is OryxCastle castle)
                     castle.IncomingPlayers = Players.Count;
-                
+
                 foreach (var player in Players.Values)
                     player.Client.Send(GameServer.Reconnect(newWorld.Id));
             });
@@ -598,7 +604,7 @@ namespace RotMG.Game
 #endif
             return Id == (obj as World).Id;
         }
-        
+
         public override int GetHashCode()
         {
             return Id;

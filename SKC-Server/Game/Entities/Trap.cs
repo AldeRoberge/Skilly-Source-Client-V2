@@ -6,9 +6,9 @@ namespace RotMG.Game.Entities
 {
     public class Trap : Entity
     {
-        public Player Player;
-        public float Radius;
-        public int Damage;
+        public Player                Player;
+        public float                 Radius;
+        public int                   Damage;
         public ConditionEffectDesc[] CondEffects;
 
         public Trap(Player player, float radius, int damage, ConditionEffectDesc[] effects) : base(0x070f, 10000)
@@ -52,8 +52,8 @@ namespace RotMG.Game.Entities
             var nova = GameServer.ShowEffect(ShowEffectIndex.Nova, Id, 0xff9000ff, new Vector2(Radius, 0));
 
             foreach (var j in Parent.EntityChunks.HitTest(Position, Radius))
-                if (j is Enemy k && 
-                    !k.HasConditionEffect(ConditionEffectIndex.Invincible) && 
+                if (j is Enemy k &&
+                    !k.HasConditionEffect(ConditionEffectIndex.Invincible) &&
                     !k.HasConditionEffect(ConditionEffectIndex.Stasis))
                     k.Damage(Player, Damage, CondEffects, false, true);
 

@@ -6,12 +6,12 @@ namespace RotMG.Game.Worlds
     public sealed class GuildHall : World
     {
         private readonly string _guildName;
-        
+
         public GuildHall(Map map, WorldDesc desc, Client client) : base(map, desc)
         {
             if (client == null)
                 return;
-            
+
             _guildName = client.Account.GuildName;
             var guild = Database.GetGuild(_guildName);
             OverwriteMap(Resources.Worlds[desc.Name].Maps[guild.Level]);

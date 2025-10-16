@@ -11,27 +11,27 @@ namespace RotMG.Game.Logic.Behaviors
     {
         public const int PredictNumTicks = 4;
 
-        public readonly float Range;
-        public readonly byte Count;
-        public readonly float ShootAngle;
+        public readonly float  Range;
+        public readonly byte   Count;
+        public readonly float  ShootAngle;
         public readonly float? FixedAngle;
         public readonly float? RotateAngle;
-        public readonly float AngleOffset;
+        public readonly float  AngleOffset;
         public readonly float? DefaultAngle;
-        public readonly float Predictive;
-        public readonly int Index;
-        public readonly int CooldownOffset;
-        public readonly int CooldownVariance;
-        public readonly int Cooldown;
+        public readonly float  Predictive;
+        public readonly int    Index;
+        public readonly int    CooldownOffset;
+        public readonly int    CooldownVariance;
+        public readonly int    Cooldown;
 
         public Shoot(
-            float range = 5, 
-            byte count = 1, 
-            float? shootAngle = null, 
-            int index = 0, 
-            float? fixedAngle = null, 
-            float? rotateAngle = null, 
-            float angleOffset = 0, 
+            float range = 5,
+            byte count = 1,
+            float? shootAngle = null,
+            int index = 0,
+            float? fixedAngle = null,
+            float? rotateAngle = null,
+            float angleOffset = 0,
             float? defaultAngle = null,
             float predictive = 0,
             int cooldownOffset = 0,
@@ -40,7 +40,9 @@ namespace RotMG.Game.Logic.Behaviors
         {
             Range = range;
             Count = count;
-            ShootAngle = count == 1 ? 0 : (shootAngle ?? 360f / count) * MathUtils.ToRadians;
+            ShootAngle = count == 1 ?
+                0 :
+                (shootAngle ?? 360f / count) * MathUtils.ToRadians;
             Index = index;
             FixedAngle = fixedAngle * MathUtils.ToRadians;
             RotateAngle = rotateAngle * MathUtils.ToRadians;
@@ -55,7 +57,7 @@ namespace RotMG.Game.Logic.Behaviors
         public override void Enter(Entity host)
         {
             host.StateCooldown.Add(Id, CooldownOffset);
-            if (RotateAngle != null) 
+            if (RotateAngle != null)
                 host.StateObject.Add(Id, 0);
         }
 
@@ -116,7 +118,7 @@ namespace RotMG.Game.Logic.Behaviors
                         projectiles.Add(new Projectile(host, desc, startId + k, Manager.TotalTime, startAngle + ShootAngle * k, host.Position, damage));
 
                     var packet = GameServer.EnemyShoot(startId, host.Id, desc.BulletType, host.Position, startAngle, (short)damage, count, ShootAngle);
-                    
+
                     foreach (var en in host.Parent.PlayerChunks.HitTest(host.Position, Player.SightRadius))
                     {
                         if (en is Player player)
@@ -135,6 +137,7 @@ namespace RotMG.Game.Logic.Behaviors
                     host.StateCooldown[Id] += MathUtils.NextIntSnap(-CooldownVariance, CooldownVariance, Settings.MillisecondsPerTick);
                 return true;
             }
+
             return false;
         }
 

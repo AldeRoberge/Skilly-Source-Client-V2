@@ -24,7 +24,7 @@ namespace RotMG.Game.Worlds
 
             foreach (var terrain in Map.Terrains.Keys)
                 _enemies[terrain] = [];
-            
+
             InitMobs();
         }
 
@@ -38,7 +38,7 @@ namespace RotMG.Game.Worlds
 
             if (AliveTime % 20000 == 0)
                 OryxTaunt();
-            
+
             base.Tick();
         }
 

@@ -12,9 +12,9 @@ namespace RotMG.Game.Logic
     public class LootDef
     {
         public readonly ushort Item;
-        public readonly float Threshold;
-        public readonly float Chance;
-        public readonly int Min;
+        public readonly float  Threshold;
+        public readonly float  Chance;
+        public readonly int    Min;
 
         public LootDef(string item, float chance = 1, float threshold = 0, int min = 0)
         {
@@ -24,10 +24,12 @@ namespace RotMG.Game.Logic
             Min = min;
         }
     }
-    
+
     public class Loot : ReadOnlyCollection<MobDrop>
     {
-        public Loot(params MobDrop[] drops) : base(drops) { }
+        public Loot(params MobDrop[] drops) : base(drops)
+        {
+        }
 
         public IEnumerable<ushort> GetLoots(int min, int max)
         {
@@ -44,6 +46,7 @@ namespace RotMG.Game.Logic
                     yield return item.Item;
                     count--;
                 }
+
                 if (count <= 0)
                     yield break;
             }
@@ -56,6 +59,7 @@ namespace RotMG.Game.Logic
             {
                 i.Populate(possibleDrops);
             }
+
             return possibleDrops;
         }
 
@@ -99,7 +103,7 @@ namespace RotMG.Game.Logic
                     if (enemy.Desc.God) player.FameStats.GodAssists++;
                 }
 
-                var t = Math.Min(1f, (float) damage / enemy.MaxHp);
+                var t = Math.Min(1f, (float)damage / enemy.MaxHp);
                 var loot = new List<ushort>();
                 foreach (var drop in possibleDrops)
                 {
@@ -112,7 +116,7 @@ namespace RotMG.Game.Logic
 
                 privateLoot[player] = loot;
             }
-            
+
             foreach (var (drop, count) in requiredDrops.ToArray())
             {
                 if (drop.Threshold <= 0)
@@ -130,8 +134,8 @@ namespace RotMG.Game.Logic
                 {
                     if (requiredDrops[drop] <= 0)
                         break;
-                    
-                    var t = Math.Min(1f, (float) damage / enemy.MaxHp);
+
+                    var t = Math.Min(1f, (float)damage / enemy.MaxHp);
                     if (t < drop.Threshold)
                         continue;
 
@@ -152,6 +156,7 @@ namespace RotMG.Game.Logic
             {
                 ShowBags(enemy, loot, player, player.AccountId);
             }
+
             ShowBags(enemy, publicLoot, null, -1);
         }
 
@@ -180,9 +185,12 @@ namespace RotMG.Game.Logic
                 {
                     var roll = Resources.Type2Item[loot[k]].Roll();
                     c.Inventory[k] = loot[k];
-                    c.ItemDatas[k] = roll.Item1 ? (int) roll.Item2 : -1;
+                    c.ItemDatas[k] = roll.Item1 ?
+                        (int)roll.Item2 :
+                        -1;
                     c.UpdateInventorySlot(k);
                 }
+
                 loot.RemoveRange(0, bagCount);
 
                 enemy.Parent.AddEntity(c, enemy.Position + MathUtils.Position(0.2f, 0.2f));

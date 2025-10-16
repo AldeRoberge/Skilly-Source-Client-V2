@@ -13,8 +13,8 @@ namespace RotMG.Networking
 {
     public static partial class AppServer
     {
-        private static bool _terminating;
-        private static HttpListener _listener;
+        private static bool             _terminating;
+        private static HttpListener     _listener;
         private static ManualResetEvent _listenEvent;
 
         public static void Init()
@@ -45,7 +45,7 @@ namespace RotMG.Networking
                     //Process request and push work to main thread.
                     var request = context.Request.Url.LocalPath;
 #if DEBUG
-                            Program.Print(PrintType.Debug, $"Received <{request}> request from <{context.Request.RemoteEndPoint}>");
+                    Program.Print(PrintType.Debug, $"Received <{request}> request from <{context.Request.RemoteEndPoint}>");
 #endif
 
                     NameValueCollection query;
@@ -97,14 +97,14 @@ namespace RotMG.Networking
                     }
 
 #if DEBUG
-                            foreach (var k in query.AllKeys)
-                                Program.Print(PrintType.Debug, $"<{k}> <{query[k]}>");
+                    foreach (var k in query.AllKeys)
+                        Program.Print(PrintType.Debug, $"<{k}> <{query[k]}>");
 #endif
 
                     if (buffer == null)
                     {
 #if DEBUG
-                                Program.Print(PrintType.Warn, $"No request handler for <{request}> request from <{context.Request.RemoteEndPoint}>");
+                        Program.Print(PrintType.Warn, $"No request handler for <{request}> request from <{context.Request.RemoteEndPoint}>");
 #endif
                         buffer = WriteError("Internal server error");
                     }

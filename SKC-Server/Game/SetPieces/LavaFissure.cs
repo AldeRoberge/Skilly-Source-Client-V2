@@ -16,27 +16,24 @@ namespace RotMG.Game.SetPieces
         private static readonly string Floor = "Partial Red Floor";
 
         private static readonly Loot chest = new(
-                new TierLoot(7, TierLoot.LootType.Weapon, 0.3f),
-                new TierLoot(8, TierLoot.LootType.Weapon, 0.2f),
-                new TierLoot(9, TierLoot.LootType.Weapon, 0.1f),
+            new TierLoot(7, TierLoot.LootType.Weapon, 0.3f),
+            new TierLoot(8, TierLoot.LootType.Weapon, 0.2f),
+            new TierLoot(9, TierLoot.LootType.Weapon, 0.1f),
+            new TierLoot(6, TierLoot.LootType.Armor, 0.3f),
+            new TierLoot(7, TierLoot.LootType.Armor, 0.2f),
+            new TierLoot(8, TierLoot.LootType.Armor, 0.1f),
+            new TierLoot(2, TierLoot.LootType.Ability, 0.3f),
+            new TierLoot(3, TierLoot.LootType.Ability, 0.2f),
+            new TierLoot(4, TierLoot.LootType.Ability, 0.1f),
+            new TierLoot(2, TierLoot.LootType.Ring, 0.25f),
+            new TierLoot(3, TierLoot.LootType.Ring, 0.15f)
+        );
 
-                new TierLoot(6, TierLoot.LootType.Armor, 0.3f),
-                new TierLoot(7, TierLoot.LootType.Armor, 0.2f),
-                new TierLoot(8, TierLoot.LootType.Armor, 0.1f),
-
-                new TierLoot(2, TierLoot.LootType.Ability, 0.3f),
-                new TierLoot(3, TierLoot.LootType.Ability, 0.2f),
-                new TierLoot(4, TierLoot.LootType.Ability, 0.1f),
-
-                new TierLoot(2, TierLoot.LootType.Ring, 0.25f),
-                new TierLoot(3, TierLoot.LootType.Ring, 0.15f)
-            );
-        
         public void RenderSetPiece(World world, IntPoint pos)
         {
             var p = new int[Size, Size];
             const double SCALE = 5.5;
-            for (var x = 0; x < Size; x++)      //Lava
+            for (var x = 0; x < Size; x++) //Lava
             {
                 var t = (double)x / Size * Math.PI;
                 var x_ = t / Math.Sqrt(2) - Math.Sin(t) / (SCALE * Math.Sqrt(2));
@@ -51,33 +48,32 @@ namespace RotMG.Game.SetPieces
                     p[x, i] = 1;
             }
 
-            for (var x = 0; x < Size; x++)      //Floor
-                for (var y = 0; y < Size; y++)
-                {
-                    if (p[x, y] == 1 && MathUtils.Chance(.2f))
-                        p[x, y] = 2;
-                }
+            for (var x = 0; x < Size; x++) //Floor
+            for (var y = 0; y < Size; y++)
+            {
+                if (p[x, y] == 1 && MathUtils.Chance(.2f))
+                    p[x, y] = 2;
+            }
 
-            var r = MathUtils.Next(4);            //Rotation
+            var r = MathUtils.Next(4); //Rotation
             for (var i = 0; i < r; i++)
                 p = SetPieces.RotateCW(p);
             p[20, 20] = 2;
-            
-            for (var x = 0; x < Size; x++)      //Rendering
-                for (var y = 0; y < Size; y++)
-                {
-                    if (p[x, y] == 1)
-                    {
-                        world.UpdateTile(x + pos.X, y + pos.Y, Resources.Id2Tile[Lava].Type);
-                        world.RemoveStatic(x + pos.X, y + pos.Y);
-                    }
-                    else if (p[x, y] == 2)
-                    {
-                        world.UpdateTile(x + pos.X, y + pos.Y, Resources.Id2Tile[Lava].Type);
-                        world.UpdateStatic(x + pos.X, y + pos.Y, Resources.Id2Object[Floor].Type);
-                    }
-                }
 
+            for (var x = 0; x < Size; x++) //Rendering
+            for (var y = 0; y < Size; y++)
+            {
+                if (p[x, y] == 1)
+                {
+                    world.UpdateTile(x + pos.X, y + pos.Y, Resources.Id2Tile[Lava].Type);
+                    world.RemoveStatic(x + pos.X, y + pos.Y);
+                }
+                else if (p[x, y] == 2)
+                {
+                    world.UpdateTile(x + pos.X, y + pos.Y, Resources.Id2Tile[Lava].Type);
+                    world.UpdateStatic(x + pos.X, y + pos.Y, Resources.Id2Object[Floor].Type);
+                }
+            }
 
 
             var entity = Entity.Resolve(Resources.Id2Object["Red Demon"].Type);
@@ -89,7 +85,9 @@ namespace RotMG.Game.SetPieces
             {
                 var roll = Resources.Type2Item[loot[k]].Roll();
                 c.Inventory[k] = loot[k];
-                c.ItemDatas[k] = roll.Item1 ? (int) roll.Item2 : -1;
+                c.ItemDatas[k] = roll.Item1 ?
+                    (int)roll.Item2 :
+                    -1;
                 c.UpdateInventorySlot(k);
             }
 

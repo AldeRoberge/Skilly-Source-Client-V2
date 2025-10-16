@@ -18,9 +18,9 @@ namespace RotMG.Networking
 
     public class ReceiveState
     {
-        public int PacketLength;
-        public readonly byte[] PacketBytes;
-        public SocketEventState State;
+        public          int              PacketLength;
+        public readonly byte[]           PacketBytes;
+        public          SocketEventState State;
 
         public ReceiveState()
         {
@@ -49,9 +49,9 @@ namespace RotMG.Networking
 
     public class SendState
     {
-        public int BytesWritten;
-        public int PacketLength;
-        public byte[] PacketBytes;
+        public int              BytesWritten;
+        public int              PacketLength;
+        public byte[]           PacketBytes;
         public SocketEventState State;
 
         public readonly byte[] Data;
@@ -72,14 +72,14 @@ namespace RotMG.Networking
 
     public static partial class GameServer
     {
-        public const int BufferSize = 0x10000;
-        public const int PrefixLength = 5;
-        public const int PrefixLengthWithId = PrefixLength - 1;
-        public const int AddBackMinDelay = 10000;
-        public const byte MaxClientsPerIp = 4;
+        public const int  BufferSize         = 0x10000;
+        public const int  PrefixLength       = 5;
+        public const int  PrefixLengthWithId = PrefixLength - 1;
+        public const int  AddBackMinDelay    = 10000;
+        public const byte MaxClientsPerIp    = 4;
 
-        private static bool _terminating;
-        private static Socket _listener;
+        private static bool                    _terminating;
+        private static Socket                  _listener;
         private static ConcurrentQueue<Client> _clients;
         private static ConcurrentQueue<Client> _addBack;
         private static Dictionary<string, int> _connected;
@@ -170,13 +170,11 @@ namespace RotMG.Networking
                             skt.Disconnect(false);
                             continue;
                         }
+
                         _connected[ip] = ++value;
                     }
 
-                    Program.PushWork(() =>
-                    {
-                        client.BeginHandling(skt, ip);
-                    });
+                    Program.PushWork(() => { client.BeginHandling(skt, ip); });
 
                     Thread.Sleep(10);
                 }

@@ -80,7 +80,7 @@ namespace RotMG.Networking
         {
 #if DEBUG
             if (id != (int)PacketId.Move)
-                Program.Print(PrintType.Debug, $"Packet received <{(PacketId)id}> <{string.Join(" ,",data.Select(k => k.ToString()).ToArray())}>");
+                Program.Print(PrintType.Debug, $"Packet received <{(PacketId)id}> <{string.Join(" ,", data.Select(k => k.ToString()).ToArray())}>");
 #endif
 
             if (!client.Active)
@@ -241,11 +241,11 @@ namespace RotMG.Networking
                 client.Send(GuildResult(false, addResult.ToString()));
                 return;
             }
-            
+
             Database.IncrementCurrency(account, -1000, Currency.Fame);
             client.Player.GuildName = guild.Name;
             client.Player.GuildRank = 40;
-            
+
             client.Send(GuildResult(true, "Success!"));
         }
 
@@ -287,7 +287,7 @@ namespace RotMG.Networking
             var playerName = rdr.ReadString();
             if (client.Account.GuildRank < 20)
                 return;
-            
+
             // probably better to send accountId from client
             Client otherClient = null;
             foreach (var connectedClient in Manager.Clients.Values)
@@ -354,7 +354,7 @@ namespace RotMG.Networking
                 client.Send(GuildResult(true, "Success!"));
                 return;
             }
-            
+
             client.Send(GuildResult(false, "Insufficient privileges"));
         }
 
@@ -362,7 +362,7 @@ namespace RotMG.Networking
         {
             var name = rdr.ReadString();
             var rank = rdr.ReadByte();
-            
+
             if (!Database.AccountExists(name, out var otherAccount))
             {
                 client.Send(GuildResult(false, "Player not found"));
@@ -391,13 +391,13 @@ namespace RotMG.Networking
                 client.Send(GuildResult(false, "Failed to change rank"));
                 return;
             }
-            
+
             var otherClientId = Manager.AccountIdToClientId[otherAccount.Id];
             if (Manager.Clients.TryGetValue(otherClientId, out var otherClient))
             {
                 otherClient.Player.GuildRank = rank;
             }
-            
+
             client.Send(GuildResult(true, "Success!"));
         }
 
@@ -420,8 +420,8 @@ namespace RotMG.Networking
                 return;
 #endif
             }
-            
-            (en as ISellable).Buy(client.Player);    
+
+            (en as ISellable).Buy(client.Player);
         }
 
         private static void UsePortal(Client client, PacketReader rdr)
@@ -448,7 +448,7 @@ namespace RotMG.Networking
 
         private static void GotoAck(Client client, PacketReader rdr)
         {
-            var time = rdr.ReadInt32(); 
+            var time = rdr.ReadInt32();
             client.Player.TryGotoAck(time);
         }
 
@@ -466,7 +466,7 @@ namespace RotMG.Networking
             var add = rdr.ReadBoolean();
             var objectId = rdr.ReadInt32();
             var en = client.Player.Parent.GetEntity(objectId);
-            if (en is Player target) 
+            if (en is Player target)
             {
                 if (target.AccountId == client.Player.AccountId)
                     return;
@@ -489,7 +489,7 @@ namespace RotMG.Networking
 
         private static void PlayerText(Client client, PacketReader rdr)
         {
-            var text = rdr.ReadString(); 
+            var text = rdr.ReadString();
             client.Player.Chat(text);
         }
 
@@ -497,7 +497,7 @@ namespace RotMG.Networking
         {
             var time = rdr.ReadInt32();
             var bulletId = rdr.ReadInt32();
-            var targetId = rdr.ReadInt32(); 
+            var targetId = rdr.ReadInt32();
             client.Player.TryHitEnemy(time, bulletId, targetId);
         }
 
@@ -507,33 +507,35 @@ namespace RotMG.Networking
             var pos = new Vector2(rdr);
             var angle = rdr.ReadSingle();
             var ability = rdr.ReadBoolean();
-            var numShots = rdr.PeekChar() != -1 ? rdr.ReadByte() : (byte)1; 
+            var numShots = rdr.PeekChar() != -1 ?
+                rdr.ReadByte() :
+                (byte)1;
             client.Player.TryShoot(time, pos, angle, ability, numShots);
         }
 
         private static void SquareHit(Client client, PacketReader rdr)
         {
             var time = rdr.ReadInt32();
-            var bulletId = rdr.ReadInt32(); 
+            var bulletId = rdr.ReadInt32();
             client.Player.TryHitSquare(time, bulletId);
         }
 
         private static void PlayerHit(Client client, PacketReader rdr)
         {
-            var bulletId = rdr.ReadInt32(); 
+            var bulletId = rdr.ReadInt32();
             client.Player.TryHit(bulletId);
         }
 
         private static void ShootAck(Client client, PacketReader rdr)
         {
-            var time = rdr.ReadInt32(); 
+            var time = rdr.ReadInt32();
             client.Player.TryShootAck(time);
         }
 
         private static void AoeAck(Client client, PacketReader rdr)
         {
             var time = rdr.ReadInt32();
-            var pos = new Vector2(rdr); 
+            var pos = new Vector2(rdr);
             client.Player.TryAckAoe(time, pos);
         }
 
@@ -546,7 +548,7 @@ namespace RotMG.Networking
             var mapJson = rdr.ReadBytes(rdr.ReadInt32());
 
             if (client.State != ProtocolState.Handshaked) return; //Only allow Hello to be processed once.
-            
+
             var acc = Database.Verify(username, password, client.IP);
             if (acc == null)
             {
@@ -657,14 +659,14 @@ namespace RotMG.Networking
         private static void Move(Client client, PacketReader rdr)
         {
             var time = rdr.ReadInt32();
-            var position = new Vector2(rdr); 
+            var position = new Vector2(rdr);
             client.Player.TryMove(time, position);
         }
 
         private static void InvSwap(Client client, PacketReader rdr)
         {
             var slot1 = new SlotData(rdr);
-            var slot2 = new SlotData(rdr); 
+            var slot2 = new SlotData(rdr);
             client.Player.SwapItem(slot1, slot2);
         }
 
@@ -874,6 +876,7 @@ namespace RotMG.Networking
                             wtr.Write((int)k.Value);
                     }
                 }
+
                 return (wtr.BaseStream as MemoryStream).ToArray();
             }
         }
@@ -894,6 +897,7 @@ namespace RotMG.Networking
                     wtr.Write(numShots);
                     wtr.Write(angleInc);
                 }
+
                 return (wtr.BaseStream as MemoryStream).ToArray();
             }
         }
@@ -975,7 +979,7 @@ namespace RotMG.Networking
                 return (wtr.BaseStream as MemoryStream).ToArray();
             }
         }
-        
+
         public static byte[] PlaySound(string sound)
         {
             using (var wtr = new PacketWriter(new MemoryStream()))

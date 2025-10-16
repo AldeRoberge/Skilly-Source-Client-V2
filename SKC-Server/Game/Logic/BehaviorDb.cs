@@ -7,18 +7,20 @@ using RotMG.Game.Logic.Loots;
 
 namespace RotMG.Game.Logic
 {
-    public interface IBehavior { }
+    public interface IBehavior
+    {
+    }
 
     public interface IBehaviorDatabase
     {
         public void Init(BehaviorDb db);
     }
 
-    public class BehaviorModel 
+    public class BehaviorModel
     {
         public Dictionary<int, State> States;
-        public List<Behavior> Behaviors;
-        public Loot Loot;
+        public List<Behavior>         Behaviors;
+        public Loot                   Loot;
 
         public BehaviorModel(params IBehavior[] behaviors)
         {
@@ -35,31 +37,32 @@ namespace RotMG.Game.Logic
                     States.Add(state.Id, state);
                 }
             }
+
             Loot = new Loot(loots.ToArray());
 
             foreach (var s1 in States.Values)
-                foreach (var t in s1.Transitions)
-                    foreach (var s2 in States.Values)
-                        if (s2.StringId == t.StringTargetState)
-                            t.TargetState = s2.Id;
+            foreach (var t in s1.Transitions)
+            foreach (var s2 in States.Values)
+                if (s2.StringId == t.StringTargetState)
+                    t.TargetState = s2.Id;
 
             foreach (var s1 in States.Values)
-                foreach (var s2 in s1.States.Values)
-                    s2.FindStateTransitions();
+            foreach (var s2 in s1.States.Values)
+                s2.FindStateTransitions();
         }
     }
 
     public class BehaviorDb
     {
-        public static int NextId;
-        public Dictionary<int, BehaviorModel> Models;
+        public static int                            NextId;
+        public        Dictionary<int, BehaviorModel> Models;
 
         public BehaviorDb()
         {
             Models = new Dictionary<int, BehaviorModel>();
             var results = from type in Assembly.GetCallingAssembly().GetTypes()
-                          where typeof(IBehaviorDatabase).IsAssignableFrom(type) && !type.IsInterface
-                          select type;
+                where typeof(IBehaviorDatabase).IsAssignableFrom(type) && !type.IsInterface
+                select type;
 
             foreach (var k in results)
             {

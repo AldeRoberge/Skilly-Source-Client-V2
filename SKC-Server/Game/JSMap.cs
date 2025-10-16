@@ -22,18 +22,24 @@ namespace RotMG.Game
                 var o = json.dict[i];
                 dict[(ushort)i] = new MapTile
                 {
-                    GroundType = o.ground == null ? (ushort)255 : Resources.Id2Tile[o.ground].Type,
-                    ObjectType = o.objs == null ? (ushort)255 : Resources.Id2Object[o.objs[0].id].Type,
+                    GroundType = o.ground == null ?
+                        (ushort)255 :
+                        Resources.Id2Tile[o.ground].Type,
+                    ObjectType = o.objs == null ?
+                        (ushort)255 :
+                        Resources.Id2Object[o.objs[0].id].Type,
                     Key = o.objs?[0].name,
-                    Region = o.regions == null ? Region.None : (Region)Enum.Parse(typeof(Region), o.regions[0].id.Replace(" ", ""))
+                    Region = o.regions == null ?
+                        Region.None :
+                        (Region)Enum.Parse(typeof(Region), o.regions[0].id.Replace(" ", ""))
                 };
             }
 
             using (var rdr = new PacketReader(new MemoryStream(buffer)))
             {
                 for (var y = 0; y < json.height; y++)
-                    for (var x = 0; x < json.width; x++)
-                        tiles[x, y] = dict[(ushort)rdr.ReadInt16()];
+                for (var x = 0; x < json.width; x++)
+                    tiles[x, y] = dict[(ushort)rdr.ReadInt16()];
             }
 
             //Add composite under cave walls
@@ -63,13 +69,13 @@ namespace RotMG.Game
         {
             Regions = new Dictionary<Region, List<IntPoint>>();
             for (var x = 0; x < Width; x++)
-                for (var y = 0; y < Height; y++)
-                {
-                    var tile = Tiles[x, y];
-                    if (!Regions.ContainsKey(tile.Region))
-                        Regions[tile.Region] = new List<IntPoint>();
-                    Regions[tile.Region].Add(new IntPoint(x, y));
-                }
+            for (var y = 0; y < Height; y++)
+            {
+                var tile = Tiles[x, y];
+                if (!Regions.ContainsKey(tile.Region))
+                    Regions[tile.Region] = new List<IntPoint>();
+                Regions[tile.Region].Add(new IntPoint(x, y));
+            }
         }
 
         private struct json_dat
@@ -93,5 +99,4 @@ namespace RotMG.Game
             public string name { get; set; }
         }
     }
-
 }

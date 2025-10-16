@@ -8,7 +8,7 @@ namespace RotMG.Game.Worlds
     public class OryxCastle : World
     {
         public int IncomingPlayers;
-        
+
         public OryxCastle(Map map, WorldDesc desc) : base(map, desc)
         {
         }
@@ -28,7 +28,7 @@ namespace RotMG.Game.Worlds
             {
                 spawns = GetAllRegion(Region.Spawn).Take(3).ToArray();
             }
-            else 
+            else
             {
                 spawns = GetAllRegion(Region.Spawn).ToArray();
             }

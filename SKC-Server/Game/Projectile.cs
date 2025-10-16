@@ -32,7 +32,9 @@ namespace RotMG.Game
             if (Desc.Accelerate) speed *= elapsed / Desc.LifetimeMS;
             if (Desc.Decelerate) speed *= 2 - elapsed / Desc.LifetimeMS;
             var dist = elapsed * (speed / 10000f);
-            var phase = Id % 2 == 0 ? 0 : MathF.PI;
+            var phase = Id % 2 == 0 ?
+                0 :
+                MathF.PI;
             if (Desc.Wavy)
             {
                 var periodFactor = 6 * MathF.PI;
@@ -44,8 +46,12 @@ namespace RotMG.Game
             else if (Desc.Parametric)
             {
                 var t = elapsed / Desc.LifetimeMS * 2 * MathF.PI;
-                var x = MathF.Sin(t) * (Id % 2 == 1 ? 1 : -1);
-                var y = MathF.Sin(2 * t) * (Id % 4 < 2 ? 1 : -1);
+                var x = MathF.Sin(t) * (Id % 2 == 1 ?
+                    1 :
+                    -1);
+                var y = MathF.Sin(2 * t) * (Id % 4 < 2 ?
+                    1 :
+                    -1);
                 var sin = MathF.Sin(Angle);
                 var cos = MathF.Cos(Angle);
                 p.X += (x * cos - y * sin) * Desc.Magnitude;
@@ -61,6 +67,7 @@ namespace RotMG.Game
                         dist = halfway - (dist - halfway);
                     }
                 }
+
                 p.X += dist * MathF.Cos(Angle);
                 p.Y += dist * MathF.Sin(Angle);
                 if (Desc.Amplitude != 0)

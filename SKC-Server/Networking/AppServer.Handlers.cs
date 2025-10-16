@@ -37,7 +37,9 @@ namespace RotMG.Networking
             }, () => _listenEvent.Set());
             _listenEvent.WaitOne();
 
-            return accountInUse ? WriteError("Account in use!") : Write(data.ToString());
+            return accountInUse ?
+                WriteError("Account in use!") :
+                Write(data.ToString());
         }
 
         private static byte[] Verify(HttpListenerContext context, NameValueCollection query)
@@ -91,11 +93,8 @@ namespace RotMG.Networking
         private static byte[] FameList(HttpListenerContext context, NameValueCollection query)
         {
             byte[] data = null;
-            _listenEvent.Reset(); 
-            Program.PushWork(() =>
-            {
-                data = Write(Database.GetLegends(query["timespan"]).ToString());
-            }, () => _listenEvent.Set());
+            _listenEvent.Reset();
+            Program.PushWork(() => { data = Write(Database.GetLegends(query["timespan"]).ToString()); }, () => _listenEvent.Set());
             _listenEvent.WaitOne();
             return data;
         }
@@ -109,7 +108,9 @@ namespace RotMG.Networking
             Program.PushWork(() =>
             {
                 var legend = Database.GetLegend(accId, charId);
-                data = string.IsNullOrWhiteSpace(legend) ? WriteError("Invalid character") : Write(legend);
+                data = string.IsNullOrWhiteSpace(legend) ?
+                    WriteError("Invalid character") :
+                    Write(legend);
             }, () => _listenEvent.Set());
             _listenEvent.WaitOne();
             return data;
@@ -132,7 +133,9 @@ namespace RotMG.Networking
                 else if (Database.IsAccountInUse(acc))
                     data = WriteError("Account in use!");
                 else
-                    data = Database.DeleteCharacter(acc, charId) ? WriteSuccess() : WriteError("Issue deleting character");
+                    data = Database.DeleteCharacter(acc, charId) ?
+                        WriteSuccess() :
+                        WriteError("Issue deleting character");
             }, () => _listenEvent.Set());
             _listenEvent.WaitOne();
 
@@ -141,7 +144,6 @@ namespace RotMG.Networking
 
         private static byte[] AccountPurchaseCharSlot(HttpListenerContext context, NameValueCollection query)
         {
-
             byte[] data = null;
 
             var username = query["username"];
@@ -156,7 +158,9 @@ namespace RotMG.Networking
                 else if (Database.IsAccountInUse(acc))
                     data = WriteError("Account in use!");
                 else
-                    data = Database.BuyCharSlot(acc) ? WriteSuccess() : WriteError("Not enough fame");
+                    data = Database.BuyCharSlot(acc) ?
+                        WriteSuccess() :
+                        WriteError("Not enough fame");
             }, () => _listenEvent.Set());
             _listenEvent.WaitOne();
 
@@ -165,7 +169,6 @@ namespace RotMG.Networking
 
         private static byte[] AccountPurchaseSkin(HttpListenerContext context, NameValueCollection query)
         {
-
             byte[] data = null;
 
             var username = query["username"];
@@ -181,7 +184,9 @@ namespace RotMG.Networking
                 else if (Database.IsAccountInUse(acc))
                     data = WriteError("Account in use!");
                 else
-                    data = Database.BuySkin(acc, skinType) ? WriteSuccess() : WriteError("Could not buy skin");
+                    data = Database.BuySkin(acc, skinType) ?
+                        WriteSuccess() :
+                        WriteError("Could not buy skin");
             }, () => _listenEvent.Set());
             _listenEvent.WaitOne();
 
@@ -190,7 +195,6 @@ namespace RotMG.Networking
 
         private static byte[] AccountChangePassword(HttpListenerContext context, NameValueCollection query)
         {
-
             byte[] data = null;
 
             var username = query["username"];
@@ -206,7 +210,9 @@ namespace RotMG.Networking
                 else if (Database.IsAccountInUse(acc))
                     data = WriteError("Account in use!");
                 else
-                    data = Database.ChangePassword(acc, newPassword) ? WriteSuccess() : WriteError("Could not change password");
+                    data = Database.ChangePassword(acc, newPassword) ?
+                        WriteSuccess() :
+                        WriteError("Could not change password");
             }, () => _listenEvent.Set());
             _listenEvent.WaitOne();
 
@@ -216,7 +222,7 @@ namespace RotMG.Networking
         private static byte[] GuildListMembers(HttpListenerContext context, NameValueCollection query)
         {
             byte[] data = null;
-            
+
             var username = query["username"];
             var password = query["password"];
 
@@ -241,7 +247,7 @@ namespace RotMG.Networking
         private static byte[] GuildGetBoard(HttpListenerContext context, NameValueCollection query)
         {
             byte[] data = null;
-            
+
             var username = query["username"];
             var password = query["password"];
 
@@ -266,7 +272,7 @@ namespace RotMG.Networking
         private static byte[] GuildSetBoard(HttpListenerContext context, NameValueCollection query)
         {
             byte[] data = null;
-            
+
             var username = query["username"];
             var password = query["password"];
 
@@ -282,9 +288,9 @@ namespace RotMG.Networking
                     data = WriteError("No permission");
                 else
                 {
-                    data = Database.SetGuildBoard(Database.GetGuild(acc.GuildName), query["board"])
-                        ? Write(query["board"])
-                        : WriteError("Failed to set board");
+                    data = Database.SetGuildBoard(Database.GetGuild(acc.GuildName), query["board"]) ?
+                        Write(query["board"]) :
+                        WriteError("Failed to set board");
                 }
             }, () => _listenEvent.Set());
             _listenEvent.WaitOne();

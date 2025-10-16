@@ -24,11 +24,12 @@ namespace RotMG.Game.Logic.Transitions
                 host.StateCooldown[Id] = Time;
                 return true;
             }
+
             return false;
         }
 
         public override void Exit(Entity host)
-        { 
+        {
             host.StateCooldown.Remove(Id);
         }
     }

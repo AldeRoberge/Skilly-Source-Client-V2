@@ -39,7 +39,7 @@ namespace RotMG.Game
         RealmPortal,
         GuildPortal,
     }
-    
+
     public enum Terrain : byte
     {
         None = 0,
@@ -62,8 +62,8 @@ namespace RotMG.Game
     {
         public MapTile OriginalTile;
         public Terrain Terrain;
-        public byte Elevation;
-        
+        public byte    Elevation;
+
         public ushort GroundType;
         public ushort ObjectType;
         public Region Region;
@@ -74,17 +74,16 @@ namespace RotMG.Game
             tile.Region = Region;
             tile.Key = Key;
             world.UpdateTile(x, y, GroundType);
-
         }
     }
-    
+
     public abstract class Map
     {
-        public MapTile[,] Tiles;
-        public int Width;
-        public int Height;
+        public MapTile[,]                         Tiles;
+        public int                                Width;
+        public int                                Height;
         public Dictionary<Region, List<IntPoint>> Regions;
-        
+
         public void ProjectOntoWorld(World world, IntPoint pos)
         {
             for (var y = 0; y < Height; y++)
@@ -99,13 +98,13 @@ namespace RotMG.Game
                 var spTile = Tiles[x, y];
                 if (spTile.GroundType == 255)
                     continue;
-                
+
                 if (tile.Region != 0)
                 {
                     world.Map.Regions[tile.Region].Remove(new IntPoint(projX, projY));
                     world.Map.Regions[spTile.Region].Add(new IntPoint(projX, projY));
                 }
-                
+
                 tile.Region = spTile.Region;
                 tile.Key = spTile.Key;
                 world.UpdateTile(projX, projY, spTile.GroundType);

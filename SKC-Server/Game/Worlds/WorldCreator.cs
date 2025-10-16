@@ -24,8 +24,8 @@ namespace RotMG.Game.Worlds
                     continue;
 
                 if (desc.Name == "Vault" || desc.Name == "GuildHall")
-                    return (World) Activator.CreateInstance(world, map, desc, client);
-                return (World) Activator.CreateInstance(world, map, desc);
+                    return (World)Activator.CreateInstance(world, map, desc, client);
+                return (World)Activator.CreateInstance(world, map, desc);
             }
 
             return new World(map, desc);

@@ -33,10 +33,10 @@ namespace RotMG.Game
                     else if (!string.IsNullOrEmpty(obj))
                         Program.Print(PrintType.Warn, $"Object: {obj} not found.");
 #endif
-                    
+
                     tile.Key = rdr.ReadString();
-                    tile.Terrain = (Terrain) rdr.ReadByte();
-                    tile.Region = (Region) rdr.ReadByte();
+                    tile.Terrain = (Terrain)rdr.ReadByte();
+                    tile.Region = (Region)rdr.ReadByte();
                     if (version == 1)
                         tile.Elevation = rdr.ReadByte();
                     tiles.Add(tile);
@@ -45,27 +45,27 @@ namespace RotMG.Game
                 Width = rdr.ReadInt32();
                 Height = rdr.ReadInt32();
                 Tiles = new MapTile[Width, Height];
-                
+
                 Regions = new Dictionary<Region, List<IntPoint>>();
                 Terrains = new Dictionary<Terrain, List<IntPoint>>();
                 for (var y = 0; y < Height; y++)
-                    for (var x = 0; x < Width; x++)
-                    {
-                        var tile = tiles[rdr.ReadInt16()];
-                        if (version == 2)
-                            tile.Elevation = rdr.ReadByte();
-                        
-                        if (!Regions.ContainsKey(tile.Region))
-                            Regions[tile.Region] = new List<IntPoint>();
-                        Regions[tile.Region].Add(new IntPoint(x, y));
-                        
-                        if (!Terrains.ContainsKey(tile.Terrain))
-                            Terrains[tile.Terrain] = new List<IntPoint>();
-                        Terrains[tile.Terrain].Add(new IntPoint(x, y));
+                for (var x = 0; x < Width; x++)
+                {
+                    var tile = tiles[rdr.ReadInt16()];
+                    if (version == 2)
+                        tile.Elevation = rdr.ReadByte();
 
-                        Tiles[x, y] = tile;
-                    }
-                
+                    if (!Regions.ContainsKey(tile.Region))
+                        Regions[tile.Region] = new List<IntPoint>();
+                    Regions[tile.Region].Add(new IntPoint(x, y));
+
+                    if (!Terrains.ContainsKey(tile.Terrain))
+                        Terrains[tile.Terrain] = new List<IntPoint>();
+                    Terrains[tile.Terrain].Add(new IntPoint(x, y));
+
+                    Tiles[x, y] = tile;
+                }
+
                 //Add composite under cave walls
                 for (var x = 0; x < Width; x++)
                 {

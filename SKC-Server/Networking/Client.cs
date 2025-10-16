@@ -19,21 +19,21 @@ namespace RotMG.Networking
     public class Client
     {
         public ProtocolState State;
-        public int Id;
-        public int TargetWorldId;
-        public string IP;
+        public int           Id;
+        public int           TargetWorldId;
+        public string        IP;
 
-        public AccountModel Account;
+        public AccountModel   Account;
         public CharacterModel Character;
-        public Player Player;
-        public wRandom Random;
-        public bool Active; //Used in escape to stop incoming packets (so you don't die)
-        public int DCTime;
+        public Player         Player;
+        public wRandom        Random;
+        public bool           Active; //Used in escape to stop incoming packets (so you don't die)
+        public int            DCTime;
 
-        private Socket _socket;
+        private Socket        _socket;
         private Queue<byte[]> _pending;
-        private SendState _send;
-        private ReceiveState _receive;
+        private SendState     _send;
+        private ReceiveState  _receive;
 
         public Client(SendState send, ReceiveState receive)
         {
@@ -56,7 +56,7 @@ namespace RotMG.Networking
             {
                 Program.Print(PrintType.Debug, $"Disconnecting client from <{_socket.RemoteEndPoint}>");
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 Program.Print(PrintType.Error, ex.ToString());
             }
@@ -176,6 +176,7 @@ namespace RotMG.Networking
                         _receive.State = SocketEventState.InProgress;
                         StartReceive();
                     }
+
                     break;
                 case SocketEventState.InProgress:
                     if (_receive.PacketLength == 1014001516) //Hacky policy file..
@@ -216,6 +217,7 @@ namespace RotMG.Networking
                         _send.State = SocketEventState.InProgress;
                         StartSend();
                     }
+
                     break;
                 case SocketEventState.InProgress:
                     Buffer.BlockCopy(_send.PacketBytes, 0, _send.Data, GameServer.PrefixLengthWithId, _send.PacketLength);
@@ -248,7 +250,9 @@ namespace RotMG.Networking
 
         public uint NextIntRange(uint min, uint max)
         {
-            return min == max ? min : min + Gen() % (max - min);
+            return min == max ?
+                min :
+                min + Gen() % (max - min);
         }
 
         private uint Gen()
@@ -261,6 +265,7 @@ namespace RotMG.Networking
             {
                 lb -= 2147483647;
             }
+
             return _seed = lb;
         }
     }

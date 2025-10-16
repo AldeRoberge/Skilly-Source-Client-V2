@@ -10,12 +10,12 @@ namespace RotMG.Game.Worlds
     public sealed class Vault : World
     {
         private readonly Client _client;
-        
+
         public Vault(Map map, WorldDesc desc, Client client) : base(map, desc)
         {
             if (client == null)
                 return;
-            
+
             _client = client;
 
             // Get regions
@@ -38,7 +38,7 @@ namespace RotMG.Game.Worlds
                 AddEntity(chest, vaultChestLocations[0].ToVector2() + .5f);
                 vaultChestLocations.RemoveAt(0);
             }
-            
+
             foreach (var point in vaultChestLocations)
             {
                 var chest = new ClosedVaultChest();
@@ -56,7 +56,7 @@ namespace RotMG.Game.Worlds
                 AddEntity(chest, giftChestLocations[0].ToVector2() + .5f);
                 giftChestLocations.RemoveAt(0);
             }
-            
+
             foreach (var point in giftChestLocations)
             {
                 var chest = new Entity(0x0743);

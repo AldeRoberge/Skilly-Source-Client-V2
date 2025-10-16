@@ -93,7 +93,7 @@ namespace RotMG.Game.SetPieces
         public static Dictionary<string, int> ApplySetPieces(Realm world)
         {
             var map = world.Map;
-            
+
             var rects = new HashSet<Rect>();
             var spawns = new Dictionary<string, int>();
             foreach (var dat in setPieces)

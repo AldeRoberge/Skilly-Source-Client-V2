@@ -43,6 +43,7 @@ namespace RotMG.Utils
                     dist = d;
                 }
             }
+
             return nearest;
         }
 
@@ -67,6 +68,7 @@ namespace RotMG.Utils
                     dist = d;
                 }
             }
+
             return nearest;
         }
 
@@ -95,6 +97,7 @@ namespace RotMG.Utils
                     dist = d;
                 }
             }
+
             return nearest;
         }
 
@@ -126,6 +129,7 @@ namespace RotMG.Utils
                     dist = d;
                 }
             }
+
             return nearest;
         }
 
@@ -160,6 +164,7 @@ namespace RotMG.Utils
                     dist = d;
                 }
             }
+
             return nearest;
         }
 
@@ -191,6 +196,7 @@ namespace RotMG.Utils
                     dist = d;
                 }
             }
+
             return nearest;
         }
 
@@ -214,6 +220,7 @@ namespace RotMG.Utils
                     dist = d;
                 }
             }
+
             return nearest;
         }
     }

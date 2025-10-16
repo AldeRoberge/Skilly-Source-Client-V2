@@ -106,27 +106,28 @@ namespace RotMG.Game
 
     public class Entity : IDisposable
     {
-        private const int MaxEfffects = 29;
+        private const int   MaxEfffects   = 29;
         private const float MoveThreshold = 0.4f;
 
-        public int Id;
-        public ushort Type;
+        public int        Id;
+        public ushort     Type;
         public ObjectDesc Desc;
-        public Vector2 Position;
-        public Chunk CurrentChunk;
-        public World Parent;
+        public Vector2    Position;
+        public Chunk      CurrentChunk;
+        public World      Parent;
 
-        public BehaviorModel Behavior;
-        public List<State> CurrentStates;
-        public Dictionary<int, int> StateCooldown; //Used for cooldowns (could be merged with DynamicObjects but it's faster this way)
+        public BehaviorModel           Behavior;
+        public List<State>             CurrentStates;
+        public Dictionary<int, int>    StateCooldown; //Used for cooldowns (could be merged with DynamicObjects but it's faster this way)
         public Dictionary<int, object> StateObject; //Used for things like WanderStates etc.
-        public List<Vector2> History;
-        public bool Dead;
-        public bool Constant;
-        public int? Lifetime;
+        public List<Vector2>           History;
+        public bool                    Dead;
+        public bool                    Constant;
+        public int?                    Lifetime;
 
-        public int[] Effects;
+        public  int[]            Effects;
         private ConditionEffects _conditionEffects;
+
         public ConditionEffects ConditionEffects
         {
             get => _conditionEffects;
@@ -134,6 +135,7 @@ namespace RotMG.Game
         }
 
         private int _hp;
+
         public int Hp
         {
             get => _hp;
@@ -141,6 +143,7 @@ namespace RotMG.Game
         }
 
         private int _maxHp;
+
         public int MaxHp
         {
             get => _maxHp;
@@ -148,6 +151,7 @@ namespace RotMG.Game
         }
 
         private int _size;
+
         public int Size
         {
             get => _size;
@@ -155,13 +159,14 @@ namespace RotMG.Game
         }
 
         private string _name;
+
         public string Name
         {
             get => _name;
             set => TrySetSV(StatType.Name, _name = value);
         }
 
-        public int UpdateCount;
+        public int                          UpdateCount;
         public Dictionary<StatType, object> SVs;
         public Dictionary<StatType, object> NewSVs;
 
@@ -194,7 +199,7 @@ namespace RotMG.Game
             return Parent != null && !Dead;
         }
 
-        public virtual bool HitByProjectile(Projectile projectile) 
+        public virtual bool HitByProjectile(Projectile projectile)
         {
             return false;
         }
@@ -233,7 +238,6 @@ namespace RotMG.Game
         //Callback when Lifetime ends
         public virtual void OnLifeEnd()
         {
-
         }
 
         public Vector2 TryGetHistory(int ticksBackwards)
@@ -258,7 +262,7 @@ namespace RotMG.Game
             if (duration != -1 && (float)duration / Settings.MillisecondsPerTick != duration / Settings.MillisecondsPerTick)
                 throw new Exception("Effect time out of sync with tick time.");
 #endif
-            if (effect == ConditionEffectIndex.Nothing || 
+            if (effect == ConditionEffectIndex.Nothing ||
                 effect == ConditionEffectIndex.Stunned && HasConditionEffect(ConditionEffectIndex.StunImmune))
                 return;
 
@@ -315,7 +319,7 @@ namespace RotMG.Game
             var dx = pos.X - Position.X;
             var dy = pos.Y - Position.Y;
 
-            if (dx is < MoveThreshold and > -MoveThreshold && 
+            if (dx is < MoveThreshold and > -MoveThreshold &&
                 dy is < MoveThreshold and > -MoveThreshold)
             {
                 return CalcNewLocation(pos);
@@ -356,14 +360,18 @@ namespace RotMG.Game
 
             if (isFarX)
             {
-                fx = pos.X > Position.X ? (int)(pos.X * 2) / 2f : (int)(Position.X * 2) / 2f;
+                fx = pos.X > Position.X ?
+                    (int)(pos.X * 2) / 2f :
+                    (int)(Position.X * 2) / 2f;
                 if ((int)fx > (int)Position.X)
                     fx -= 0.01f;
             }
 
             if (isFarY)
             {
-                fy = pos.Y > Position.Y ? (int)(pos.Y * 2) / 2f : (int)(Position.Y * 2) / 2f;
+                fy = pos.Y > Position.Y ?
+                    (int)(pos.Y * 2) / 2f :
+                    (int)(Position.Y * 2) / 2f;
                 if ((int)fy > (int)Position.Y)
                     fy -= 0.01f;
             }
@@ -380,8 +388,12 @@ namespace RotMG.Game
                 return pos;
             }
 
-            var ax = pos.X > Position.X ? pos.X - fx : fx - pos.X;
-            var ay = pos.Y > Position.Y ? pos.Y - fy : fy - pos.Y;
+            var ax = pos.X > Position.X ?
+                pos.X - fx :
+                fx - pos.X;
+            var ay = pos.Y > Position.Y ?
+                pos.Y - fy :
+                fy - pos.Y;
             if (ax > ay)
             {
                 if (RegionUnblocked(pos.X, fy))
@@ -403,7 +415,7 @@ namespace RotMG.Game
                     pos.X = fx;
                     return pos;
                 }
-               
+
                 if (RegionUnblocked(pos.X, fy))
                 {
                     pos.Y = fy;
@@ -583,9 +595,8 @@ namespace RotMG.Game
                     //Switch state if needed
                     if (targetState != -1)
                     {
-
                         //Exit old behaviors/transitions
-                        for (var k = i; k < CurrentStates.Count; k++) 
+                        for (var k = i; k < CurrentStates.Count; k++)
                         {
                             foreach (var behavior in CurrentStates[k].Behaviors) behavior.Exit(this);
                             foreach (var transition in CurrentStates[k].Transitions) transition.Exit(this);
@@ -597,7 +608,9 @@ namespace RotMG.Game
 
                         //Get new substates
                         var subIndex = i - 1;
-                        var states = i == 0 ? Behavior.States : CurrentStates[i - 1].States;
+                        var states = i == 0 ?
+                            Behavior.States :
+                            CurrentStates[i - 1].States;
                         while (states != null)
                         {
                             subIndex++;
@@ -616,6 +629,7 @@ namespace RotMG.Game
                             foreach (var behavior in CurrentStates[k].Behaviors) behavior.Enter(this);
                             foreach (var transition in CurrentStates[k].Transitions) transition.Enter(this);
                         }
+
                         break;
                     }
                 }
@@ -659,7 +673,9 @@ namespace RotMG.Game
             {
                 Id = Id,
                 Position = Position,
-                Stats = newTick ? NewSVs : SVs
+                Stats = newTick ?
+                    NewSVs :
+                    SVs
             };
         }
 
@@ -680,6 +696,7 @@ namespace RotMG.Game
                 StateObject.Clear();
                 CurrentStates.Clear();
             }
+
             SVs.Clear();
             NewSVs.Clear();
             Parent = null;
@@ -690,7 +707,7 @@ namespace RotMG.Game
             var desc = Resources.Type2Object[type];
 
 #if DEBUG
-            if (desc.Player) 
+            if (desc.Player)
                 throw new Exception("Cannot dynamically resolve a player entity.");
 #endif
 
@@ -706,6 +723,7 @@ namespace RotMG.Game
                 case "ClosedVaultChest":
                     return new ClosedVaultChest();
             }
+
             if (desc.Static) return new StaticObject(type);
             if (desc.Enemy) return new Enemy(type);
             return new Entity(type);

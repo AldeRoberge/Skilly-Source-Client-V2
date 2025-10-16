@@ -7,9 +7,9 @@ namespace RotMG.Game
 {
     public class Chunk
     {
-        public HashSet<Entity> Entities;
-        public readonly int X;
-        public readonly int Y;
+        public          HashSet<Entity> Entities;
+        public readonly int             X;
+        public readonly int             Y;
 
         public Chunk(int x, int y)
         {
@@ -35,12 +35,12 @@ namespace RotMG.Game
 
     public class ChunkController
     {
-        public const int Size = 8;
+        public const int Size         = 8;
         public const int ActiveRadius = 32 / Size;
 
         public Chunk[,] Chunks;
-        public int Width;
-        public int Height;
+        public int      Width;
+        public int      Height;
 
         public ChunkController(int width, int height)
         {
@@ -48,8 +48,8 @@ namespace RotMG.Game
             Height = height;
             Chunks = new Chunk[Convert(Width) + 1, Convert(Height) + 1];
             for (var x = 0; x < Chunks.GetLength(0); x++)
-                for (var y = 0; y < Chunks.GetLength(1); y++)
-                    Chunks[x, y] = new Chunk(x, y);
+            for (var y = 0; y < Chunks.GetLength(1); y++)
+                Chunks[x, y] = new Chunk(x, y);
         }
 
         public Chunk GetChunk(int x, int y)
@@ -105,10 +105,10 @@ namespace RotMG.Game
             var endY = Math.Min(Chunks.GetLength(1) - 1, beginY + size);
 
             for (var x = startX; x <= endX; x++)
-                for (var y = startY; y <= endY; y++)
-                    foreach (var en in Chunks[x, y].Entities)
-                        if (target.Distance(en) < radius)
-                            result.Add(en);
+            for (var y = startY; y <= endY; y++)
+                foreach (var en in Chunks[x, y].Entities)
+                    if (target.Distance(en) < radius)
+                        result.Add(en);
 
             return result;
         }
@@ -117,16 +117,16 @@ namespace RotMG.Game
         {
             var result = new List<Entity>();
             foreach (var c in chunks)
-                foreach (var en in c.Entities)
-                    result.Add(en);
+            foreach (var en in c.Entities)
+                result.Add(en);
             return result;
         }
 
         public void Dispose()
         {
             for (var w = 0; w < Chunks.GetLength(0); w++)
-                for (var h = 0; h < Chunks.GetLength(1); h++)
-                    Chunks[w, h].Entities.Clear();
+            for (var h = 0; h < Chunks.GetLength(1); h++)
+                Chunks[w, h].Entities.Clear();
             Chunks = null;
         }
     }

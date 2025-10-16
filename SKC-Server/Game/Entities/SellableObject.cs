@@ -25,6 +25,7 @@ namespace RotMG.Game.Entities
     public class SellableStatic : StaticObject, ISellable
     {
         private int _price;
+
         public int Price
         {
             get => _price;
@@ -32,6 +33,7 @@ namespace RotMG.Game.Entities
         }
 
         private Currency _currency;
+
         public Currency Currency
         {
             get => _currency;
@@ -39,6 +41,7 @@ namespace RotMG.Game.Entities
         }
 
         private int _rankRequired;
+
         public int RankRequired
         {
             get => _rankRequired;
@@ -74,10 +77,11 @@ namespace RotMG.Game.Entities
             player.Client.Send(GameServer.BuyResult(1, message));
         }
     }
-    
+
     public class SellableEntity : Entity, ISellable
     {
         private int _price;
+
         public int Price
         {
             get => _price;
@@ -85,6 +89,7 @@ namespace RotMG.Game.Entities
         }
 
         private Currency _currency;
+
         public Currency Currency
         {
             get => _currency;
@@ -92,6 +97,7 @@ namespace RotMG.Game.Entities
         }
 
         private int _rankRequired;
+
         public int RankRequired
         {
             get => _rankRequired;

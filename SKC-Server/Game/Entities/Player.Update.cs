@@ -8,10 +8,10 @@ namespace RotMG.Game.Entities
 {
     public partial class Player
     {
-        public const int SightRadius = 15;
-        private const float StartAngle = 0;
-        private const float EndAngle = (float)(2 * Math.PI);
-        private const float RayStepSize = .05f;
+        public const  int   SightRadius   = 15;
+        private const float StartAngle    = 0;
+        private const float EndAngle      = (float)(2 * Math.PI);
+        private const float RayStepSize   = .05f;
         private const float AngleStepSize = 2.30f / (SightRadius * 2);
 
         private static readonly IntPoint[] SurroundingPoints =
@@ -27,16 +27,18 @@ namespace RotMG.Game.Entities
         ];
 
         private static HashSet<IntPoint> SightCircle;
+
         public static void InitSightCircle()
         {
             SightCircle = [];
             for (var x = -SightRadius; x <= SightRadius; x++)
-                for (var y = -SightRadius; y <= SightRadius; y++)
-                    if (x * x + y * y <= SightRadius * SightRadius)
-                        SightCircle.Add(new IntPoint(x, y));
+            for (var y = -SightRadius; y <= SightRadius; y++)
+                if (x * x + y * y <= SightRadius * SightRadius)
+                    SightCircle.Add(new IntPoint(x, y));
         }
 
         private static HashSet<IntPoint>[] SightRays;
+
         public static void InitSightRays()
         {
             var sightRays = new List<HashSet<IntPoint>>();
@@ -56,6 +58,7 @@ namespace RotMG.Game.Entities
                         ray.Add(point);
                     dist += RayStepSize;
                 }
+
                 sightRays.Add(ray);
                 currentAngle += AngleStepSize;
             }
@@ -63,10 +66,10 @@ namespace RotMG.Game.Entities
             SightRays = sightRays.ToArray();
         }
 
-        public int[,] TileUpdates;
+        public int[,]               TileUpdates;
         public Dictionary<int, int> EntityUpdates;
-        public HashSet<Entity> Entities;
-        public HashSet<IntPoint> CalculatedSightCircle;
+        public HashSet<Entity>      Entities;
+        public HashSet<IntPoint>    CalculatedSightCircle;
 
         public void SendNewTick()
         {
@@ -87,7 +90,7 @@ namespace RotMG.Game.Entities
         {
             var nUpdate = ShouldCalculateSightCircle();
             var sight = Parent.BlockSight == 0 ? SightCircle :
-                    nUpdate ? CalculateSightCircle() : CalculatedSightCircle;
+                nUpdate ? CalculateSightCircle() : CalculatedSightCircle;
 
             var tiles = new List<TileData>();
             var adds = new List<ObjectDefinition>();
@@ -175,7 +178,7 @@ namespace RotMG.Game.Entities
                     EntityUpdates.Add(en.Id, en.UpdateCount);
                 }
             }
-            
+
             //Add quest
             if (Quest != null && Entities.Add(Quest))
             {
@@ -223,6 +226,7 @@ namespace RotMG.Game.Entities
 
         private IntPoint _p;
         private int      _w;
+
         private bool ShouldCalculateSightCircle()
         {
             var pos = Position.ToIntPoint();
@@ -232,6 +236,7 @@ namespace RotMG.Game.Entities
                 _w = Parent.UpdateCount;
                 return true;
             }
+
             return false;
         }
 
@@ -242,19 +247,19 @@ namespace RotMG.Game.Entities
             if (Parent.BlockSight == 1) //Line casting
             {
                 foreach (var ray in SightRays)
-                    foreach (var p in ray)
-                    {
-                        if (Parent.BlocksSight(p.X + (int)Position.X, p.Y + (int)Position.Y))
-                            break;
+                foreach (var p in ray)
+                {
+                    if (Parent.BlocksSight(p.X + (int)Position.X, p.Y + (int)Position.Y))
+                        break;
 
-                        CalculatedSightCircle.Add(p);
-                        foreach (var s in SurroundingPoints)
-                        {
-                            var sp = new IntPoint(p.X + s.X, p.Y + s.Y);
-                            if (SightCircle.Contains(sp))
-                                CalculatedSightCircle.Add(sp);
-                        }
+                    CalculatedSightCircle.Add(p);
+                    foreach (var s in SurroundingPoints)
+                    {
+                        var sp = new IntPoint(p.X + s.X, p.Y + s.Y);
+                        if (SightCircle.Contains(sp))
+                            CalculatedSightCircle.Add(sp);
                     }
+                }
             }
 
             if (Parent.BlockSight == 2) //Path

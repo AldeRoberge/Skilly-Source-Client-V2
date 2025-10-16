@@ -7,21 +7,24 @@ namespace RotMG.Game.Entities
     public class Portal(ushort type, int? lifetime = 30000) : Entity(type, lifetime)
     {
         private static readonly Regex PlayerCountRegex = new(@" \((\d+)\)$");
-        
+
         public World WorldInstance;
 
         private bool _usable;
+
         public bool Usable
         {
             get => _usable;
-            set => TrySetSV(StatType.Active, (_usable = value) ? 1 : 0);
+            set => TrySetSV(StatType.Active, (_usable = value) ?
+                1 :
+                0);
         }
 
         public World GetWorldInstance(Client connectingClient)
         {
             if (WorldInstance != null)
                 return WorldInstance;
-            
+
             if (!Resources.PortalId2World.TryGetValue(Type, out var worldDesc))
             {
 #if DEBUG
@@ -29,11 +32,11 @@ namespace RotMG.Game.Entities
 #endif
                 return null;
             }
-            
+
             var world = Manager.GetWorld(worldDesc.Id, connectingClient);
             if (world != null)
                 return world;
-            
+
             world = WorldInstance = Manager.AddWorld(worldDesc, connectingClient);
             world.Portal = this;
 
@@ -50,7 +53,7 @@ namespace RotMG.Game.Entities
         {
             if (Name == null)
                 return;
-            
+
             var count = WorldInstance?.Players.Count;
             Name = PlayerCountRegex.Replace(Name, $" ({count})");
         }

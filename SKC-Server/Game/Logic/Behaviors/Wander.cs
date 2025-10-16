@@ -6,7 +6,7 @@ namespace RotMG.Game.Logic.Behaviors
     public class WanderState
     {
         public Vector2 Direction;
-        public float RemainingDistance;
+        public float   RemainingDistance;
     }
 
     public class Wander : Behavior
@@ -48,6 +48,8 @@ namespace RotMG.Game.Logic.Behaviors
             host.StateObject[Id] = null;
         }
 
-        public override void Death(Entity host) { }
+        public override void Death(Entity host)
+        {
+        }
     }
 }

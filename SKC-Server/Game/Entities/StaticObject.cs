@@ -21,8 +21,8 @@ namespace RotMG.Game.Entities
 
                 var owner = projectile.Owner as Player;
                 owner.FameStats.DamageDealt += damageWithDefense;
-                owner.FameStats.ShotsThatDamage++; 
-                
+                owner.FameStats.ShotsThatDamage++;
+
                 var packet = GameServer.Damage(Id, [], damageWithDefense);
                 foreach (var en in Parent.PlayerChunks.HitTest(Position, Player.SightRadius))
                     if (en is Player player && player.Client.Account.AllyDamage && !player.Equals(owner))
@@ -35,6 +35,7 @@ namespace RotMG.Game.Entities
                     return true;
                 }
             }
+
             return false;
         }
 

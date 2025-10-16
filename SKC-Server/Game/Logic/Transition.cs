@@ -11,10 +11,16 @@
         }
 
         public string StringTargetState; //Only used for parsing.
-        public int TargetState;
+        public int    TargetState;
 
-        public virtual void Enter(Entity host) { }
+        public virtual void Enter(Entity host)
+        {
+        }
+
         public virtual bool Tick(Entity host) => false;
-        public virtual void Exit(Entity host) { }
+
+        public virtual void Exit(Entity host)
+        {
+        }
     }
 }

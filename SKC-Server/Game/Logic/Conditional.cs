@@ -4,7 +4,7 @@
     {
         public readonly Behavior[] Behaviors;
 
-        public Conditional(params Behavior[] behaviors) 
+        public Conditional(params Behavior[] behaviors)
         {
             Behaviors = behaviors;
         }
@@ -28,6 +28,7 @@
                     Behaviors[k].Tick(host);
                 return true;
             }
+
             return false;
         }
 
@@ -45,6 +46,5 @@
                     Behaviors[k].Death(host);
             }
         }
-
     }
 }

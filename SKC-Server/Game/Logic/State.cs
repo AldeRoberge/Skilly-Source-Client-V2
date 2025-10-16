@@ -6,11 +6,11 @@ namespace RotMG.Game.Logic
     public class State : IBehavior
     {
         public string StringId; //Only used for parsing.
-        public int Id;
+        public int    Id;
 
-        public State Parent;
-        public List<Behavior> Behaviors;
-        public List<Transition> Transitions;
+        public State                  Parent;
+        public List<Behavior>         Behaviors;
+        public List<Transition>       Transitions;
         public Dictionary<int, State> States;
 
         public State(string id, params IBehavior[] behaviors)
@@ -41,9 +41,9 @@ namespace RotMG.Game.Logic
         public void FindStateTransitions()
         {
             foreach (var transition in Transitions)
-                foreach (var state in Parent.States.Values)
-                    if (state.StringId == transition.StringTargetState)
-                        transition.TargetState = state.Id;
+            foreach (var state in Parent.States.Values)
+                if (state.StringId == transition.StringTargetState)
+                    transition.TargetState = state.Id;
 
             foreach (var state in States.Values)
                 state.FindStateTransitions();

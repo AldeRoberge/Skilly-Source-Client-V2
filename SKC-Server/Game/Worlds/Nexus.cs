@@ -7,9 +7,9 @@ namespace RotMG.Game.Worlds
 {
     public sealed class Nexus : World
     {
-        private static int CurrentRealms;
+        private static int            CurrentRealms;
         private static List<IntPoint> RealmSpawns;
-        
+
         public Nexus(Map map, WorldDesc desc) : base(map, desc)
         {
             var vaultPos = GetRegion(Region.VaultPortal);
@@ -41,6 +41,7 @@ namespace RotMG.Game.Worlds
                     RealmSpawns.Add(en.Position.ToIntPoint());
                     SpawnRealms();
                 }
+
             base.RemoveEntity(en);
         }
 

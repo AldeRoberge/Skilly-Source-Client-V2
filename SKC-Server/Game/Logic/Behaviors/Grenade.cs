@@ -20,18 +20,20 @@ namespace RotMG.Game.Logic.Behaviors
         uint color = 0xFFFF0000)
         : Behavior
     {
-        public readonly float                 Range            = range;
-        public readonly float                 Radius           = radius;
-        public readonly int                   Damage           = damage;
-        public readonly float?                FixedAngle       = fixedAngle * MathUtils.ToRadians;
-        public readonly int                   Cooldown         = cooldown;
-        public readonly int                   CooldownOffset   = cooldownOffset;
-        public readonly int                   CooldownVariance = cooldownVariance;
-        public readonly ConditionEffectDesc[] Effects          =
+        public readonly float  Range            = range;
+        public readonly float  Radius           = radius;
+        public readonly int    Damage           = damage;
+        public readonly float? FixedAngle       = fixedAngle * MathUtils.ToRadians;
+        public readonly int    Cooldown         = cooldown;
+        public readonly int    CooldownOffset   = cooldownOffset;
+        public readonly int    CooldownVariance = cooldownVariance;
+
+        public readonly ConditionEffectDesc[] Effects =
         [
             new ConditionEffectDesc(effect, effectDuration)
         ];
-        public readonly uint                  Color = color;
+
+        public readonly uint Color = color;
 
         public override void Enter(Entity host)
         {
@@ -58,7 +60,7 @@ namespace RotMG.Game.Logic.Behaviors
                         p = new Vector2(
                             target.Position.X,
                             target.Position.Y
-                            );
+                        );
 
 
                     var ack = new AoeAck
@@ -79,7 +81,7 @@ namespace RotMG.Game.Logic.Behaviors
                     foreach (var en in players)
                         (en as Player).Client.Send(eff);
 
-                    Manager.AddTimedAction(1500, () => 
+                    Manager.AddTimedAction(1500, () =>
                     {
                         foreach (var en in players)
                             if (en.Parent != null)
@@ -95,6 +97,7 @@ namespace RotMG.Game.Logic.Behaviors
                     host.StateCooldown[Id] += MathUtils.NextIntSnap(-CooldownVariance, CooldownVariance, Settings.MillisecondsPerTick);
                 return true;
             }
+
             return false;
         }
     }

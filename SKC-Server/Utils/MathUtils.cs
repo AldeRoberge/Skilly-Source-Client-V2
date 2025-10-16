@@ -12,6 +12,7 @@ namespace RotMG.Utils
 
         private static Random                _rnd = new();
         private static RandomNumberGenerator _gen = RNGCryptoServiceProvider.Create();
+
         public static string GenerateSalt()
         {
             var x = new byte[0x10];
@@ -32,6 +33,7 @@ namespace RotMG.Utils
                 v = ((int)(x / MathF.PI) + 1) / 2;
                 x -= v * 2 * MathF.PI;
             }
+
             return x;
         }
 
@@ -79,7 +81,9 @@ namespace RotMG.Utils
 
         public static int PlusMinus()
         {
-            return _rnd.Next(2) == 0 ? -1 : 1;
+            return _rnd.Next(2) == 0 ?
+                -1 :
+                1;
         }
 
         public static float GetSpeed(this Entity entity, float spd)
@@ -88,7 +92,9 @@ namespace RotMG.Utils
             if (entity == null || entity.Parent == null)
                 throw new Exception("Undefined entity");
 #endif
-            return entity.HasConditionEffect(ConditionEffectIndex.Slowed) ? (5.55f * spd + 0.74f) / 2 : 5.55f * spd + 0.74f;
+            return entity.HasConditionEffect(ConditionEffectIndex.Slowed) ?
+                (5.55f * spd + 0.74f) / 2 :
+                5.55f * spd + 0.74f;
         }
 
         public static float Angle(this Vector2 from, Vector2 to)
