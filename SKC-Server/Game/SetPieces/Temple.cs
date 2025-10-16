@@ -4,7 +4,7 @@ using RotMG.Game.Logic.Loots;
 
 namespace RotMG.Game.SetPieces
 {
-    abstract class Temple : ISetPiece
+    internal abstract class Temple : ISetPiece
     {
         public abstract int Size { get; }
         public abstract void RenderSetPiece(World world, IntPoint pos);
@@ -18,7 +18,7 @@ namespace RotMG.Game.SetPieces
         protected static readonly string Grass = "Jungle Grass";
         protected static readonly string Tree = "Jungle Tree Big";
 
-        protected static readonly Loot chest = new Loot(
+        protected static readonly Loot chest = new(
                 new TierLoot(4, TierLoot.LootType.Weapon, 0.3f),
                 new TierLoot(5, TierLoot.LootType.Weapon, 0.2f),
 

@@ -413,7 +413,7 @@ namespace RotMG.Networking
             var objectId = rdr.ReadInt32();
             var en = client.Player.Parent.GetEntity(objectId);
 
-            if (!(en is ISellable))
+            if (en is not ISellable)
             {
 #if DEBUG
                 Program.Print(PrintType.Error, "Tried buying from non sellable object");
@@ -466,7 +466,7 @@ namespace RotMG.Networking
             var add = rdr.ReadBoolean();
             var objectId = rdr.ReadInt32();
             var en = client.Player.Parent.GetEntity(objectId);
-            if (en != null && en is Player target) 
+            if (en is Player target) 
             {
                 if (target.AccountId == client.Player.AccountId)
                     return;
@@ -899,7 +899,7 @@ namespace RotMG.Networking
             }
         }
 
-        public static byte[] ShowEffect(ShowEffectIndex effect, int targetObjectId, uint color, Vector2 pos1 = new Vector2(), Vector2 pos2 = new Vector2())
+        public static byte[] ShowEffect(ShowEffectIndex effect, int targetObjectId, uint color, Vector2 pos1 = new(), Vector2 pos2 = new())
         {
             using (var wtr = new PacketWriter(new MemoryStream()))
             {
@@ -1066,7 +1066,8 @@ namespace RotMG.Networking
         }
 
         public static byte[] PolicyFile = _policyFile();
-        static byte[] _policyFile()
+
+        private static byte[] _policyFile()
         {
             using (var wtr = new PacketWriter(new MemoryStream()))
             {

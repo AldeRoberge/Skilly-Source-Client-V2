@@ -3,12 +3,12 @@ using RotMG.Utils;
 
 namespace RotMG.Game.SetPieces
 {
-    class Building : ISetPiece
+    internal class Building : ISetPiece
     {
-        public int Size { get { return 21; } }
+        public int Size => 21;
 
-        static readonly string Floor = "Brown Lines";
-        static readonly string Wall = "Wooden Wall";
+        private static readonly string Floor = "Brown Lines";
+        private static readonly string Wall  = "Wooden Wall";
 
         
         public void RenderSetPiece(World world, IntPoint pos)

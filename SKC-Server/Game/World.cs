@@ -21,7 +21,7 @@ namespace RotMG.Game
 
     public class World
     {
-        public Loot WorldLoot = new Loot();
+        public Loot WorldLoot = new();
 
         public int Id;
         public int NextObjectId;
@@ -178,16 +178,16 @@ namespace RotMG.Game
 
         public IntPoint GetRegion(Region region)
         {
-            if (!Map.Regions.ContainsKey(region))
+            if (!Map.Regions.TryGetValue(region, out List<IntPoint> value))
                 return new IntPoint(0, 0);
-            return Map.Regions[region][MathUtils.Next(Map.Regions[region].Count)];
+            return value[MathUtils.Next(value.Count)];
         }
 
         public List<IntPoint> GetAllRegion(Region region)
         {
-            if (!Map.Regions.ContainsKey(region))
+            if (!Map.Regions.TryGetValue(region, out List<IntPoint> value))
                 return new List<IntPoint>();
-            return Map.Regions[region];
+            return value;
         }
 
         public virtual IntPoint GetSpawnRegion()
@@ -303,17 +303,14 @@ namespace RotMG.Game
         public void RemoveStatic(int x, int y)
         {
             var tile = GetTile(x, y);
-            if (tile != null)
+            if (tile is { StaticObject: not null })
             {
-                if (tile.StaticObject != null)
-                {
-                    RemoveEntity(tile.StaticObject);
-                    tile.StaticObject = null;
-                    tile.BlocksSight = false;
-                    tile.UpdateCount++;
+                RemoveEntity(tile.StaticObject);
+                tile.StaticObject = null;
+                tile.BlocksSight = false;
+                tile.UpdateCount++;
 
-                    UpdateCount++;
-                }
+                UpdateCount++;
             }
         }
 

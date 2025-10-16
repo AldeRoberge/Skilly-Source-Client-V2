@@ -2,9 +2,9 @@
 
 namespace RotMG.Game.SetPieces
 {
-    class KageKami : ISetPiece
+    internal class KageKami : ISetPiece
     {
-        public int Size { get { return 65; } }
+        public int Size => 65;
 
         public void RenderSetPiece(World world, IntPoint pos)
         {

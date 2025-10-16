@@ -113,7 +113,7 @@ namespace RotMG.Game.Entities
             if (desc.Damage > 0 && !HasConditionEffect(ConditionEffectIndex.Invincible))
             {
                 if (!(tile.StaticObject?.Desc.ProtectFromGroundDamage ?? false) &&
-                    Damage(desc.Id, desc.Damage, new ConditionEffectDesc[0], true))
+                    Damage(desc.Id, desc.Damage, [], true))
                     return;
             }
 
@@ -196,7 +196,7 @@ namespace RotMG.Game.Entities
             if (!Parent.AllowTeleport)
                 return false;
 
-            if (!(en is Player))
+            if (en is not Player)
                 return false;
 
             if (en.HasConditionEffect(ConditionEffectIndex.Invisible))

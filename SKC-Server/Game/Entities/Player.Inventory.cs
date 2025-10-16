@@ -156,7 +156,7 @@ namespace RotMG.Game.Entities
             }
             
             //Entities which are not containers???
-            if (!(en1 is IContainer) || !(en2 is IContainer))
+            if (en1 is not IContainer || en2 is not IContainer)
             {
 #if DEBUG
                 Program.Print(PrintType.Error, "Not containers");
@@ -284,7 +284,7 @@ namespace RotMG.Game.Entities
             // soulbound item into non soulbound bag
             if (con1 is Player)
             {
-                if (d1 != null && d1.Soulbound && en2 is Container con && con.OwnerId != AccountId)
+                if (d1 is { Soulbound: true } && en2 is Container con && con.OwnerId != AccountId)
                 {
                     DropItem(slot1.SlotId);
                     Client.Send(ValidInvSwap);

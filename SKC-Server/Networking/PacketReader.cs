@@ -5,10 +5,8 @@ using System.Text;
 
 namespace RotMG.Networking
 {
-    public class PacketReader : BinaryReader
+    public class PacketReader(Stream input) : BinaryReader(input, Encoding.UTF8)
     {
-        public PacketReader(Stream input) : base(input, Encoding.UTF8) { }
-
         public override short ReadInt16()
         {
             return IPAddress.NetworkToHostOrder(base.ReadInt16());

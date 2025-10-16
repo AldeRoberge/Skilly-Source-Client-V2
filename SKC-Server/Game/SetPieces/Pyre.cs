@@ -8,16 +8,13 @@ using RotMG.Utils;
 
 namespace RotMG.Game.SetPieces
 {
-    class Pyre : ISetPiece
+    internal class Pyre : ISetPiece
     {
-        public int Size
-        {
-            get { return 30; }
-        }
+        public int Size => 30;
 
-        static readonly string Floor = "Scorch Blend";
+        private static readonly string Floor = "Scorch Blend";
 
-        static readonly Loot chest = new Loot(
+        private static readonly Loot chest = new(
                 new TierLoot(5, TierLoot.LootType.Weapon, 0.3f),
                 new TierLoot(6, TierLoot.LootType.Weapon, 0.2f),
                 new TierLoot(7, TierLoot.LootType.Weapon, 0.1f),

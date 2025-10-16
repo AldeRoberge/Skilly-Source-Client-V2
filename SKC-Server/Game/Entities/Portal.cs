@@ -4,9 +4,9 @@ using RotMG.Networking;
 
 namespace RotMG.Game.Entities
 {
-    public class Portal : Entity
+    public class Portal(ushort type, int? lifetime = 30000) : Entity(type, lifetime)
     {
-        private static readonly Regex PlayerCountRegex = new Regex(@" \((\d+)\)$");
+        private static readonly Regex PlayerCountRegex = new(@" \((\d+)\)$");
         
         public World WorldInstance;
 
@@ -16,8 +16,6 @@ namespace RotMG.Game.Entities
             get => _usable;
             set => TrySetSV(StatType.Active, (_usable = value) ? 1 : 0);
         }
-        
-        public Portal(ushort type, int? lifetime = 30000) : base(type, lifetime) { }
 
         public World GetWorldInstance(Client connectingClient)
         {

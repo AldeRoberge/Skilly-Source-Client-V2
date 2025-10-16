@@ -2,9 +2,9 @@
 
 namespace RotMG.Game.SetPieces
 {
-    class Hermit : ISetPiece
+    internal class Hermit : ISetPiece
     {
-        public int Size { get { return 32; } }
+        public int Size => 32;
 
         public void RenderSetPiece(World world, IntPoint pos)
         {

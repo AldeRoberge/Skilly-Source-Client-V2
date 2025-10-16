@@ -8,18 +8,18 @@ using RotMG.Utils;
 
 namespace RotMG.Game.SetPieces
 {
-    class Castle : ISetPiece
+    internal class Castle : ISetPiece
     {
-        public int Size { get { return 40; } }
+        public int Size => 40;
 
-        static readonly string Floor = "Rock";
-        static readonly string Bridge = "Bridge";
-        static readonly string WaterA = "Shallow Water";
-        static readonly string WaterB = "Dark Water";
-        static readonly string WallA = "Grey Wall";
-        static readonly string WallB = "Destructible Grey Wall";
+        private static readonly string Floor  = "Rock";
+        private static readonly string Bridge = "Bridge";
+        private static readonly string WaterA = "Shallow Water";
+        private static readonly string WaterB = "Dark Water";
+        private static readonly string WallA  = "Grey Wall";
+        private static readonly string WallB  = "Destructible Grey Wall";
 
-        static readonly Loot chest = new Loot(
+        private static readonly Loot chest = new(
                 new TierLoot(6, TierLoot.LootType.Weapon, 0.3f),
                 new TierLoot(7, TierLoot.LootType.Weapon, 0.2f),
                 new TierLoot(8, TierLoot.LootType.Weapon, 0.1f),

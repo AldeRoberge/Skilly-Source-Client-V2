@@ -8,15 +8,10 @@ using RotMG.Game.Worlds;
 
 namespace RotMG.Game.Entities
 {
-    public class Enemy : Entity
+    public class Enemy(ushort type) : Entity(type)
     {
-        public Dictionary<Player, int> DamageStorage;
-        public Terrain Terrain;
-
-        public Enemy(ushort type) : base(type)
-        {
-            DamageStorage = new Dictionary<Player, int>();
-        }
+        public Dictionary<Player, int> DamageStorage = new();
+        public Terrain                 Terrain;
 
         public void ApplyPoison(Player hitter, ConditionEffectDesc[] effects, int damage, int damageLeft)
         {
@@ -58,7 +53,7 @@ namespace RotMG.Game.Entities
                 List<Entity> l;
                 foreach (var en in l = Parent.PlayerChunks.HitTest(Position, Player.SightRadius))
                 {
-                    if (!(en is Player player)) 
+                    if (en is not Player player) 
                         continue;
                     var exp = baseExp;
                     if (exp > Player.GetNextLevelEXP(player.Level) / 10)
@@ -124,7 +119,7 @@ namespace RotMG.Game.Entities
 
             hitter.FameStats.DamageDealt += damageWithDefense;
 
-            var packet = GameServer.Damage(Id, new ConditionEffectIndex[0], damageWithDefense);
+            var packet = GameServer.Damage(Id, [], damageWithDefense);
             foreach (var en in Parent.PlayerChunks.HitTest(Position, Player.SightRadius))
                 if (en is Player player && player.Client.Account.AllyDamage && !player.Equals(hitter))
                     player.Client.Send(packet);
@@ -143,7 +138,7 @@ namespace RotMG.Game.Entities
         public override bool HitByProjectile(Projectile projectile)
         {
 #if DEBUG
-            if (projectile.Owner == null || !(projectile.Owner is Player))
+            if (projectile.Owner == null || projectile.Owner is not Player)
                 throw new Exception("Projectile owner is not player");
 #endif
             (projectile.Owner as Player).FameStats.ShotsThatDamage++;

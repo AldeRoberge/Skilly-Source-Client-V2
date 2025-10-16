@@ -79,9 +79,9 @@ namespace RotMG.Networking
             Program.PushWork(() =>
             {
                 var status = Database.RegisterAccount(newUsername, newPassword, GetIPFromContext(context));
-                if (status == RegisterStatus.Success)
-                    data = WriteSuccess();
-                else data = WriteError(status.ToString());
+                data = status == RegisterStatus.Success ?
+                    WriteSuccess() :
+                    WriteError(status.ToString());
             }, () => _listenEvent.Set());
             _listenEvent.WaitOne();
 

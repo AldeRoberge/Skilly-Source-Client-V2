@@ -69,7 +69,7 @@ namespace RotMG.Networking
                 Account.Save();
                 Manager.AccountIdToClientId.Remove(Account.Id);
 
-                if (Player != null && Player.Parent != null)
+                if (Player is { Parent: not null })
                 {
                     Player.TradeDone(Player.TradeResult.Canceled);
                     Player.SaveToCharacter();

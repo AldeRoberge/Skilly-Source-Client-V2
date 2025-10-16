@@ -27,8 +27,8 @@ namespace RotMG.Game
                     tile.GroundType = rdr.ReadUInt16();
                     var obj = rdr.ReadString();
                     tile.ObjectType = 255;
-                    if (Resources.Id2Object.ContainsKey(obj))
-                        tile.ObjectType = Resources.Id2Object[obj].Type;
+                    if (Resources.Id2Object.TryGetValue(obj, out ObjectDesc value))
+                        tile.ObjectType = value.Type;
 #if DEBUG
                     else if (!string.IsNullOrEmpty(obj))
                         Program.Print(PrintType.Warn, $"Object: {obj} not found.");

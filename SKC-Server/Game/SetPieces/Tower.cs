@@ -4,9 +4,9 @@ using RotMG.Utils;
 
 namespace RotMG.Game.SetPieces
 {
-    class Tower : ISetPiece
+    internal class Tower : ISetPiece
     {
-        static int[,] quarter;
+        private static int[,] quarter;
         static Tower()
         {
             var s =
@@ -33,10 +33,10 @@ namespace RotMG.Game.SetPieces
                             (a[y][x] == '=' ? 2 : 0);
         }
 
-        public int Size { get { return 27; } }
+        public int Size => 27;
 
-        static readonly string Floor = "Rock";
-        static readonly string Wall = "Grey Wall";
+        private static readonly string Floor = "Rock";
+        private static readonly string Wall  = "Grey Wall";
 
         public void RenderSetPiece(World world, IntPoint pos)
         {

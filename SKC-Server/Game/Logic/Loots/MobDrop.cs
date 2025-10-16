@@ -5,7 +5,7 @@ namespace RotMG.Game.Logic.Loots
 {
     public abstract class MobDrop : IBehavior
     {
-        protected readonly List<LootDef> LootDefs = new List<LootDef>();
+        protected readonly List<LootDef> LootDefs = new();
         
         public virtual void Populate(IList<LootDef> lootDefs, LootDef overrides = null)
         {

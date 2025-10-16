@@ -6,15 +6,14 @@ namespace RotMG.Game.Worlds
 {
     public sealed partial class Realm : World
     {
-        private static readonly Queue<string> WorldNames = new Queue<string>(
-    new []
-        {
+        private static readonly Queue<string> WorldNames = new(
+        [
             "Pirate", "Deathmage", "Spectre", "Titan", "Gorgon", "Kraken", "Satyr", "Drake", "Chimera", "Dragon",
             "Wyrm", "Hydra", "Leviathan", "Minotaur", "Mummy", "Reaper", "Phoenix", "Giant", "Unicorn", "Harpy",
             "Gargoyle", "Snake", "Cube", "Goblin", "Hobbit", "Skeleton", "Scorpion", "Bat", "Ghost", "Slime", "Lich",
             "Orc", "Imp", "Spider", "Demon", "Blob", "Golem", "Sprite", "Flayer", "Ogre", "Djinn", "Cyclops",
             "Beholder", "Medusa"
-        });
+        ]);
 
         public new readonly WMap Map;
 
@@ -24,7 +23,7 @@ namespace RotMG.Game.Worlds
             DisplayName = WorldNames.Dequeue();
 
             foreach (var terrain in Map.Terrains.Keys)
-                _enemies[terrain] = new List<Enemy>();
+                _enemies[terrain] = [];
             
             InitMobs();
         }

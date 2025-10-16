@@ -14,22 +14,22 @@ namespace RotMG.Game.Entities
         private const float RayStepSize = .05f;
         private const float AngleStepSize = 2.30f / (SightRadius * 2);
 
-        private static readonly IntPoint[] SurroundingPoints = new IntPoint[]
-        {
-            new IntPoint(1, 0),
-            new IntPoint(1, 1),
-            new IntPoint(0, 1),
-            new IntPoint(-1, 1),
-            new IntPoint(-1, 0),
-            new IntPoint(-1, -1),
-            new IntPoint(0, -1),
-            new IntPoint(1, -1)
-        };
+        private static readonly IntPoint[] SurroundingPoints =
+        [
+            new(1, 0),
+            new(1, 1),
+            new(0, 1),
+            new(-1, 1),
+            new(-1, 0),
+            new(-1, -1),
+            new(0, -1),
+            new(1, -1)
+        ];
 
         private static HashSet<IntPoint> SightCircle;
         public static void InitSightCircle()
         {
-            SightCircle = new HashSet<IntPoint>();
+            SightCircle = [];
             for (var x = -SightRadius; x <= SightRadius; x++)
                 for (var y = -SightRadius; y <= SightRadius; y++)
                     if (x * x + y * y <= SightRadius * SightRadius)
@@ -221,7 +221,8 @@ namespace RotMG.Game.Entities
             }
         }
 
-        IntPoint _p; int _w;
+        private IntPoint _p;
+        private int      _w;
         private bool ShouldCalculateSightCircle()
         {
             var pos = Position.ToIntPoint();

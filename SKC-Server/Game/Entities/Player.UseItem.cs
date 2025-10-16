@@ -18,7 +18,7 @@ namespace RotMG.Game.Entities
         public void UsePortal(int objectId)
         {
             var entity = Parent.GetEntity(objectId);
-            if (!(entity is Portal portal))
+            if (entity is not Portal portal)
             {
 #if DEBUG
                 Program.Print(PrintType.Error, $"{entity} from UsePortal is not a portal");
@@ -84,7 +84,7 @@ namespace RotMG.Game.Entities
             var en = Parent.GetEntity(slot.ObjectId);
             if (slot.SlotId != 1)
                 (en as IContainer)?.UpdateInventorySlot(slot.SlotId);
-            if (en == null || !(en is IContainer))
+            if (en == null || en is not IContainer)
             {
 #if DEBUG
                 Program.Print(PrintType.Error, "Undefined entity");
@@ -220,7 +220,7 @@ namespace RotMG.Game.Entities
                                 var a = t == null ? MathUtils.NextAngle() : Position.Angle(t.Position);
                                 var p = new List<Projectile>()
                                 {
-                                     new Projectile(this, desc.Projectile, startId + i, time, a, Position, d)
+                                     new(this, desc.Projectile, startId + i, time, a, Position, d)
                                 };
 
                                 stars.Add(GameServer.ServerPlayerShoot(startId + i, Id, desc.Type, Position, a, 0, p));
@@ -444,7 +444,7 @@ namespace RotMG.Game.Entities
                                                 k.Client.Send(nova);
                                         foreach (var j in Parent.EntityChunks.HitTest(placeholder.Position, eff.Radius))
                                             if (j is Enemy e)
-                                                e.ApplyPoison(this, new ConditionEffectDesc[0], (int)(eff.TotalDamage / (eff.DurationMS / 1000f)), eff.TotalDamage);
+                                                e.ApplyPoison(this, [], (int)(eff.TotalDamage / (eff.DurationMS / 1000f)), eff.TotalDamage);
                                     }
                                     placeholder.Parent.RemoveEntity(placeholder);
                                 }

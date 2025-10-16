@@ -5,14 +5,11 @@ using RotMG.Utils;
 
 namespace RotMG.Game.SetPieces
 {
-    class Sphinx : ISetPiece
+    internal class Sphinx : ISetPiece
     {
-        public int Size
-        {
-            get { return 81; }
-        }
+        public int Size => 81;
 
-        static readonly byte[,] Center = new byte[,]
+        private static readonly byte[,] Center = new byte[,]
         {
             { 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0 },
             { 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0 },
@@ -33,9 +30,9 @@ namespace RotMG.Game.SetPieces
             { 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0 },
         };
 
-        static readonly string Floor = "Gold Sand";
-        static readonly string Central = "Sand Tile";
-        static readonly string Pillar = "Tomb Wall";
+        private static readonly string Floor   = "Gold Sand";
+        private static readonly string Central = "Sand Tile";
+        private static readonly string Pillar  = "Tomb Wall";
         
         public void RenderSetPiece(World world, IntPoint pos)
         {

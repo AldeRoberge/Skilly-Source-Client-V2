@@ -2,9 +2,9 @@
 
 namespace RotMG.Game.SetPieces
 {
-    class LordoftheLostLands : ISetPiece
+    internal class LordoftheLostLands : ISetPiece
     {
-        public int Size { get { return 5; } }
+        public int Size => 5;
 
         public void RenderSetPiece(World world, IntPoint pos)
         {

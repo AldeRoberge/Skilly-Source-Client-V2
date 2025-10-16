@@ -438,10 +438,10 @@ namespace RotMG.Common
             MaxTargets = e.ParseInt("@maxTargets");
             Stat = e.ParseInt("@stat", -1);
 
-            Effects = new ConditionEffectDesc[1]
-            {
+            Effects =
+            [
                 new ConditionEffectDesc(Effect, DurationMS)
-            };
+            ];
 
             if (e.Attribute("color") != null)
                 Color = e.ParseUInt("@color");
@@ -454,8 +454,8 @@ namespace RotMG.Common
         public const float DamageMultiplier = 0.05f;
         public const float CooldownMultiplier = 0.05f;
 
-        static ItemData[] GlobalModifiers =
-        {
+        private static ItemData[] GlobalModifiers =
+        [
             ItemData.MaxHP, 
             ItemData.MaxMP, 
             ItemData.Attack, 
@@ -464,47 +464,45 @@ namespace RotMG.Common
             ItemData.Dexterity, 
             ItemData.Vitality, 
             ItemData.Wisdom, 
-            ItemData.FameBonus,
-        };
+            ItemData.FameBonus
+        ];
 
-        static ItemData[] AbilityModifiers = GlobalModifiers.Concat(
-            new []
-            {
-                ItemData.Cooldown, 
-                ItemData.Damage, 
-            }).ToArray();
+        private static ItemData[] AbilityModifiers = GlobalModifiers.Concat(
+        [
+            ItemData.Cooldown, 
+                ItemData.Damage
+        ]).ToArray();
 
-        static ItemData[] WeaponModifiers = GlobalModifiers.Concat(
-            new []
-            {
-                ItemData.RateOfFire, 
-                ItemData.Damage, 
-            }).ToArray();
+        private static ItemData[] WeaponModifiers = GlobalModifiers.Concat(
+        [
+            ItemData.RateOfFire, 
+                ItemData.Damage
+        ]).ToArray();
 
         public static ItemType[] WeaponTypes =
-        {
+        [
             ItemType.Sword,
             ItemType.Dagger,
             ItemType.Staff,
             ItemType.Wand,
             ItemType.Katana,
             ItemType.Bow
-        };
+        ];
 
         public static ItemType[] ArmorTypes =
-        {
+        [
             ItemType.Robe,
             ItemType.Plate,
             ItemType.Leather
-        };
+        ];
 
         public static ItemType[] RingTypes =
-        {
-            ItemType.Ring,
-        };
+        [
+            ItemType.Ring
+        ];
 
         public static ItemType[] AbilityTypes =
-        {
+        [
             ItemType.Cloak,
             ItemType.Spell,
             ItemType.Tome,
@@ -519,9 +517,9 @@ namespace RotMG.Common
             ItemType.Shuriken,
             ItemType.Prism,
             ItemType.Scepter
-        };
+        ];
 
-        static ItemType[] ModifiableTypes = WeaponTypes.Concat(ArmorTypes).Concat(RingTypes).Concat(AbilityTypes).ToArray();
+        private static ItemType[] ModifiableTypes = WeaponTypes.Concat(ArmorTypes).Concat(RingTypes).Concat(AbilityTypes).ToArray();
 
         public static float GetStat(int data, ItemData i, float multiplier)
         {
@@ -832,9 +830,9 @@ namespace RotMG.Common
             BlockSight = e.ParseInt("BlockSight");
             Persist = e.ParseBool("Persist");
             IsTemplate = e.ParseBool("IsTemplate");
-            Portals = e.ParseUshortArray("Portals", ";", new ushort[0]);
+            Portals = e.ParseUshortArray("Portals", ";", []);
 
-            var maps = e.ParseStringArray("Maps", ";", new string[0]);
+            var maps = e.ParseStringArray("Maps", ";", []);
             Maps = new Map[maps.Length];
             for (var i = 0; i < maps.Length; i++)
             {

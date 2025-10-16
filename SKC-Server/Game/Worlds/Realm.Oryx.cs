@@ -21,313 +21,313 @@ namespace RotMG.Game.Worlds
         
         #region "Taunt data"
         private static readonly Dictionary<string, TauntData> CriticalEnemies = 
-            new Dictionary<string, TauntData>
-        {
+            new()
+            {
             {
                 "Lich", new TauntData()
                 {
-                    NumberOfEnemies = new[]
-                    {
+                    NumberOfEnemies =
+                    [
                         "I am invincible while my {COUNT} Liches still stand!",
                         "My {COUNT} Liches will feast on your essence!"
-                    },
-                    Final = new[]
-                    {
+                    ],
+                    Final =
+                    [
                         "My final Lich shall consume your souls!",
                         "My final Lich will protect me forever!"
-                    }
+                    ]
                 }
             },
             {
                 "Ent Ancient", new TauntData()
                 {
-                    NumberOfEnemies = new[]
-                    {
+                    NumberOfEnemies =
+                    [
                         "Mortal scum! My {COUNT} Ent Ancients will defend me forever!",
                         "My forest of {COUNT} Ent Ancients is all the protection I need!"
-                    },
-                    Final = new[]
-                    {
+                    ],
+                    Final =
+                    [
                         "My final Ent Ancient will destroy you all!",
                         "My final Ent Ancient shall crush you!"
-                    }
+                    ]
                 }
             },
             {
                 "Oasis Giant", new TauntData()
                 {
-                    NumberOfEnemies = new[]
-                    {
+                    NumberOfEnemies =
+                    [
                         "My {COUNT} Oasis Giants will feast on your flesh!",
                         "You have no hope against my {COUNT} Oasis Giants!"
-                    },
-                    Final = new[]
-                    {
+                    ],
+                    Final =
+                    [
                         "A powerful Oasis Giant still fights for me!",
                         "You will never defeat me while an Oasis Giant remains!"
-                    }
+                    ]
                 }
             },
             {
                 "Phoenix Lord", new TauntData()
                 {
-                    NumberOfEnemies = new[]
-                    {
+                    NumberOfEnemies =
+                    [
                         "Maggots! My {COUNT} Phoenix Lord will burn you to ash!",
                         "My {COUNT} Phoenix Lords will serve me forever!"
-                    },
-                    Final = new[]
-                    {
+                    ],
+                    Final =
+                    [
                         "My final Phoenix Lord will never fall!",
                         "My last Phoenix Lord will blacken your bones!"
-                    }
+                    ]
                 }
             },
             {
                 "Ghost King", new TauntData()
                 {
-                    NumberOfEnemies = new[]
-                    {
+                    NumberOfEnemies =
+                    [
                         "My {COUNT} Ghost Kings give me more than enough protection!",
                         "Pathetic humans! My {COUNT} Ghost Kings shall destroy you utterly!"
-                    },
-                    Final = new[]
-                    {
+                    ],
+                    Final =
+                    [
                         "A mighty Ghost King remains to guard me!",
                         "My final Ghost King is untouchable!"
-                    }
+                    ]
                 }
             },
             {
                 "Cyclops God", new TauntData()
                 {
-                    NumberOfEnemies = new[]
-                    {
+                    NumberOfEnemies =
+                    [
                         "Cretins! I have {COUNT} Cyclops Gods to guard me!",
                         "My {COUNT} powerful Cyclops Gods will smash you!"
-                    },
-                    Final = new[]
-                    {
+                    ],
+                    Final =
+                    [
                         "My last Cyclops God will smash you to pieces!",
                         "My final Cyclops God shall crush your puny skulls!"
-                    }
+                    ]
                 }
             },
             {
                 "Red Demon", new TauntData()
                 {
-                    NumberOfEnemies = new[]
-                    {
+                    NumberOfEnemies =
+                    [
                         "Fools! There is no escape from my {COUNT} Red Demons!",
                         "My legion of {COUNT} Red Demons live only to serve me!"
-                    },
-                    Final = new[]
-                    {
+                    ],
+                    Final =
+                    [
                         "My final Red Demon is unassailable!",
                         "A Red Demon still guards me!"
-                    }
+                    ]
                 }
             },
 
             {
                 "Skull Shrine", new TauntData()
                 {
-                    Spawn = new[]
-                    {
+                    Spawn =
+                    [
                         "Your futile efforts are no match for a Skull Shrine!"
-                    },
-                    NumberOfEnemies = new[]
-                    {
+                    ],
+                    NumberOfEnemies =
+                    [
                         "Insects!  {COUNT} Skull Shrines still protect me",
                         "You hairless apes will never overcome my {COUNT} Skull Shrines!",
                         "You frail humans will never defeat my {COUNT} Skull Shrines!",
                         "Miserable worms like you cannot stand against my {COUNT} Skull Shrines!",
                         "Imbeciles! My {COUNT} Skull Shrines make me invincible!"
-                    },
-                    Final = new[]
-                    {
+                    ],
+                    Final =
+                    [
                         "Pathetic fools!  A Skull Shrine guards me!",
                         "Miserable scum!  My Skull Shrine is invincible!"
-                    },
-                    Killed = new[]
-                    {
+                    ],
+                    Killed =
+                    [
                         "You defaced a Skull Shrine!  Minions, to arms!",
                         "{PLAYER} razed one of my Skull Shrines -- I WILL HAVE MY REVENGE!",
                         "{PLAYER}, you will rue the day you dared to defile my Skull Shrine!",
                         "{PLAYER}, you contemptible pig! Ruining my Skull Shrine will be the last mistake you ever make!",
                         "{PLAYER}, you insignificant cur! The penalty for destroying a Skull Shrine is death!"
-                    }
+                    ]
                 }
             },
             {
                 "Cube God", new TauntData()
                 {
-                    Spawn = new[]
-                    {
+                    Spawn =
+                    [
                         "Your meager abilities cannot possibly challenge a Cube God!"
-                    },
-                    NumberOfEnemies = new[]
-                    {
+                    ],
+                    NumberOfEnemies =
+                    [
                         "Filthy vermin! My {COUNT} Cube Gods will exterminate you!",
                         "Loathsome slugs! My {COUNT} Cube Gods will defeat you!",
                         "You piteous cretins! {COUNT} Cube Gods still guard me!",
                         "Your pathetic rabble will never survive against my {COUNT} Cube Gods!",
                         "You feeble creatures have no hope against my {COUNT} Cube Gods!"
-                    },
-                    Final = new[]
-                    {
+                    ],
+                    Final =
+                    [
                         "Worthless mortals! A mighty Cube God defends me!",
                         "Wretched mongrels!  An unconquerable Cube God is my bulwark!"
-                    },
-                    Killed = new[]
-                    {
+                    ],
+                    Killed =
+                    [
                         "You have dispatched my Cube God, but you will never escape my Realm!",
                         "{PLAYER}, you pathetic swine! How dare you assault my Cube God?",
                         "{PLAYER}, you wretched dog! You killed my Cube God!",
                         "{PLAYER}, you may have destroyed my Cube God but you will never defeat me!",
-                        "I have many more Cube Gods, {PLAYER}!",
-                    }
+                        "I have many more Cube Gods, {PLAYER}!"
+                    ]
                 }
             },
             {
                 "Pentaract", new TauntData()
                 {
-                    Spawn = new[]
-                    {
+                    Spawn =
+                    [
                         "Behold my Pentaract, and despair!"
-                    },
-                    NumberOfEnemies = new[]
-                    {
+                    ],
+                    NumberOfEnemies =
+                    [
                         "Wretched creatures! {COUNT} Pentaracts remain!",
                         "You detestable humans will never defeat my {COUNT} Pentaracts!",
                         "My {COUNT} Pentaracts will protect me forever!",
                         "Your weak efforts will never overcome my {COUNT} Pentaracts!",
                         "Defiance is useless! My {COUNT} Pentaracts will crush you!"
-                    },
-                    Final = new[]
-                    {
+                    ],
+                    Final =
+                    [
                         "I am invincible while my Pentaract stands!",
                         "Ignorant fools! A Pentaract guards me still!"
-                    },
-                    Killed = new[]
-                    {
+                    ],
+                    Killed =
+                    [
                         "That was but one of many Pentaracts!",
                         "You have razed my Pentaract, but you will die here in my Realm!",
                         "{PLAYER}, you lowly scum!  You'll regret that you ever touched my Pentaract!",
                         "{PLAYER}, you flea-ridden animal! You destoryed my Pentaract!",
                         "{PLAYER}, by destroying my Pentaract you have sealed your own doom!"
-                    }
+                    ]
                 }
             },
             {
                 "Grand Sphinx", new TauntData()
                 {
-                    Spawn = new[]
-                    {
+                    Spawn =
+                    [
                         "At last, a Grand Sphinx will teach you to respect!"
-                    },
-                    NumberOfEnemies = new[]
-                    {
+                    ],
+                    NumberOfEnemies =
+                    [
                         "You dull-spirited apes! You shall pose no challenge for {COUNT} Grand Sphinxes!",
                         "Regret your choices, blasphemers! My {COUNT} Grand Sphinxes will teach you respect!",
                         "My {COUNT} Grand Sphinxes protect my Chamber with their lives!",
                         "My Grand Sphinxes will bewitch you with their beauty!"
-                    },
-                    Final = new[]
-                    {
+                    ],
+                    Final =
+                    [
                         "A Grand Sphinx is more than a match for this rabble.",
                         "You festering rat-catchers! A Grand Sphinx will make you doubt your purpose!",
                         "Gaze upon the beauty of the Grand Sphinx and feel your last hopes drain away."
-                    },
-                    Killed = new[]
-                    {
+                    ],
+                    Killed =
+                    [
                         "The death of my Grand Sphinx shall be avenged!",
                         "My Grand Sphinx, she was so beautiful. I will kill you myself, {PLAYER}!",
                         "My Grand Sphinx had lived for thousands of years! You, {PLAYER}, will not survive the day!",
                         "{PLAYER}, you up-jumped goat herder! You shall pay for defeating my Grand Sphinx!",
                         "{PLAYER}, you pestiferous lout! I will not forget what you did to my Grand Sphinx!",
                         "{PLAYER}, you foul ruffian! Do not think I forget your defiling of my Grand Sphinx!"
-                    }
+                    ]
                 }
             },
             {
                 "Lord of the Lost Lands", new TauntData()
                 {
-                    Spawn = new[]
-                    {
+                    Spawn =
+                    [
                         "Cower in fear of my Lord of the Lost Lands!",
                         "My Lord of the Lost Lands will make short work of you!"
-                    },
-                    NumberOfEnemies = new[]
-                    {
+                    ],
+                    NumberOfEnemies =
+                    [
                         "Cower before your destroyer! You stand no chance against {COUNT} Lords of the Lost Lands!",
                         "Your pathetic band of fighters will be crushed under the might feet of my {COUNT} Lords of the Lost Lands!",
                         "Feel the awesome might of my {COUNT} Lords of the Lost Lands!",
                         "Together, my {COUNT} Lords of the Lost Lands will squash you like a bug!",
                         "Do not run! My {COUNT} Lords of the Lost Lands only wish to greet you!"
-                    },
-                    Final = new[]
-                    {
+                    ],
+                    Final =
+                    [
                         "Give up now! You stand no chance against a Lord of the Lost Lands!",
                         "Pathetic fools! My Lord of the Lost Lands will crush you all!",
                         "You are nothing but disgusting slime to be scraped off the foot of my Lord of the Lost Lands!"
-                    },
-                    Killed = new[]
-                    {
+                    ],
+                    Killed =
+                    [
                         "How dare you foul-mouthed hooligans treat my Lord of the Lost Lands with such indignity!",
                         "What trickery is this?! My Lord of the Lost Lands was invincible!",
                         "You win this time, {PLAYER}, but mark my words:  You will fall before the day is done.",
                         "{PLAYER}, I will never forget you exploited my Lord of the Lost Lands' weakness!",
                         "{PLAYER}, you have done me a service! That Lord of the Lost Lands was not worthy of serving me.",
-                        "You got lucky this time {PLAYER}, but you stand no chance against me!",
-                    }
+                        "You got lucky this time {PLAYER}, but you stand no chance against me!"
+                    ]
                 }
             },
             {
                 "Hermit God", new TauntData()
                 {
-                    Spawn = new[]
-                    {
+                    Spawn =
+                    [
                         "My Hermit God's thousand tentacles shall drag you to a watery grave!"
-                    },
-                    NumberOfEnemies = new[]
-                    {
+                    ],
+                    NumberOfEnemies =
+                    [
                         "You will make a tasty snack for my Hermit Gods!",
                         "I will enjoy watching my {COUNT} Hermit Gods fight over your corpse!"
-                    },
-                    Final = new[]
-                    {
+                    ],
+                    Final =
+                    [
                         "You will be pulled to the bottom of the sea by my mighty Hermit God.",
                         "Flee from my Hermit God, unless you desire a watery grave!",
                         "My Hermit God awaits more sacrifices for the majestic Thessal.",
                         "My Hermit God will pull you beneath the waves!",
-                        "You will make a tasty snack for my Hermit God!",
-                    },
-                    Killed = new[]
-                    {
+                        "You will make a tasty snack for my Hermit God!"
+                    ],
+                    Killed =
+                    [
                         "This is preposterous!  There is no way you could have defeated my Hermit God!",
                         "You were lucky this time, {PLAYER}!  You will rue this day that you killed my Hermit God!",
                         "You naive imbecile, {PLAYER}! Without my Hermit God, Dreadstump is free to roam the seas without fear!",
-                        "My Hermit God was more than you'll ever be, {PLAYER}. I will kill you myself!",
-                    }
+                        "My Hermit God was more than you'll ever be, {PLAYER}. I will kill you myself!"
+                    ]
                 }
             },
             {
                 "Ghost Ship", new TauntData()
                 {
-                    Spawn = new[]
-                    {
+                    Spawn =
+                    [
                         "My Ghost Ship will terrorize you pathetic peasants!",
                         "A Ghost Ship has entered the Realm."
-                    },
-                    Final = new[]
-                    {
+                    ],
+                    Final =
+                    [
                         "My Ghost Ship will send you to a watery grave.",
                         "You filthy mongrels stand no chance against my Ghost Ship!",
                         "My Ghost Ship's cannonballs will crush your pathetic Knights!"
-                    },
-                    Killed = new[]
-                    {
+                    ],
+                    Killed =
+                    [
                         "My Ghost Ship will return!",
                         "Alas, my beautiful Ghost Ship has sunk!",
                         "{PLAYER}, you foul creature.  I shall see to your death personally!",
@@ -335,88 +335,88 @@ namespace RotMG.Game.Worlds
                         "{PLAYER} is such a jerk!",
                         "How could a creature like {PLAYER} defeat my dreaded Ghost Ship?!",
                         "The spirits of the sea will seek revenge on your worthless soul, {PLAYER}!"
-                    }
+                    ]
                 }
             },
             {
                 "Dragon Head", new TauntData()
                 {
-                    Spawn = new[]
-                    {
+                    Spawn =
+                    [
                         "The Rock Dragon has been summoned.",
-                        "Beware my Rock Dragon. All who face him shall perish.",
-                    },
-                    Final = new[]
-                    {
+                        "Beware my Rock Dragon. All who face him shall perish."
+                    ],
+                    Final =
+                    [
                         "My Rock Dragon will end your pathetic existence!",
                         "Fools, no one can withstand the power of my Rock Dragon!",
                         "The Rock Dragon will guard his post until the bitter end.",
-                        "The Rock Dragon will never let you enter the Lair of Draconis.",
-                    },
-                    Killed = new[]
-                    {
+                        "The Rock Dragon will never let you enter the Lair of Draconis."
+                    ],
+                    Killed =
+                    [
                         "My Rock Dragon will return!",
                         "The Rock Dragon has failed me!",
                         "{PLAYER} knows not what he has done.  That Lair was guarded for the Realm's own protection!",
                         "{PLAYER}, you have angered me for the last time!",
                         "{PLAYER} will never survive the trials that lie ahead.",
                         "A filthy weakling like {PLAYER} could never have defeated my Rock Dragon!!!",
-                        "You shall not live to see the next sunrise, {PLAYER}!",
-                    }
+                        "You shall not live to see the next sunrise, {PLAYER}!"
+                    ]
                 }
             },
             {
                 "shtrs Defense System", new TauntData()
                 {
-                    Spawn = new[]
-                    {
+                    Spawn =
+                    [
                         "The Shatters has been discovered!?!",
-                        "The Forgotten King has raised his Avatar!",
-                    },
-                    Final = new[]
-                    {
+                        "The Forgotten King has raised his Avatar!"
+                    ],
+                    Final =
+                    [
                         "Attacking the Avatar of the Forgotten King would be...unwise.",
                         "Kill the Avatar, and you risk setting free an abomination.",
-                        "Before you enter the Shatters you must defeat the Avatar of the Forgotten King!",
-                    },
-                    Killed = new[]
-                    {
+                        "Before you enter the Shatters you must defeat the Avatar of the Forgotten King!"
+                    ],
+                    Killed =
+                    [
                         "The Avatar has been defeated!",
                         "How could simpletons kill The Avatar of the Forgotten King!?",
                         "{PLAYER} has unleashed an evil upon this Realm.",
                         "{PLAYER}, you have awoken the Forgotten King. Enjoy a slow death!",
                         "{PLAYER} will never survive what lies in the depths of the Shatters.",
                         "Enjoy your little victory while it lasts, {PLAYER}!"
-                    }
+                    ]
                 }
             },
             {
                 "Zombie Horde", new TauntData()
                 {
-                    Spawn = new[]
-                    {
+                    Spawn =
+                    [
                         "At last, my Zombie Horde will eradicate you like the vermin that you are!",
                         "The full strength of my Zombie Horde has been unleashed!",
                         "Let the apocalypse begin!",
-                        "Quiver with fear, peasants, my Zombie Horde has arrived!",
-                    },
-                    Final = new[]
-                    {
+                        "Quiver with fear, peasants, my Zombie Horde has arrived!"
+                    ],
+                    Final =
+                    [
                         "A small taste of my Zombie Horde should be enough to eliminate you!",
-                        "My Zombie Horde will teach you the meaning of fear!",
-                    },
-                    Killed = new[]
-                    {
+                        "My Zombie Horde will teach you the meaning of fear!"
+                    ],
+                    Killed =
+                    [
                         "The death of my Zombie Horde is unacceptable! You will pay for your insolence!",
-                        "{PLAYER}, I will kill you myself and turn you into the newest member of my Zombie Horde!",
-                    }
+                        "{PLAYER}, I will kill you myself and turn you into the newest member of my Zombie Horde!"
+                    ]
                 }
             }
         };
         #endregion
         #region "Spawn Data"
         private static readonly Dictionary<Terrain, Tuple<int, Tuple<string, double>[]>> RegionMobs =
-            new Dictionary<Terrain, Tuple<int, Tuple<string, double>[]>>()
+            new()
         {
             { Terrain.ShoreSand, Tuple.Create(
                 100, new []
@@ -546,22 +546,22 @@ namespace RotMG.Game.Worlds
             },
         };
         #endregion
-        private readonly List<Tuple<string, ISetPiece>> _events = new List<Tuple<string, ISetPiece>>()
-        {
-            Tuple.Create("Skull Shrine", (ISetPiece) new SkullShrine()),
-            Tuple.Create("Cube God", (ISetPiece) new CubeGod()),
-            Tuple.Create("Pentaract", (ISetPiece) new Pentaract()),
-            Tuple.Create("Grand Sphinx", (ISetPiece) new Sphinx()),
-            Tuple.Create("Lord of the Lost Lands", (ISetPiece) new LordoftheLostLands()),
-            Tuple.Create("Hermit God", (ISetPiece) new Hermit()),
-            Tuple.Create("Ghost Ship", (ISetPiece) new GhostShip()),
-        };
+        private readonly List<Tuple<string, ISetPiece>> _events =
+        [
+            Tuple.Create("Skull Shrine", (ISetPiece)new SkullShrine()),
+            Tuple.Create("Cube God", (ISetPiece)new CubeGod()),
+            Tuple.Create("Pentaract", (ISetPiece)new Pentaract()),
+            Tuple.Create("Grand Sphinx", (ISetPiece)new Sphinx()),
+            Tuple.Create("Lord of the Lost Lands", (ISetPiece)new LordoftheLostLands()),
+            Tuple.Create("Hermit God", (ISetPiece)new Hermit()),
+            Tuple.Create("Ghost Ship", (ISetPiece)new GhostShip())
+        ];
 
         //none of these count minions spawned
-        private readonly Dictionary<Terrain, int> _enemyMaxCount = new Dictionary<Terrain, int>();
-        private readonly Dictionary<Terrain, int> _enemyCount = new Dictionary<Terrain, int>();
-        private readonly Dictionary<Terrain, List<Enemy>> _enemies = new Dictionary<Terrain, List<Enemy>>();
-        private Dictionary<string, int> _criticalEnemyCounts;
+        private readonly Dictionary<Terrain, int>         _enemyMaxCount = new();
+        private readonly Dictionary<Terrain, int>         _enemyCount    = new();
+        private readonly Dictionary<Terrain, List<Enemy>> _enemies       = new();
+        private          Dictionary<string, int>          _criticalEnemyCounts;
 
         private void InitMobs()
         {
@@ -592,7 +592,7 @@ namespace RotMG.Game.Worlds
         {
             Vector2 point;
             var allPoints = Map.Terrains
-                .Where(t => t.Key >= Terrain.Mountains && t.Key <= Terrain.MidForest)
+                .Where(t => t.Key is >= Terrain.Mountains and <= Terrain.MidForest)
                 .Select(t => t.Value).ToArray();
             do
             {
@@ -687,7 +687,7 @@ namespace RotMG.Game.Worlds
                 return;
 
             if (count == 1 && tauntData.Final != null ||
-                tauntData.Final != null && tauntData.NumberOfEnemies == null)
+                tauntData is { Final: not null, NumberOfEnemies: null })
             {
                 var tauntMessages = tauntData.Final;
                 var message = tauntMessages[MathUtils.Next(tauntMessages.Length)];

@@ -2,9 +2,9 @@
 
 namespace RotMG.Game.SetPieces
 {
-    class CubeGod : ISetPiece
+    internal class CubeGod : ISetPiece
     {
-        public int Size { get { return 5; } }
+        public int Size => 5;
 
         public void RenderSetPiece(World world, IntPoint pos)
         {

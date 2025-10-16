@@ -81,7 +81,7 @@ namespace RotMG.Utils
             var dist = float.MaxValue;
             foreach (var en in entity.Parent.EntityChunks.HitTest(entity.Position, radius))
             {
-                if (!(en is Enemy))
+                if (en is not Enemy)
                     continue;
 
                 if (en.HasConditionEffect(ConditionEffectIndex.Invincible) ||
@@ -109,7 +109,7 @@ namespace RotMG.Utils
             var dist = float.MaxValue;
             foreach (var en in entity.Parent.EntityChunks.HitTest(entity.Position, radius))
             {
-                if (!(en is Enemy))
+                if (en is not Enemy)
                     continue;
 
                 if (en.HasConditionEffect(ConditionEffectIndex.Invincible) ||
@@ -140,7 +140,7 @@ namespace RotMG.Utils
             var dist = float.MaxValue;
             foreach (var en in entity.Parent.EntityChunks.HitTest(entity.Position, radius))
             {
-                if (!(en is Enemy))
+                if (en is not Enemy)
                     continue;
 
                 if (en.HasConditionEffect(ConditionEffectIndex.Invincible) ||
@@ -174,7 +174,7 @@ namespace RotMG.Utils
             var dist = float.MaxValue;
             foreach (var en in entity.Parent.EntityChunks.HitTest(entity.Position, radius))
             {
-                if (!(en is Enemy))
+                if (en is not Enemy)
                     continue;
 
                 if (en.HasConditionEffect(ConditionEffectIndex.Invincible) ||

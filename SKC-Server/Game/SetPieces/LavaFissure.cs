@@ -8,17 +8,14 @@ using RotMG.Utils;
 
 namespace RotMG.Game.SetPieces
 {
-    class LavaFissure : ISetPiece
+    internal class LavaFissure : ISetPiece
     {
-        public int Size
-        {
-            get { return 40; }
-        }
+        public int Size => 40;
 
-        static readonly string Lava = "Lava Blend";
-        static readonly string Floor = "Partial Red Floor";
+        private static readonly string Lava  = "Lava Blend";
+        private static readonly string Floor = "Partial Red Floor";
 
-        static readonly Loot chest = new Loot(
+        private static readonly Loot chest = new(
                 new TierLoot(7, TierLoot.LootType.Weapon, 0.3f),
                 new TierLoot(8, TierLoot.LootType.Weapon, 0.2f),
                 new TierLoot(9, TierLoot.LootType.Weapon, 0.1f),

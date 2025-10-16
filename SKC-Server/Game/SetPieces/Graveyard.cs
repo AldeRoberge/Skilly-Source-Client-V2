@@ -11,14 +11,14 @@ namespace RotMG.Game.SetPieces
 {
     public class Graveyard : ISetPiece
     {
-        public int Size { get { return 34; } }
+        public int Size => 34;
 
-        static readonly string Floor = "Grass";
-        static readonly string WallA = "Grey Wall";
-        static readonly string WallB = "Destructible Grey Wall";
-        static readonly string Cross = "Cross";
+        private static readonly string Floor = "Grass";
+        private static readonly string WallA = "Grey Wall";
+        private static readonly string WallB = "Destructible Grey Wall";
+        private static readonly string Cross = "Cross";
 
-        static readonly Loot chest = new Loot(
+        private static readonly Loot chest = new(
                 new TierLoot(4, TierLoot.LootType.Weapon, 0.3f),
                 new TierLoot(5, TierLoot.LootType.Weapon, 0.2f),
                 new TierLoot(6, TierLoot.LootType.Weapon, 0.1f),

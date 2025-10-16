@@ -18,18 +18,18 @@ namespace RotMG.Game.Entities
         public int LastChatTime;
 
         private readonly string[] _unrankedCommands =
-        {
+        [
             "commands", "g", "guild", "tell", "allyshots", "allydamage", "effects", "sounds", "vault", "realm",
             "notifications", "online", "who", "server", "pos", "loc", "where", "find", "fame", "famestats", "stats",
             "trade", "currentsong", "song"
-        };
+        ];
 
         private readonly string[] _rankedCommands =
-        {
+        [
             "announce", "announcement", "legendary", "roll", "disconnect", "dcAll", "dc", "songs", "changesong",
             "terminate", "stop", "gimme", "give", "gift", "closerealm", "rank", "create", "spawn", "killall",
             "setpiece", "max", "tq", "god", "eff", "effect", "ban", "unban", "mute", "unmute"
-        };
+        ];
 
         public void SendInfo(string text) => Client.Send(GameServer.Text("", 0, -1, 0, "", text));
         public void SendError(string text) => Client.Send(GameServer.Text("*Error*", 0, -1, 0, "", text));

@@ -17,7 +17,7 @@ namespace RotMG.Game.Logic.Loots
 
         public TierLoot(byte tier, LootType type, float chance = 1, float threshold = 0, int min = 0)
         {
-            ItemType[] types = new ItemType[0];
+            ItemType[] types = [];
             switch (type)
             {
                 case LootType.Weapon:
@@ -33,7 +33,7 @@ namespace RotMG.Game.Logic.Loots
                     types = ItemDesc.RingTypes;
                     break;
                 case LootType.Potion:
-                    types = new[] { ItemType.Potion };
+                    types = [ItemType.Potion];
                     break;
                 default:
 #if DEBUG

@@ -36,22 +36,21 @@ namespace RotMG.Game.SetPieces
         }
 
         private static readonly List<Tuple<string, ISetPiece, int, int, Terrain[]>> setPieces =
-            new List<Tuple<string, ISetPiece, int, int, Terrain[]>>()
-            {
-                SetPiece("", new Building(), 80, 100, Terrain.LowForest, Terrain.LowPlains, Terrain.MidForest),
-                SetPiece("", new Graveyard(), 5, 10, Terrain.LowSand, Terrain.LowPlains),
-                SetPiece("Ent Ancient", new Grove(), 17, 25, Terrain.MidForest, Terrain.MidPlains),
-                SetPiece("Lich", new LichyTemple(), 4, 7, Terrain.MidForest, Terrain.MidPlains),
-                SetPiece("Cyclops God", new Castle(), 4, 7, Terrain.HighForest, Terrain.HighPlains),
-                SetPiece("Ghost King", new Tower(), 8, 15, Terrain.HighForest, Terrain.HighPlains),
-                SetPiece("", new TempleA(), 10, 20, Terrain.MidForest, Terrain.MidPlains),
-                SetPiece("", new TempleB(), 10, 20, Terrain.MidForest, Terrain.MidPlains),
-                SetPiece("Oasis Giant", new Oasis(), 0, 5, Terrain.LowSand, Terrain.MidSand),
-                SetPiece("Phoenix Lord", new Pyre(), 0, 5, Terrain.MidSand, Terrain.HighSand),
-                SetPiece("Red Demon",new LavaFissure(), 3, 5, Terrain.Mountains),
-                SetPiece("", new Crystal(), 1, 1, Terrain.Mountains),
-                SetPiece("", new KageKami(), 2, 3, Terrain.HighForest, Terrain.HighPlains)
-            };
+        [
+            SetPiece("", new Building(), 80, 100, Terrain.LowForest, Terrain.LowPlains, Terrain.MidForest),
+            SetPiece("", new Graveyard(), 5, 10, Terrain.LowSand, Terrain.LowPlains),
+            SetPiece("Ent Ancient", new Grove(), 17, 25, Terrain.MidForest, Terrain.MidPlains),
+            SetPiece("Lich", new LichyTemple(), 4, 7, Terrain.MidForest, Terrain.MidPlains),
+            SetPiece("Cyclops God", new Castle(), 4, 7, Terrain.HighForest, Terrain.HighPlains),
+            SetPiece("Ghost King", new Tower(), 8, 15, Terrain.HighForest, Terrain.HighPlains),
+            SetPiece("", new TempleA(), 10, 20, Terrain.MidForest, Terrain.MidPlains),
+            SetPiece("", new TempleB(), 10, 20, Terrain.MidForest, Terrain.MidPlains),
+            SetPiece("Oasis Giant", new Oasis(), 0, 5, Terrain.LowSand, Terrain.MidSand),
+            SetPiece("Phoenix Lord", new Pyre(), 0, 5, Terrain.MidSand, Terrain.HighSand),
+            SetPiece("Red Demon", new LavaFissure(), 3, 5, Terrain.Mountains),
+            SetPiece("", new Crystal(), 1, 1, Terrain.Mountains),
+            SetPiece("", new KageKami(), 2, 3, Terrain.HighForest, Terrain.HighPlains)
+        ];
 
         public static int[,] RotateCW(int[,] mat)
         {

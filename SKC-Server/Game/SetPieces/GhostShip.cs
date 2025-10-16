@@ -2,9 +2,9 @@
 
 namespace RotMG.Game.SetPieces
 {
-    class GhostShip : ISetPiece
+    internal class GhostShip : ISetPiece
     {
-        public int Size { get { return 40; } }
+        public int Size => 40;
 
         public void RenderSetPiece(World world, IntPoint pos)
         {

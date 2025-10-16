@@ -5,15 +5,12 @@ using RotMG.Utils;
 
 namespace RotMG.Game.SetPieces
 {
-    class Grove : ISetPiece
+    internal class Grove : ISetPiece
     {
-        public int Size
-        {
-            get { return 25; }
-        }
+        public int Size => 25;
 
-        static readonly string Floor = "Light Grass";
-        static readonly string Tree = "Cherry Tree";
+        private static readonly string Floor = "Light Grass";
+        private static readonly string Tree  = "Cherry Tree";
         
         public void RenderSetPiece(World world, IntPoint pos)
         {

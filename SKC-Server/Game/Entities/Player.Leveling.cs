@@ -159,9 +159,9 @@ namespace RotMG.Game.Entities
             }
             return ret;
         }
-        
-        static readonly Dictionary<string, Tuple<int, int, int>> QuestDat =
-            new Dictionary<string, Tuple<int, int, int>>()  //Priority, Min, Max
+
+        private static readonly Dictionary<string, Tuple<int, int, int>> QuestDat =
+            new()  //Priority, Min, Max
         {
             // wandering quest enemies
             { "Scorpion Queen",                 Tuple.Create(1, 1, 6) },

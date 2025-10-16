@@ -2,12 +2,13 @@
 
 namespace RotMG.Game.SetPieces
 {
-    class Crystal: ISetPiece
+    internal class Crystal: ISetPiece
     {
-        public int Size { get { return 5; } }
-        
-        static readonly string Floor = "Rock";
-        static readonly byte[,] Circle =
+        public int Size => 5;
+
+        private static readonly string Floor = "Rock";
+
+        private static readonly byte[,] Circle =
         {
             {0,0,1,0,0},
             {0,1,1,1,0},

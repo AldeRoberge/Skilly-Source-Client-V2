@@ -5,13 +5,8 @@ using System;
 
 namespace RotMG.Game.Entities
 {
-    public class StaticObject : Entity
+    public class StaticObject(ushort type) : Entity(type)
     {
-        public StaticObject(ushort type) : base(type)
-        {
-
-        }
-
         public override bool HitByProjectile(Projectile projectile)
         {
 #if DEBUG
@@ -28,7 +23,7 @@ namespace RotMG.Game.Entities
                 owner.FameStats.DamageDealt += damageWithDefense;
                 owner.FameStats.ShotsThatDamage++; 
                 
-                var packet = GameServer.Damage(Id, new ConditionEffectIndex[0], damageWithDefense);
+                var packet = GameServer.Damage(Id, [], damageWithDefense);
                 foreach (var en in Parent.PlayerChunks.HitTest(Position, Player.SightRadius))
                     if (en is Player player && player.Client.Account.AllyDamage && !player.Equals(owner))
                         player.Client.Send(packet);

@@ -3,15 +3,15 @@ using RotMG.Utils;
 
 namespace RotMG.Game.SetPieces
 {
-    class LichyTemple : ISetPiece
+    internal class LichyTemple : ISetPiece
     {
-        public int Size { get { return 26; } }
+        public int Size => 26;
 
-        static readonly string Floor = "Blue Floor";
-        static readonly string WallA = "Blue Wall";
-        static readonly string WallB = "Destructible Blue Wall";
-        static readonly string PillarA = "Blue Pillar";
-        static readonly string PillarB = "Broken Blue Pillar";
+        private static readonly string Floor   = "Blue Floor";
+        private static readonly string WallA   = "Blue Wall";
+        private static readonly string WallB   = "Destructible Blue Wall";
+        private static readonly string PillarA = "Blue Pillar";
+        private static readonly string PillarB = "Broken Blue Pillar";
 
         
         public void RenderSetPiece(World world, IntPoint pos)

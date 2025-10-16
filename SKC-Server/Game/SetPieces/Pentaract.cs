@@ -3,12 +3,13 @@ using RotMG.Common;
 
 namespace RotMG.Game.SetPieces
 {
-    class Pentaract : ISetPiece
+    internal class Pentaract : ISetPiece
     {
-        public int Size { get { return 41; } }
+        public int Size => 41;
 
-        static readonly string Floor = "Scorch Blend";
-        static readonly byte[,] Circle = new byte[,]
+        private static readonly string Floor = "Scorch Blend";
+
+        private static readonly byte[,] Circle = new byte[,]
         {
             { 0, 0, 1, 1, 1, 0, 0 },
             { 0, 1, 1, 1, 1, 1, 0 },
@@ -19,7 +20,7 @@ namespace RotMG.Game.SetPieces
             { 0, 0, 1, 1, 1, 0, 0 },
         };
 
-        Random rand = new Random();
+        private Random rand = new();
         public void RenderSetPiece(World world, IntPoint pos)
         {
             var t = new int[41, 41];

@@ -19,21 +19,21 @@ namespace RotMG.Common
     {
         private const int MaxLegends = 20;
         private const int MinFameRequiredToEnterLegends = 0;
-        private static readonly Dictionary<string, TimeSpan> TimeSpans = new Dictionary<string, TimeSpan>()
+        private static readonly Dictionary<string, TimeSpan> TimeSpans = new()
         {
             {"week", TimeSpan.FromDays(7) },
             {"month", TimeSpan.FromDays(30) },
             {"all", TimeSpan.MaxValue }
         };
 
-        private static readonly Dictionary<string, XElement> FameLists = new Dictionary<string, XElement>
+        private static readonly Dictionary<string, XElement> FameLists = new()
         {
             { "week", null },
             { "month", null },
             { "all", null }
         };
 
-        private static readonly HashSet<int> Legends = new HashSet<int>();
+        private static readonly HashSet<int> Legends = [];
 
         private const int MaxInvalidLoginAttempts = 5;
         private static Dictionary<string, byte> InvalidLoginAttempts;
@@ -80,15 +80,15 @@ namespace RotMG.Common
 
         private static void AddRegisteredAccount(string ip)
         {
-            if (RegisteredAccounts.ContainsKey(ip))
-                RegisteredAccounts[ip]++;
+            if (RegisteredAccounts.TryGetValue(ip, out byte value))
+                RegisteredAccounts[ip] = ++value;
             else RegisteredAccounts[ip] = 1;
         }
 
         private static void AddInvalidLoginAttempt(string ip)
         {
-            if (InvalidLoginAttempts.ContainsKey(ip))
-                InvalidLoginAttempts[ip]++;
+            if (InvalidLoginAttempts.TryGetValue(ip, out byte value))
+                InvalidLoginAttempts[ip] = ++value;
             else InvalidLoginAttempts[ip] = 1;
         }
 
@@ -154,12 +154,12 @@ namespace RotMG.Common
             return new AccountModel() 
             {
                 MaxNumChars = 1, 
-                Stats = new StatsInfo() { ClassStats = new ClassStatsInfo[0] },
-                AliveChars = new List<int>(),
-                DeadChars = new List<int>(),
-                OwnedSkins = new List<int>(),
-                LockedIds = new List<int>(),
-                IgnoredIds = new List<int>()
+                Stats = new StatsInfo() { ClassStats = [] },
+                AliveChars = [],
+                DeadChars = [],
+                OwnedSkins = [],
+                LockedIds = [],
+                IgnoredIds = []
             };
         }
 
@@ -247,7 +247,7 @@ namespace RotMG.Common
                 Level = 0,
                 Fame = 0,
                 TotalFame = 0,
-                Members = new List<int>(),
+                Members = [],
                 BoardMessage = ""
             };
 
@@ -391,23 +391,23 @@ namespace RotMG.Common
                 MaxNumChars = 1,
                 NextCharId = 0,
                 VaultCount = 0,
-                AliveChars = new List<int>(),
-                DeadChars = new List<int>(),
-                OwnedSkins = new List<int>(),
+                AliveChars = [],
+                DeadChars = [],
+                OwnedSkins = [],
                 Ranked = false,
                 Muted = false,
                 Banned = false,
                 GuildName = null,
                 GuildRank = 0,
                 Connected = false,
-                LockedIds = new List<int>(),
-                IgnoredIds = new List<int>(),
+                LockedIds = [],
+                IgnoredIds = [],
                 AllyDamage = true,
                 AllyShots = true,
                 Effects = true,
                 Sounds = true,
                 Notifications = true,
-                Gifts = new List<int>(),
+                Gifts = [],
                 RegisterTime = UnixTime(),
                 LastSeen = UnixTime()
             };
@@ -626,7 +626,7 @@ namespace RotMG.Common
             var stats = new FameStats
             {
                 BaseFame = baseFame,
-                Bonuses = new List<FameBonus>()
+                Bonuses = []
             }; var classStats = acc.Stats.GetClassStats(character.ClassType);
 
             //Ancestor
@@ -965,9 +965,9 @@ namespace RotMG.Common
 
         public static XElement GetLegends(string timespan)
         {
-            if (!FameLists.ContainsKey(timespan))
+            if (!FameLists.TryGetValue(timespan, out XElement value))
                 return null;
-            return FameLists[timespan];
+            return value;
         }
 
         public static string GetLegend(int accId, int charId)

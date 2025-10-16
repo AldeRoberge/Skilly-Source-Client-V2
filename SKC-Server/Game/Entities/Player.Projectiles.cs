@@ -19,7 +19,7 @@ namespace RotMG.Game.Entities
 
     public struct ProjectileAck
     {
-        public static ProjectileAck Undefined = new ProjectileAck
+        public static ProjectileAck Undefined = new()
         {
             Projectile = null,
             Time = -1

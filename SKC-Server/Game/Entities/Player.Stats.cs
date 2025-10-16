@@ -19,8 +19,8 @@ namespace RotMG.Game.Entities
         public int[] Boosts;
         public Dictionary<StatType, object> PrivateSVs;
 
-        float _hpRegenCounter;
-        float _mpRegenCounter;
+        private float _hpRegenCounter;
+        private float _mpRegenCounter;
         public void TickRegens()
         {
             if (HasConditionEffect(ConditionEffectIndex.Bleeding))

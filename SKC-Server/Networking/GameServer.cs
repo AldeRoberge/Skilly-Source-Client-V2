@@ -158,7 +158,7 @@ namespace RotMG.Networking
                     }
 
                     var ip = skt.RemoteEndPoint.ToString().Split(':')[0];
-                    if (!_connected.ContainsKey(ip))
+                    if (!_connected.TryGetValue(ip, out int value))
                         _connected[ip] = 1;
                     else
                     {
@@ -170,7 +170,7 @@ namespace RotMG.Networking
                             skt.Disconnect(false);
                             continue;
                         }
-                        _connected[ip]++;
+                        _connected[ip] = ++value;
                     }
 
                     Program.PushWork(() =>

@@ -6,11 +6,11 @@ using RotMG.Utils;
 
 namespace RotMG.Game.SetPieces
 {
-    class TempleA : Temple
+    internal class TempleA : Temple
     {
-        public override int Size { get { return 60; } }
+        public override int Size => 60;
 
-        
+
         public override void RenderSetPiece(World world, IntPoint pos)
         {
             var t = new int[Size, Size];
@@ -67,8 +67,8 @@ namespace RotMG.Game.SetPieces
             for (var x = 0; x < Size; x++)                  //Plants
                 for (var y = 0; y < Size; y++)
                 {
-                    if (((x > 5 && x < bas) || (x < Size - 5 && x > Size - bas) ||
-                         (y > 5 && y < bas) || (y < Size - 5 && y > Size - bas)) &&
+                    if ((x is > 5 and < bas || (x < Size - 5 && x > Size - bas) ||
+                         y is > 5 and < bas || (y < Size - 5 && y > Size - bas)) &&
                         o[x, y] == 0 && t[x, y] == 1)
                     {
                         double r = MathUtils.NextFloat();

@@ -5,9 +5,9 @@ namespace RotMG.Game.Entities
 {
     public class GuildMerchant : SellableStatic
     {
-        private readonly int[] _hallTypes = {0x736, 0x737, 0x738};
-        private readonly int[] _hallPrices = {10000, 100000, 250000};
-        private readonly int[] _hallLevels = {1, 2, 3};
+        private readonly int[] _hallTypes  = [0x736, 0x737, 0x738];
+        private readonly int[] _hallPrices = [10000, 100000, 250000];
+        private readonly int[] _hallLevels = [1, 2, 3];
 
         private readonly int _upgradeLevel;
 

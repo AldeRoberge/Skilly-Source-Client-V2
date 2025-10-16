@@ -10,7 +10,7 @@ namespace RotMG.Utils
         public const float ToRadians = MathF.PI / 180f;
         public const float ToDegrees = 180f / MathF.PI;
 
-        private static Random _rnd = new Random();
+        private static Random                _rnd = new();
         private static RandomNumberGenerator _gen = RNGCryptoServiceProvider.Create();
         public static string GenerateSalt()
         {

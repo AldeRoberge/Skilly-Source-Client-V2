@@ -38,10 +38,10 @@ namespace RotMG.Game.Logic.Behaviors
             Cooldown = cooldown;
             CooldownOffset = cooldownOffset;
             CooldownVariance = cooldownVariance;
-            Effects = new ConditionEffectDesc[1]
-            {
+            Effects =
+            [
                 new ConditionEffectDesc(effect, effectDuration)
-            };
+            ];
             Color = color;
         }
 

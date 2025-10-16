@@ -12,14 +12,14 @@ namespace RotMG.Game.Entities
         private const int MaxLatencyMS = 2000;
         public const int MaxPotions = 6;
 
-        public static int[] Stars = 
-        {
+        public static int[] Stars =
+        [
             20,
             150,
             400,
             800,
             2000
-        };
+        ];
 
         public Client Client;
         public string GuildInvite;
@@ -235,16 +235,16 @@ namespace RotMG.Game.Entities
         {
             TileUpdates = new int[Parent.Width, Parent.Height];
             EntityUpdates = new Dictionary<int, int>();
-            Entities = new HashSet<Entity>();
-            CalculatedSightCircle = new HashSet<IntPoint>();
+            Entities = [];
+            CalculatedSightCircle = [];
             AwaitingProjectiles = new Queue<List<Projectile>>();
             AckedProjectiles = new Dictionary<int, ProjectileAck>();
             ShotProjectiles = new Dictionary<int, Projectile>();
             AwaitingAoes = new Queue<AoeAck>();
             ShootAEs = new Queue<ushort>();
             AwaitingGoto = new Queue<int>();
-            TradedWith = new HashSet<int>();
-            PendingTrades = new HashSet<int>();
+            TradedWith = [];
+            PendingTrades = [];
             
             SpeedHistory = new List<float>(SpeedHistoryCount);
             for (var i = 0; i < SpeedHistoryCount; i++) //Just make some temporary history when player is first initialized

@@ -10,33 +10,33 @@ namespace RotMG.Common
 {
     public static class Resources
     {
-        public static Dictionary<ushort, ObjectDesc> Type2Object = new Dictionary<ushort, ObjectDesc>();
-        public static Dictionary<string, ObjectDesc> Id2Object = new Dictionary<string, ObjectDesc>();
-        public static Dictionary<string, ObjectDesc> IdLower2Object = new Dictionary<string, ObjectDesc>();
+        public static Dictionary<ushort, ObjectDesc> Type2Object    = new();
+        public static Dictionary<string, ObjectDesc> Id2Object      = new();
+        public static Dictionary<string, ObjectDesc> IdLower2Object = new();
 
-        public static Dictionary<ushort, PlayerDesc> Type2Player = new Dictionary<ushort, PlayerDesc>();
-        public static Dictionary<string, PlayerDesc> Id2Player = new Dictionary<string, PlayerDesc>();
+        public static Dictionary<ushort, PlayerDesc> Type2Player = new();
+        public static Dictionary<string, PlayerDesc> Id2Player   = new();
 
-        public static Dictionary<ushort, SkinDesc> Type2Skin = new Dictionary<ushort, SkinDesc>();
-        public static Dictionary<string, SkinDesc> Id2Skin = new Dictionary<string, SkinDesc>();
+        public static Dictionary<ushort, SkinDesc> Type2Skin = new();
+        public static Dictionary<string, SkinDesc> Id2Skin   = new();
 
-        public static Dictionary<ushort, TileDesc> Type2Tile = new Dictionary<ushort, TileDesc>();
-        public static Dictionary<string, TileDesc> Id2Tile = new Dictionary<string, TileDesc>();
+        public static Dictionary<ushort, TileDesc> Type2Tile = new();
+        public static Dictionary<string, TileDesc> Id2Tile   = new();
 
-        public static Dictionary<ushort, ItemDesc> Type2Item = new Dictionary<ushort, ItemDesc>();
-        public static Dictionary<string, ItemDesc> Id2Item = new Dictionary<string, ItemDesc>();
-        public static Dictionary<string, ItemDesc> IdLower2Item = new Dictionary<string, ItemDesc>();
+        public static Dictionary<ushort, ItemDesc> Type2Item    = new();
+        public static Dictionary<string, ItemDesc> Id2Item      = new();
+        public static Dictionary<string, ItemDesc> IdLower2Item = new();
 
-        public static Dictionary<string, WorldDesc> Worlds = new Dictionary<string, WorldDesc>();
-        public static Dictionary<ushort, WorldDesc> PortalId2World = new Dictionary<ushort, WorldDesc>();
-        public static Dictionary<string, Map> SetPieces = new Dictionary<string, Map>();
+        public static Dictionary<string, WorldDesc> Worlds         = new();
+        public static Dictionary<ushort, WorldDesc> PortalId2World = new();
+        public static Dictionary<string, Map>       SetPieces      = new();
 
-        public static Dictionary<ushort, QuestDesc> Quests = new Dictionary<ushort, QuestDesc>();
+        public static Dictionary<ushort, QuestDesc> Quests = new();
 
-        public static Dictionary<string, byte[]> WebFiles = new Dictionary<string, byte[]>();
+        public static Dictionary<string, byte[]> WebFiles = new();
 
 
-        public static List<XElement> News = new List<XElement>();
+        public static List<XElement> News = new();
 
         public static string CombineResourcePath(string path)
         {

@@ -315,10 +315,8 @@ namespace RotMG.Game
             var dx = pos.X - Position.X;
             var dy = pos.Y - Position.Y;
 
-            if (dx < MoveThreshold && 
-                dx > -MoveThreshold && 
-                dy < MoveThreshold &&
-                dy > -MoveThreshold)
+            if (dx is < MoveThreshold and > -MoveThreshold && 
+                dy is < MoveThreshold and > -MoveThreshold)
             {
                 return CalcNewLocation(pos);
             }

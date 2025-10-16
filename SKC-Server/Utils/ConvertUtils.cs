@@ -8,7 +8,7 @@ namespace RotMG.Utils
 {
     public static class ConvertUtils
     {
-        private static SHA1Managed _sHA1Managed = new SHA1Managed();
+        private static SHA1Managed _sHA1Managed = new();
 
         public static int[] ToIntArray(this string value, string seperator)
         {
