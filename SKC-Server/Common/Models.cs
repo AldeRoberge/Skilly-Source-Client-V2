@@ -14,9 +14,10 @@ namespace RotMG.Common
 
     public abstract class DatabaseModel : IDatabaseInfo
     {
-        public XElement Data;
-        public readonly string Path;
-        public DatabaseModel(string key)
+        public           XElement Data;
+        private readonly string   Path;
+
+        protected DatabaseModel(string key)
         {
             if (!string.IsNullOrWhiteSpace(key))
             {

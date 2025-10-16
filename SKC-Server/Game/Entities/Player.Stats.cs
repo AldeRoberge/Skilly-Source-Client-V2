@@ -75,9 +75,9 @@ namespace RotMG.Game.Entities
             var ret = MinMoveSpeed + GetStat(4) / 75f * (MaxMoveSpeed - MinMoveSpeed);
             if (HasConditionEffect(ConditionEffectIndex.Speedy))
             {
-                ret = ret * 1.5f;
+                ret *= 1.5f;
             }
-            ret = ret * MoveMultiplier;
+            ret *= MoveMultiplier;
             return ret;
         }
 
@@ -106,7 +106,7 @@ namespace RotMG.Game.Entities
             var ret = MinAttackFreq + GetStat(5) / 75f * (MaxAttackFreq - MinAttackFreq);
             if (HasConditionEffect(ConditionEffectIndex.Berserk))
             {
-                ret = ret * 1.5f;
+                ret *= 1.5f;
             }
             return ret;
         }
@@ -118,7 +118,7 @@ namespace RotMG.Game.Entities
 
             var ret = MinAttackMult + GetStat(2) / 75f * (MaxAttackMult - MinAttackMult);
             if (HasConditionEffect(ConditionEffectIndex.Damaging))
-                ret = ret * 1.5f;
+                ret *= 1.5f;
             return ret;
         }
 

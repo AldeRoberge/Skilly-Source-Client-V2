@@ -599,7 +599,7 @@ namespace RotMG.Game.Entities
                 UseTime = time;
                 var cooldownMod = ItemDesc.GetStat(ItemDatas[1], ItemData.Cooldown, ItemDesc.CooldownMultiplier);
                 var cooldown = desc.CooldownMS;
-                cooldown = cooldown + (int)(cooldown * -cooldownMod);
+                cooldown += (int)(cooldown * -cooldownMod);
                 UseDuration = cooldown;
                 FameStats.AbilitiesUsed++;
             }

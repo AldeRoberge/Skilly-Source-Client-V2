@@ -545,69 +545,68 @@ namespace RotMG.Networking
             var password = rdr.ReadString();
             var mapJson = rdr.ReadBytes(rdr.ReadInt32());
 
-            if (client.State == ProtocolState.Handshaked) //Only allow Hello to be processed once.
+            if (client.State != ProtocolState.Handshaked) return; //Only allow Hello to be processed once.
+            
+            var acc = Database.Verify(username, password, client.IP);
+            if (acc == null)
             {
-                var acc = Database.Verify(username, password, client.IP);
-                if (acc == null)
-                {
-                    client.Send(Failure(0, "Invalid account."));
-                    Manager.AddTimedAction(1000, client.Disconnect);
-                    return;
-                }
+                client.Send(Failure(0, "Invalid account."));
+                Manager.AddTimedAction(1000, client.Disconnect);
+                return;
+            }
 
-                if (acc.Banned)
-                {
-                    client.Send(Failure(0, "Banned."));
-                    Manager.AddTimedAction(1000, client.Disconnect);
-                    return;
-                }
+            if (acc.Banned)
+            {
+                client.Send(Failure(0, "Banned."));
+                Manager.AddTimedAction(1000, client.Disconnect);
+                return;
+            }
 
-                if (!acc.Ranked && gameId == Manager.EditorId)
-                {
-                    client.Send(Failure(0, "Not ranked."));
-                    Manager.AddTimedAction(1000, client.Disconnect);
-                }
+            if (!acc.Ranked && gameId == Manager.EditorId)
+            {
+                client.Send(Failure(0, "Not ranked."));
+                Manager.AddTimedAction(1000, client.Disconnect);
+            }
 
-                Manager.GetClient(acc.Id)?.Disconnect();
+            Manager.GetClient(acc.Id)?.Disconnect();
 
-                if (Database.IsAccountInUse(acc))
-                {
-                    client.Send(Failure(0, "Account in use!"));
-                    Manager.AddTimedAction(1000, client.Disconnect);
-                    return;
-                }
+            if (Database.IsAccountInUse(acc))
+            {
+                client.Send(Failure(0, "Account in use!"));
+                Manager.AddTimedAction(1000, client.Disconnect);
+                return;
+            }
 
-                client.Account = acc;
-                client.Account.Connected = true;
-                client.Account.LastSeen = Database.UnixTime();
-                client.Account.Save();
-                client.TargetWorldId = gameId;
+            client.Account = acc;
+            client.Account.Connected = true;
+            client.Account.LastSeen = Database.UnixTime();
+            client.Account.Save();
+            client.TargetWorldId = gameId;
 
-                Manager.AccountIdToClientId[client.Account.Id] = client.Id;
-                var world = Manager.GetWorld(gameId, client);
+            Manager.AccountIdToClientId[client.Account.Id] = client.Id;
+            var world = Manager.GetWorld(gameId, client);
 
 #if DEBUG
-                if (client.TargetWorldId == Manager.EditorId)
-                {
-                    Program.Print(PrintType.Debug, "Loading editor world");
-                    var map = new JSMap(Encoding.UTF8.GetString(mapJson));
-                    world = new World(map, Resources.Worlds["Dreamland"]);
-                    client.TargetWorldId = Manager.AddWorld(world);
-                }
+            if (client.TargetWorldId == Manager.EditorId)
+            {
+                Program.Print(PrintType.Debug, "Loading editor world");
+                var map = new JSMap(Encoding.UTF8.GetString(mapJson));
+                world = new World(map, Resources.Worlds["Dreamland"]);
+                client.TargetWorldId = Manager.AddWorld(world);
+            }
 #endif
 
-                if (world == null)
-                {
-                    client.Send(Failure(0, "Invalid world!"));
-                    Manager.AddTimedAction(1000, client.Disconnect);
-                    return;
-                }
-
-                var seed = (uint)MathUtils.NextInt(1, int.MaxValue - 1);
-                client.Random = new wRandom(seed);
-                client.Send(MapInfo(world.Width, world.Height, world.Name, world.DisplayName, seed, world.Background, world.ShowDisplays, world.AllowTeleport, world.Music));
-                client.State = ProtocolState.Awaiting; //Allow the processing of Load/Create.
+            if (world == null)
+            {
+                client.Send(Failure(0, "Invalid world!"));
+                Manager.AddTimedAction(1000, client.Disconnect);
+                return;
             }
+
+            var seed = (uint)MathUtils.NextInt(1, int.MaxValue - 1);
+            client.Random = new wRandom(seed);
+            client.Send(MapInfo(world.Width, world.Height, world.Name, world.DisplayName, seed, world.Background, world.ShowDisplays, world.AllowTeleport, world.Music));
+            client.State = ProtocolState.Awaiting; //Allow the processing of Load/Create.
         }
 
         private static void Create(Client client, PacketReader rdr)

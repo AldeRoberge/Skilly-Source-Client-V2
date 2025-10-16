@@ -335,7 +335,7 @@ namespace RotMG.Game
                 }
 
                 pos = CalcNewLocation(new Vector2(pos.X + dx * ds, pos.Y + dy * ds));
-                tds = tds + ds;
+                tds += ds;
             }
 
             return pos;
@@ -358,14 +358,14 @@ namespace RotMG.Game
             {
                 fx = pos.X > Position.X ? (int)(pos.X * 2) / 2f : (int)(Position.X * 2) / 2f;
                 if ((int)fx > (int)Position.X)
-                    fx = fx - 0.01f;
+                    fx -= 0.01f;
             }
 
             if (isFarY)
             {
                 fy = pos.Y > Position.Y ? (int)(pos.Y * 2) / 2f : (int)(Position.Y * 2) / 2f;
                 if ((int)fy > (int)Position.Y)
-                    fy = fy - 0.01f;
+                    fy -= 0.01f;
             }
 
             if (!isFarX)

@@ -25,12 +25,12 @@ namespace RotMG.Utils
             if (x < -MathF.PI)
             {
                 v = ((int)(x / -MathF.PI) + 1) / 2;
-                x = x + v * 2 * MathF.PI;
+                x += v * 2 * MathF.PI;
             }
             else if (x > MathF.PI)
             {
                 v = ((int)(x / MathF.PI) + 1) / 2;
-                x = x - v * 2 * MathF.PI;
+                x -= v * 2 * MathF.PI;
             }
             return x;
         }

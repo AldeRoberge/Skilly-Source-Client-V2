@@ -91,21 +91,15 @@ namespace RotMG.Common
         }
     }
 
-    public struct IntPoint
+    public struct IntPoint(int x, int y)
     {
-        public int X;
-        public int Y;
-
-        public IntPoint(int x, int y)
-        {
-            X = x;
-            Y = y;
-        }
+        public int X = x;
+        public int Y = y;
 
         public static bool operator ==(IntPoint a, IntPoint b) => a.X == b.X && a.Y == b.Y;
         public static bool operator !=(IntPoint a, IntPoint b) => a.X != b.X || a.Y != b.Y;
 
-        public bool Equals(IntPoint other) => X == other.X && Y == other.Y;
+        private bool Equals(IntPoint other) => X == other.X && Y == other.Y;
         public override bool Equals(object obj)
         {
             if (obj is IntPoint p)
@@ -126,16 +120,10 @@ namespace RotMG.Common
         }
     }
 
-    public struct SlotData
+    public struct SlotData(PacketReader rdr)
     {
-        public int ObjectId;
-        public byte SlotId;
-
-        public SlotData(PacketReader rdr)
-        {
-            ObjectId = rdr.ReadInt32();
-            SlotId = rdr.ReadByte();
-        }
+        public int  ObjectId = rdr.ReadInt32();
+        public byte SlotId   = rdr.ReadByte();
     }
 
     public struct TradeItem
@@ -156,21 +144,13 @@ namespace RotMG.Common
         }
     }
 
-    public struct Vector2
+    public struct Vector2(float x, float y)
     {
-        public float X;
-        public float Y;
+        public float X = x;
+        public float Y = y;
 
-        public Vector2(float x, float y)
+        public Vector2(PacketReader rdr) : this(rdr.ReadSingle(), rdr.ReadSingle())
         {
-            X = x;
-            Y = y;
-        }
-
-        public Vector2(PacketReader rdr)
-        {
-            X = rdr.ReadSingle();
-            Y = rdr.ReadSingle();
         }
 
         public void Write(PacketWriter wtr)

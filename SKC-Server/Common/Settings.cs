@@ -18,19 +18,18 @@ namespace RotMG.Common
 
         public static void Init()
         {
-            if (File.Exists("Settings.xml"))
-            {
-                var data = XElement.Parse(File.ReadAllText("Settings.xml"));
-                MaxClients = data.ParseInt("MaxClients", 256);
-                Address = data.ParseString("Address", "127.0.0.1");
-                Ports = data.ParseIntArray("Ports", ":");
-                ResourceDirectory = data.ParseString("@res", "Common/Resources");
-                DatabaseDirectory = data.ParseString("@db", "Database");
-                TicksPerSecond = data.ParseInt("TicksPerSecond", 5);
-                MillisecondsPerTick = 1000 / TicksPerSecond;
-                SecondsPerTick = 1f / TicksPerSecond;
-                MaxRealms = data.ParseInt("MaxRealms");
-            }
+            if (!File.Exists("Settings.xml")) return;
+            
+            var data = XElement.Parse(File.ReadAllText("Settings.xml"));
+            MaxClients = data.ParseInt("MaxClients", 256);
+            Address = data.ParseString("Address", "127.0.0.1");
+            Ports = data.ParseIntArray("Ports", ":");
+            ResourceDirectory = data.ParseString("@res", "Common/Resources");
+            DatabaseDirectory = data.ParseString("@db", "Database");
+            TicksPerSecond = data.ParseInt("TicksPerSecond", 5);
+            MillisecondsPerTick = 1000 / TicksPerSecond;
+            SecondsPerTick = 1f / TicksPerSecond;
+            MaxRealms = data.ParseInt("MaxRealms");
         }
     }
 }

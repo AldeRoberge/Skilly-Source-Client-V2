@@ -5,10 +5,8 @@ using System.Text;
 
 namespace RotMG.Networking
 {
-    public class PacketWriter : BinaryWriter
+    public class PacketWriter(Stream input) : BinaryWriter(input, Encoding.UTF8)
     {
-        public PacketWriter(Stream input) : base(input, Encoding.UTF8) { }
-
         public override void Write(short value)
         {
             base.Write(IPAddress.NetworkToHostOrder(value));

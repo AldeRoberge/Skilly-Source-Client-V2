@@ -255,11 +255,11 @@ namespace RotMG.Networking
         {
             var lb = 16807 * (_seed & 0xFFFF);
             var hb = 16807 * (_seed >> 16);
-            lb = lb + ((hb & 32767) << 16);
-            lb = lb + (hb >> 15);
+            lb += ((hb & 32767) << 16);
+            lb += (hb >> 15);
             if (lb > 2147483647)
             {
-                lb = lb - 2147483647;
+                lb -= 2147483647;
             }
             return _seed = lb;
         }

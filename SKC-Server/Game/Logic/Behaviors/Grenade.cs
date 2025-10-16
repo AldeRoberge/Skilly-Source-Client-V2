@@ -7,43 +7,31 @@ using System.Linq;
 
 namespace RotMG.Game.Logic.Behaviors
 {
-    public class Grenade : Behavior
+    public class Grenade(
+        float range = 8,
+        int damage = 100,
+        float radius = 5,
+        float? fixedAngle = null,
+        int cooldown = 0,
+        int cooldownOffset = 0,
+        int cooldownVariance = 0,
+        ConditionEffectIndex effect = ConditionEffectIndex.Nothing,
+        int effectDuration = 0,
+        uint color = 0xFFFF0000)
+        : Behavior
     {
-        public readonly float Range;
-        public readonly float Radius;
-        public readonly int Damage;
-        public readonly float? FixedAngle;
-        public readonly int Cooldown;
-        public readonly int CooldownOffset;
-        public readonly int CooldownVariance;
-        public readonly ConditionEffectDesc[] Effects;
-        public readonly uint Color;
-
-        public Grenade(
-            float range = 8, 
-            int damage = 100, 
-            float radius = 5, 
-            float? fixedAngle = null, 
-            int cooldown = 0,
-            int cooldownOffset = 0,
-            int cooldownVariance = 0,
-            ConditionEffectIndex effect = ConditionEffectIndex.Nothing, 
-            int effectDuration = 0, 
-            uint color = 0xFFFF0000)
-        {
-            Range = range;
-            Damage = damage;
-            Radius = radius;
-            FixedAngle = fixedAngle * MathUtils.ToRadians;
-            Cooldown = cooldown;
-            CooldownOffset = cooldownOffset;
-            CooldownVariance = cooldownVariance;
-            Effects =
-            [
-                new ConditionEffectDesc(effect, effectDuration)
-            ];
-            Color = color;
-        }
+        public readonly float                 Range            = range;
+        public readonly float                 Radius           = radius;
+        public readonly int                   Damage           = damage;
+        public readonly float?                FixedAngle       = fixedAngle * MathUtils.ToRadians;
+        public readonly int                   Cooldown         = cooldown;
+        public readonly int                   CooldownOffset   = cooldownOffset;
+        public readonly int                   CooldownVariance = cooldownVariance;
+        public readonly ConditionEffectDesc[] Effects          =
+        [
+            new ConditionEffectDesc(effect, effectDuration)
+        ];
+        public readonly uint                  Color = color;
 
         public override void Enter(Entity host)
         {
