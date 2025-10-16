@@ -33,7 +33,7 @@ namespace UI.GameScreen
                 return;
             
             _portrait.sprite = _player.TextureProvider.GetPortrait();
-            _nameText.text = Account.Username;
+            _nameText.text = _player.Name;
         }
     }
 }
