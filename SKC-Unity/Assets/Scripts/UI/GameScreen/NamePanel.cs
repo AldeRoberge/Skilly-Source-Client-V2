@@ -29,7 +29,7 @@ namespace UI.GameScreen
 
         private void Update()
         {
-            if (_player == null)
+            if (!_player)
                 return;
 
             _portrait.sprite = _player.TextureProvider.GetPortrait();
