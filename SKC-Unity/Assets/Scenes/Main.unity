@@ -10411,6 +10411,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7754677133304644527}
   - component: {fileID: 7754677133304644524}
+  - component: {fileID: 7754677133304644528}
   m_Layer: 5
   m_Name: Log In Layout
   m_TagString: Untagged
@@ -10443,6 +10444,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 35.21}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &7754677133304644528
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7754677133304644526}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8ea3b1119b43c541b695918cc74e748, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LogInAutomatic
+  _loginLayout: {fileID: 7754677133304644524}
 --- !u!114 &7754677133429759940
 MonoBehaviour:
   m_ObjectHideFlags: 0

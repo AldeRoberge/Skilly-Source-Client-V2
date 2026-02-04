@@ -438,7 +438,7 @@ namespace SKC
         public string    GuildName;
         public int       GuildRank;
         public int       GuildFame;
-        public StatsInfo Stats;
+        public StatsInfo Stats = new StatsInfo();
         public bool      Connected;
         public int       RegisterTime;
         public int       LastSeen;
@@ -453,6 +453,39 @@ namespace SKC
 
         public AccountModel() : base(null)
         {
+            Id = 0;
+            Name = string.Empty;
+
+            NextCharId = 1;
+            MaxNumChars = 0;
+            VaultCount = 0;
+
+            AliveChars = new List<int>();
+            DeadChars = new List<int>();
+            OwnedSkins = new List<int>();
+            LockedIds = new List<int>();
+            IgnoredIds = new List<int>();
+            Gifts = new List<int>();
+
+            Ranked = false;
+            Muted = false;
+            Banned = false;
+
+            GuildName = string.Empty;
+            GuildRank = 0;
+            GuildFame = 0;
+
+            Stats = new StatsInfo();
+
+            Connected = false;
+            RegisterTime = 0;
+            LastSeen = 0;
+
+            AllyShots = true;
+            AllyDamage = true;
+            Effects = true;
+            Sounds = true;
+            Notifications = true;
         }
 
         public AccountModel(int key) : base($"account.{key}")
@@ -590,7 +623,7 @@ namespace SKC
         public int              Fame;
         public int              Credits;
         public int              TotalCredits;
-        public ClassStatsInfo[] ClassStats;
+        public ClassStatsInfo[] ClassStats = new ClassStatsInfo[0];
 
         public XElement Export(bool appExport = true)
         {
@@ -614,3 +647,4 @@ namespace SKC
         }
     }
 }
+

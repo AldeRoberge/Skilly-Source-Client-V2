@@ -174,7 +174,7 @@ namespace SKC
         public static bool IsValidPassword(string input)
         {
             if (string.IsNullOrWhiteSpace(input)) return false;
-            if (input.Length < 9) return false;
+            if (input.Length < 3) return false;
             return true;
         }
 

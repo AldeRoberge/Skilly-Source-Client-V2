@@ -82,7 +82,7 @@ namespace UI.TitleScreen
 
         private bool ValidPassword()
         {
-            if (_passwordField.text.Length < 12)
+            if (_passwordField.text.Length < 3)
             {
                 _errorTextField.text = "Password too short";
                 return false;

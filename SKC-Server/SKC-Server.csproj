@@ -12,6 +12,23 @@
   <ItemGroup>
     <PackageReference Include="Ionic.Zlib.Core" Version="1.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
+    <Content Include="bin\Debug\net8.0\Database\@guilds.file" />
+    <Content Include="bin\Debug\net8.0\Database\@legends.all.file" />
+    <Content Include="bin\Debug\net8.0\Database\@legends.month.file" />
+    <Content Include="bin\Debug\net8.0\Database\@legends.week.file" />
+    <Content Include="bin\Debug\net8.0\Database\@news.file" />
+    <Content Include="bin\Debug\net8.0\Database\@nextAccId.file" />
+    <Content Include="bin\Debug\net8.0\Database\account.1.file" />
+    <Content Include="bin\Debug\net8.0\Database\char.1.1.file" />
+    <Content Include="bin\Debug\net8.0\Database\login.hash.0.file" />
+    <Content Include="bin\Debug\net8.0\Database\login.hash.1.file" />
+    <Content Include="bin\Debug\net8.0\Database\login.id.0.file" />
+    <Content Include="bin\Debug\net8.0\Database\login.id.1.file" />
+    <Content Include="bin\Debug\net8.0\Database\login.salt.0.file" />
+    <Content Include="bin\Debug\net8.0\Database\login.salt.1.file" />
+    <Content Include="bin\Debug\net8.0\Database\login.username.admin.file" />
+    <Content Include="bin\Debug\net8.0\Database\login.username.awdawdawd.file" />
+    <Content Include="bin\Debug\net8.0\Database\vault.1.0.file" />
     <Content Include="Resources\**">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

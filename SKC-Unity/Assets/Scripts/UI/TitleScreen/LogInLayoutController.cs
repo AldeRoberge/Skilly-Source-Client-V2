@@ -47,6 +47,17 @@ namespace UI.TitleScreen
                 _usernameField.text = "";
             }
         }
+        
+        public void SetCredentials(string username, string password)
+        {
+            _usernameField.text = username;
+            _passwordField.text = password;
+        }
+        
+        public void SubmitLogin()
+        {
+            _ = OnPlayButtonClick();
+        }
 
         public override void Reset(object data)
         {
@@ -89,7 +100,7 @@ namespace UI.TitleScreen
 
         private bool ValidPassword()
         {
-            if (_passwordField.text.Length < 12)
+            if (_passwordField.text.Length < 3)
             {
                 _errorTextField.text = "Password too short";
                 return false;

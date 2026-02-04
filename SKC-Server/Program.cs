@@ -20,6 +20,24 @@ namespace SKC
             Settings.Init();
             Resources.Init();
             Database.Init();
+
+            // Ensure an "admin" account exists on startup (username: admin, password: admin)
+            try
+            {
+                if (Database.IdFromUsername("admin") == -1)
+                {
+                    var status = Database.RegisterAccount("admin", "admin", "127.0.0.1");
+                    if (status == RegisterStatus.Success)
+                        Print(PrintType.Info, "Auto-created admin/admin account.");
+                    else
+                        Print(PrintType.Warn, $"Auto-register admin returned: {status}");
+                }
+            }
+            catch (Exception ex)
+            {
+                Print(PrintType.Error, $"Failed to auto-create admin account: {ex}");
+            }
+
             AppServer.Init();
             GameServer.Init();
             Manager.Init();
